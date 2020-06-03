@@ -56,7 +56,7 @@ comments:
     Note that there is an issue with log4net related to IPv6 and Windows Vista/7.
     You can fix it by adding the following [...]"
 - id: 14653
-  author: "log4net UdpAppender with IPv6 on Windows Vista and 7 | EntLib.net &aelig;&Scaron;&euro;&aelig;&oelig;&macr;&aring;&circ;&dagger;&auml;&ordm;&laquo;&aring;&sup1;&sup3;&aring;\x8F&deg;"
+  author: "log4net UdpAppender with IPv6 on Windows Vista and 7 | EntLib.net &aelig;&Scaron;&aelig;&macr;&aring;&circ;&dagger;&auml;&ordm;&laquo;&aring;&sup1;&sup3;&aring;\x8F&deg;"
   author_email: ''
   author_url: http://www.entlib.net/?p=565
   date: '2011-07-29 12:32:15 +0000'
@@ -73,7 +73,7 @@ comments:
     to the IP address conversion and specific support added for IPv6 took care of
     it. See the release notes at http://logging.apache.org/log4net/release/release-notes.html
 ---
-<p><a href="http://logging.apache.org/log4net/index.html">log4net</a> is a great logging framework for .NET, but it hasn&acirc;&euro;&trade;t been updated in years. When we moved to Windows Vista, we noticed that the <a href="http://logging.apache.org/log4net/release/sdk/log4net.Appender.UdpAppender.html">UdpAppender</a> stopped working with <a href="http://logging.apache.org/chainsaw/index.html">Chainsaw</a> and with our internal logging tools when logging to <strong>localhost</strong>. After some Googling, we discovered that replacing <strong>localhost</strong> with <strong>127.0.0.2</strong> got everything working and we promptly forgot about it.</p>
+<p><a href="http://logging.apache.org/log4net/index.html">log4net</a> is a great logging framework for .NET, but it hasn&trade;t been updated in years. When we moved to Windows Vista, we noticed that the <a href="http://logging.apache.org/log4net/release/sdk/log4net.Appender.UdpAppender.html">UdpAppender</a> stopped working with <a href="http://logging.apache.org/chainsaw/index.html">Chainsaw</a> and with our internal logging tools when logging to <strong>localhost</strong>. After some Googling, we discovered that replacing <strong>localhost</strong> with <strong>127.0.0.2</strong> got everything working and we promptly forgot about it.</p>
 <p>Earlier this week, we moved one of our projects over to .NET 4.0 and once again logging failed. In the console window while debugging the app, I noticed the following,</p>
 <pre><code>log4net.Util.TypeConverters.ConversionNotSupportedException: Cannot convert from type [System.String]
   value [127.0.0.2] to type [System.Net.IPAddress] --->
@@ -89,7 +89,7 @@ comments:
          socketFlags, EndPoint remoteEP)
        at System.Net.Sockets.UdpClient.Send(Byte[] dgram, Int32 bytes, IPEndPoint endPoint)
        at log4net.Appender.UdpAppender.Append(LoggingEvent loggingEvent)</code></pre>
-<p>At this point, I have some clues, specifically that localhost was being resolved as the IPv6 address ::1, not the IPv4 address 127.0.0.1. Looking through the reported issues I found that this problem had been <a href="https://issues.apache.org/jira/browse/LOG4NET-112">reported and fixed in 2007</a>. Unfortunately, that code isn&acirc;&euro;&trade;t in the release, so I downloaded the latest source and recompiled log4net. Of course, they don&acirc;&euro;&trade;t release the signing key, so I generated my own and signed the assembly myself.</p>
+<p>At this point, I have some clues, specifically that localhost was being resolved as the IPv6 address ::1, not the IPv4 address 127.0.0.1. Looking through the reported issues I found that this problem had been <a href="https://issues.apache.org/jira/browse/LOG4NET-112">reported and fixed in 2007</a>. Unfortunately, that code isn&trade;t in the release, so I downloaded the latest source and recompiled log4net. Of course, they don&trade;t release the signing key, so I generated my own and signed the assembly myself.</p>
 <p>This fixed my problems with the UdpAppender, although, if you use <strong>localhost</strong> on a Windows Vista or Windows 7 machine, it will resolve to the IPv6 address, so make sure that your receiver is listening on the IPv6 address. For example, in <a href="http://log2console.codeplex.com/">log2console,</a> under Receivers, set Use IPv6 Addresses to true for the UDP receiver. If your receiver does not support IPv6, use <strong>127.0.0.2</strong> for the address.</p>
 <p>To save other people the hassle of recompiling log4net themselves to get the latest fixes, I have uploaded a release version of the assembly. Download it here.</p>
 <ul>

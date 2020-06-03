@@ -16,7 +16,7 @@ tags:
 comments: []
 ---
 <p>Application Settings are the recommended way to save state between runs of your program. Long gone are the days of using the registry or INI files to save information. The only problem with Application Settings though is that they tend to disappear whenever you release a new version of your application. Fortunately, it is easy to fix this with some boiler plate code.</p>
-<p>First, we need to make sure that our project has a settings file. It is usually under the Properties node of the project. If it is not, right click on the solution and <strong>Add | New Item&acirc;&euro;&brvbar; | Visual C# Items | General | Settings File</strong> and name it <em>Settings.settings.</em> Next, drag it and drop it in your project&acirc;&euro;&trade;s Properties folder.</p>
+<p>First, we need to make sure that our project has a settings file. It is usually under the Properties node of the project. If it is not, right click on the solution and <strong>Add | New Item&brvbar; | Visual C# Items | General | Settings File</strong> and name it <em>Settings.settings.</em> Next, drag it and drop it in your project&trade;s Properties folder.</p>
 <p>Next, you need to add a bool User setting called <strong>UpgradeRequired</strong> and default it to true. Next, at the very beginning of your Main, you check if <strong>UpgradeRequired</strong> is true, and if it is, upgrade the settings, set <strong>UpgradeRequired</strong> to false and save out the settings. This will pull in the settings from previous versions of your application.</p>
 <p>Your settings should look like this,</p>
 <p><img style="display: inline" title="settings" alt="settings" src="/images/2011/09/settings.png" width="416" height="106"></p>
@@ -36,5 +36,5 @@ comments: []
    // At the end of main, save out any changes to settings
    Properties.Settings.Default.Save();
 }</code></pre>
-<p>Now you just need to create new settings and use them in your application. Any setting with <strong>Application</strong> scope will be set in your <em>app.config</em> and will be read-only. This is often used for connection strings and other information that is unlikely to change. <strong>User</strong> scoped settings also have their default values in <em>app.config</em>, but any changes are written out to an XML file in the user&acirc;&euro;&trade;s <em>AppData</em> folder.</p>
+<p>Now you just need to create new settings and use them in your application. Any setting with <strong>Application</strong> scope will be set in your <em>app.config</em> and will be read-only. This is often used for connection strings and other information that is unlikely to change. <strong>User</strong> scoped settings also have their default values in <em>app.config</em>, but any changes are written out to an XML file in the user&trade;s <em>AppData</em> folder.</p>
 <p>Also, notice that code gets generated for any setting that you create and you access it through a property on <em>Properties.Settings.Default</em>. You can use any complex type for a setting, including classes in your application, as long as they are <strong>Serializable</strong>.</p>

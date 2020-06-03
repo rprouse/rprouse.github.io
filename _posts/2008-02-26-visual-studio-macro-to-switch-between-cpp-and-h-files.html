@@ -14,7 +14,7 @@ tags:
 - Tips'n'Tricks
 comments:
 - id: 2021
-  author: Dima&#8217;s blog &raquo; Blog Archive &raquo; &ETH;&Yuml;&ETH;&micro;&Ntilde;&euro;&ETH;&micro;&ETH;&ordm;&ETH;&raquo;&Ntilde;Ž&Ntilde;&Dagger;&ETH;&micro;&ETH;&frac12;&ETH;&cedil;&ETH;&micro;
+  author: Dima&#8217;s blog &raquo; Blog Archive &raquo; &ETH;&Yuml;&ETH;&micro;&Ntilde;&ETH;&micro;&ETH;&ordm;&ETH;&raquo;&Ntilde;Ž&Ntilde;&Dagger;&ETH;&micro;&ETH;&frac12;&ETH;&cedil;&ETH;&micro;
     &ETH;&frac14;&ETH;&micro;&ETH;&para;&ETH;&acute;&Ntilde;&fnof; H &ETH;&cedil;
     CPP &Ntilde;&bdquo;&ETH;&deg;&ETH;&sup1;&ETH;&raquo;&ETH;&deg;&ETH;&frac14;&ETH;&cedil;
     &ETH;&sup2; Visual Studio 7/7.1/8/9
@@ -168,8 +168,8 @@ comments:
   author_url: http://www.pearltrees.com/alain/ie-extension/id3829371
   date: '2011-12-09 06:37:19 +0000'
   date_gmt: '2011-12-09 10:37:19 +0000'
-  content: "[...] Visual Studio Macro to switch between CPP and H files &Acirc;&raquo;
-    Alteridem Consulting Application.Documents.Open(documentName, &acirc;&euro;&oelig;Text&acirc;&euro;\x9D)
+  content: "[...] Visual Studio Macro to switch between CPP and H files &raquo;
+    Alteridem Consulting Application.Documents.Open(documentName, Text\x9D)
     [...]"
 - id: 19059
   author: Dave
@@ -232,7 +232,7 @@ comments:
   author_url: http://www.dunescientific.com/blog/archive/setup-visual-studio-ide-for-c-work/
   date: '2012-10-18 15:26:39 +0000'
   date_gmt: '2012-10-18 19:26:39 +0000'
-  content: "[...] See&Acirc;&nbsp;/2008/02/26/visual-studio-macro-to-switch-between-cpp-and-h-files/
+  content: "[...] See&nbsp;/2008/02/26/visual-studio-macro-to-switch-between-cpp-and-h-files/
     \  This entry was posted in Other. Bookmark the permalink.    &larr; CodeGear
     IDE Setup for work using mtk [...]"
 - id: 43796
@@ -293,30 +293,30 @@ comments:
 <li>Add the code from below into the module and save the project.</li>
 </ol>
 <pre name="code" class="vb:nogutter">
-&acirc;&euro;&tilde;=====================================================================
-&acirc;&euro;&tilde; If the currently open document is a CPP or an H file, attempts to
-&acirc;&euro;&tilde; switch between the CPP and the H file.
-&acirc;&euro;&tilde;=====================================================================
+&tilde;=====================================================================
+&tilde; If the currently open document is a CPP or an H file, attempts to
+&tilde; switch between the CPP and the H file.
+&tilde;=====================================================================
 Public Sub SwitchBetweenSourceAndHeader()
   Dim currentDocument As String
   Dim targetDocument As String
 
   currentDocument = ActiveDocument.FullName
 
-  If currentDocument.EndsWith(&acirc;&euro;&oelig;.cpp&acirc;&euro;, StringComparison.InvariantCultureIgnoreCase) Then
-    targetDocument = Left(currentDocument, Len(currentDocument) - 3) + &acirc;&euro;&oelig;h&acirc;&euro;
+  If currentDocument.EndsWith(.cpp, StringComparison.InvariantCultureIgnoreCase) Then
+    targetDocument = Left(currentDocument, Len(currentDocument) - 3) + h
     OpenDocument(targetDocument)
-  ElseIf currentDocument.EndsWith(&acirc;&euro;&oelig;.h&acirc;&euro;, StringComparison.InvariantCultureIgnoreCase) Then
-    targetDocument = Left(currentDocument, Len(currentDocument) - 1) + &acirc;&euro;&oelig;cpp&acirc;&euro;
+  ElseIf currentDocument.EndsWith(.h, StringComparison.InvariantCultureIgnoreCase) Then
+    targetDocument = Left(currentDocument, Len(currentDocument) - 1) + cpp
     OpenDocument(targetDocument)
   End If
 
 End Sub
 
-&acirc;&euro;&tilde;=====================================================================
-&acirc;&euro;&tilde; Given a document name, attempts to activate it if it is already open,
-&acirc;&euro;&tilde; otherwise attempts to open it.
-&acirc;&euro;&tilde;=====================================================================
+&tilde;=====================================================================
+&tilde; Given a document name, attempts to activate it if it is already open,
+&tilde; otherwise attempts to open it.
+&tilde;=====================================================================
 Private Sub OpenDocument(ByRef documentName As String)
   Dim document As EnvDTE.Document
   Dim activatedTarget As Boolean
@@ -330,7 +330,7 @@ Private Sub OpenDocument(ByRef documentName As String)
     End If
   Next
   If Not activatedTarget Then
-    Application.Documents.Open(documentName, &acirc;&euro;&oelig;Text&acirc;&euro;)
+    Application.Documents.Open(documentName, Text)
   End If
 End Sub
 </code></pre>

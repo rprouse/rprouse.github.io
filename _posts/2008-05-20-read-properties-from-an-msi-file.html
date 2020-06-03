@@ -189,7 +189,7 @@ comments:
    string retVal = string.Empty;
 
    // Create an Installer instance
-   Type classType = Type.GetTypeFromProgID( &acirc;&euro;&oelig;WindowsInstaller.Installer&acirc;&euro; );
+   Type classType = Type.GetTypeFromProgID( WindowsInstaller.Installer );
    Object installerObj = Activator.CreateInstance( classType );
    Installer installer = installerObj as Installer;
 
@@ -199,7 +199,7 @@ comments:
 
    // Fetch the requested property
    string sql = String.Format(
-      &acirc;&euro;&oelig;SELECT Value FROM Property WHERE Property=&acirc;&euro;&trade;{0}&acirc;&euro;&trade;&acirc;&euro;, property );
+      SELECT Value FROM Property WHERE Property=&trade;{0}&trade;, property );
    View view = database.OpenView( sql );
    view.Execute( null );
 
@@ -211,6 +211,6 @@ comments:
    return retVal;
 }</code></pre>
 <p>If you want to look up the version, just pass in the name of the MSI file you want to inspect and "ProductVersion" for the property you want to return. For example;</p>
-<pre class="c-sharp:nogutter">string version = GetMsiProperty( msiFile, &acirc;&euro;&oelig;ProductVersion&acirc;&euro; );</code></pre>
+<pre class="c-sharp:nogutter"><code>string version = GetMsiProperty( msiFile, ProductVersion );</code></pre>
 <p>You can use this method to look up other properties in the installer. Some common ones you might want are <strong>ProductName, ProductCode, UpgradeCode, Manufacturer, ARPHELPLINK, ARPCOMMENTS, ARPCONTACT, ARPURLINFOABOUT</strong> and <strong>ARPURLUDATEINFO</strong>. For a full list of properties, see the <a href="http://msdn.microsoft.com/en-us/library/aa370905(VS.85).aspx">MSDN Reference</a>, but remember that most of the properties listed on that page are only for already installed applications and won't be included in the installer.</p>
 <p>If you find this code useful or the code is not self-explanatory, please leave a comment.</p>
