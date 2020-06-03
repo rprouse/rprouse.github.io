@@ -65,7 +65,7 @@ comments:
 <h2>Write Unit Tests</h2>
 <p>Another common convention is to name the test class the same as the class being tested with Tests appended. The class I want to test is called&nbsp;<strong>EnumToStringConverter.cs</strong>, so I rename&nbsp;<strong>Class1.cs</strong> to&nbsp;<strong>EnumToStringConverterTests.cs</strong>.</p>
 <p>To this class, I add the&nbsp;<strong>[TestFixture]</strong> attribute. You also need to&nbsp;add the <strong>using NUnit.Framework</strong>. My first test is going to make sure that the converter splits multiple words correctly, so I add a test enum and the first unit test. Add this point, my code looks like this.</p>
-<pre><code>using NUnit.Framework;
+<pre><code class="csharp">using NUnit.Framework;
 
 namespace IntroToNUnit.Tests
 {
@@ -90,7 +90,7 @@ namespace IntroToNUnit.Tests
 <p>Notice that my test method is public and returns void and that it has a <strong>[Test]</strong> attribute to identify it as a test. You can have more complicated test methods which I will cover in future posts.</p>
 <h2>Arrange, Act, Assert</h2>
 <p>Now it is time to write the first unit test. The most common structure is known as <a href="http://c2.com/cgi/wiki?ArrangeActAssert">Arrange, Act, Assert</a>. What this means is that you group the code in your test method into setting up for the test (Arrange), then you perform the action that you want to test (Act), then you check the results (Assert). Sometimes you will find that the arrange and act steps are combined for simpler tests as in this case. That is fine.</p>
-<pre><code>[Test]
+<pre><code class="csharp">[Test]
 public void CanConvertEnumIntoMultipleWords()
 {
     // Arrange/Act
@@ -102,9 +102,9 @@ public void CanConvertEnumIntoMultipleWords()
 </code></pre>
 <p>In this test, I have executed the code that I want to test, then I asserted what I expected the value to be. The <strong>Assert</strong>&nbsp;class is provided by NUnit and allows&nbsp;check many conditions in your tests. In this case I am only checking that the string returned is equal to what I expected. I will cover more types of NUnit Asserts in a later post.</p>
 <p>NUnit has two assert syntaxes. In the example code, I used the <a href="http://Constraint Model">Constraint Model</a> or sometimes the Fluent Syntax. It is called the fluent syntax because it reads very much like English and because you can continue to append extra conditions. For example, I could have also checked for null with,</p>
-<pre><code>Assert.That(actual, Is.Not.Null.And.EqualTo("Unit Testing"));</code></pre>
+<pre><code class="csharp">Assert.That(actual, Is.Not.Null.And.EqualTo("Unit Testing"));</code></pre>
 <p>NUnit also has a <a href="https://github.com/nunit/docs/wiki/Classic-Model">classic model/syntax</a> that you are likely to see in other tutorials. The above Assert could also be written as,</p>
-<pre><code>Assert.NotNull(actual);
+<pre><code class="csharp">Assert.NotNull(actual);
 Assert.AreEqual("Unit Testing", actual);
 </code></pre>
 <p>Some people prefer the classic syntax, but I recommend that you use the fluent syntax. New features in NUnit are always added to the fluent syntax and only rarely get added to the classic syntax.</p>

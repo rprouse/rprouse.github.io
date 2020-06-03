@@ -190,28 +190,27 @@ comments:
 <p>First, you will want to add a project reference to the project you are testing, then add NuGet references to the test framework&nbsp;<strong>NUnit</strong> 3.6.1, to the test runner&nbsp;<strong>NUnit3TestAdapter</strong> 3.8.0-alpha1 and to the test SDK&nbsp;<strong>Microsoft.NET.Test.Sdk</strong> 15.0.0. Add the references either using the <strong>Manage NuGet Packages...</strong> user interface, or by editing the project file.</p>
 <p><img src="/images/2017/05/Add-NuGet-References-to-Test-Project.png" alt="Add NuGet References to Test Project" width="790" height="429" align="center" /></p>
 <p>Your csproj file should end up looking similar to this. Notice how much cleaner the new format is.</p>
-<pre><code>
-<project Sdk="Microsoft.NET.Sdk">
+<pre><code class="xml">&lt;project Sdk="Microsoft.NET.Sdk"&gt;
 
-  <propertygroup>
-    <targetframework>netcoreapp1.1</targetframework>
-  </propertygroup>
+  &lt;propertygroup&gt;
+    &lt;targetframework&gt;netcoreapp1.1&lt;/targetframework&gt;
+  &lt;/propertygroup&gt;
 
-  <itemgroup>
-    <packagereference Include="Microsoft.NET.Test.Sdk" Version="15.0.0"></packagereference>
-    <packagereference Include="NUnit" Version="3.6.1"></packagereference>
-    <packagereference Include="NUnit3TestAdapter" Version="3.8.0-alpha1"></packagereference>
-  </itemgroup>
+  &lt;itemgroup&gt;
+    &lt;packagereference Include="Microsoft.NET.Test.Sdk" Version="15.0.0"&gt;&lt;/packagereference&gt;
+    &lt;packagereference Include="NUnit" Version="3.6.1"&gt;&lt;/packagereference&gt;
+    &lt;packagereference Include="NUnit3TestAdapter" Version="3.8.0-alpha1"&gt;&lt;/packagereference&gt;
+  &lt;/itemgroup&gt;
 
-  <itemgroup>
-    <projectreference Include="..\NetStandardLibrary\NetStandardLibrary.csproj"></projectreference>
-  </itemgroup>
+  &lt;itemgroup&gt;
+    &lt;projectreference Include="..\NetStandardLibrary\NetStandardLibrary.csproj"&gt;&lt;/projectreference&gt;
+  &lt;/itemgroup&gt;
 
-  <itemgroup>
-    <service Include="{82a7f48d-3b50-4b1e-b82e-3ada8210c358}"></service>
-  </itemgroup>
+  &lt;itemgroup&gt;
+    &lt;service Include="{82a7f48d-3b50-4b1e-b82e-3ada8210c358}"&gt;&lt;/service&gt;
+  &lt;/itemgroup&gt;
 
-</project>
+&lt;/project&gt;
 </code></pre>
 <p>From here, <a href="/2016/10/03/nunit-unit-tests/">write your unit tests</a> as you would for any project.</p>
 <h2>Running Tests in Visual Studio</h2>
@@ -225,8 +224,7 @@ comments:
 </ul>
 <h2>Running Tests from the Command Line</h2>
 <p>Adding the <a href="https://www.nuget.org/packages/NUnit3TestAdapter/3.8.0-alpha1">NUnit 3 Test Adapter</a> to your project will also allow you to use the <strong>dotnet test</strong> CLI. Here is an example run with the unit tests targeting both .NET 4.5 and .NET Core 1.1.</p>
-<pre><code>
-C:\src\Spikes\NetStandardLibrary
+<pre><code class="nohighlight">C:\src\Spikes\NetStandardLibrary
 &Icirc;&raquo; dotnet test .\NetStandardLibrary.Tests\NetStandardLibrary.Tests.csproj
 Build started, please wait...
 Build completed.

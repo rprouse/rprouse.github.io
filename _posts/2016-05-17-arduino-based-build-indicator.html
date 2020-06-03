@@ -55,7 +55,7 @@ void loop() {
 }
 </code></pre>
 <p>On the computer, I wrote a simple Python script to get the RSS feed for our CruiseControl.NET build results. RSS doesn't contain build specific nodes, so I just search for the word Success in the RSS title. The python script just loops, looks for new RSS items and sends a 0 or 1 to the Arduino over serial. It should be fairly simple to change the script to work with your build server.</p>
-<pre><code>#! python3
+<pre><code class="python">#! python3
 
 import feedparser
 import serial
@@ -83,7 +83,7 @@ while True:
     # display info for the first post
     num = len(feed.entries)
     success = False
-    if num > 0:
+    if num &gt; 0:
         entry = feed.entries[num-1]
 
         # Have we already seen this entry?

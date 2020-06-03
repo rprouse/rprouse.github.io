@@ -85,7 +85,7 @@ comments:
     [&#8230;]"
 ---
 <p>Another often overlooked C# statement that was introduced in .NET 2.0 is <strong>yield</strong>. This keyword is used to return items from a loop within a method and retain the state of the method through multiple calls. That is a bit hard to wrap your head around, so as always, an example will help;</p>
-<pre><code>public static IEnumerable<int> Range( int min, int max )
+<pre><code class="csharp">public static IEnumerable&lt;int&gt; Range( int min, int max )
 {
     for ( int i = min; i < max; i++ )
     {
@@ -94,25 +94,25 @@ comments:
 }</code></pre>
 <p>Each time <strong>Range</strong> is called, it will return one value in the given range. Of interest is that it maintains the state between calls. The best way to think of it is that for the first call to the method, execution starts at the first line and continues until it hits a yield statement at which time it returns the value. The subsequent runs through the method continue execution at the statement after the yield, continuing to yield values or exiting at the end of the method.</p>
 <p>Using this, you can write the following code;</p>
-<pre><code>foreach ( int i in Range( 10, 20 ) )
+<pre><code class="csharp">foreach ( int i in Range( 10, 20 ) )
 {
     Console.Write( i.ToString() + " " );
 }</code></pre>
 <p>Which will return the following;</p>
 <p>10 11 12 13 14 15 16 17 18 19</p>
 <p>Why bother you say? Why not just iterate through the numbers yourself? The answer&nbsp;lies in the fact that each call maintains state, so you don't have to. The above example doesn't really show you the power, so let's try a more complex example, calculating prime numbers.</p>
-<pre><code>public static IEnumerable<int> Primes( int max )
+<pre><code class="csharp">public static IEnumerable&lt;int&gt; Primes( int max )
 {
     yield return 2;
-    List<int> found = new List<int>();
+    List&lt;int&gt; found = new List&lt;int&gt;();
     found.Add( 3 );
     int candidate = 3;
-    while ( candidate <= max )
+    while ( candidate &lt;= max )
     {
         bool isPrime = true;
         foreach ( int prime in found )
         {
-            if ( prime * prime > candidate )
+            if ( prime * prime &gt; candidate )
             {
                 break;
             }
@@ -131,16 +131,16 @@ comments:
     }
 }</code></pre>
 <p>Notice that there are multiple yields within this method and that the state is maintained through each call. You can now print out all of the prime numbers below 50 with;</p>
-<pre><code>foreach ( int prime in Primes( 50 ) )
+<pre><code class="csharp">foreach ( int prime in Primes( 50 ) )
 {
     Console.Write( prime.ToString() + " " );
 }</code></pre>
 <p>There is also the <strong>yield break</strong> statement. If a <strong>yield break</strong> statement is hit within a method, execution of that method stops with no return. Using this, the first method could be rewritten like this;</p>
-<pre><code>public static IEnumerable<int> Range( int min, int max )
+<pre><code class="csharp">public static IEnumerable&lt;int&gt; Range( int min, int max )
 {
     while ( true )
     {
-        if ( min >= max )
+        if ( min &gt;= max )
         {
             yield break;
         }

@@ -64,13 +64,13 @@ To see how to connect your Docker Client to the Docker Engine running on this vi
 <h3>Listing Docker Machines</h3>
 <p>You use <strong>docker-machine ls</strong> to view registered Docker machines and their state.</p>
 <pre><code>D:\src
-&Icirc;&raquo; docker-machine ls
+&gt; docker-machine ls
 NAME          ACTIVE   DRIVER   STATE     URL                        SWARM   DOCKER    ERRORS
 Boot2Docker   -        hyperv   Running   tcp://192.168.0.113:2376           v1.10.2
 </code></pre>
 <h3>Starting and Stopping Machines</h3>
 <p>Use <strong>docker-machine start [MachineName]</strong> and <strong>docker-machine stop [MachineName]</strong> to start and stop virtual machines.</p>
-<pre><code>&Icirc;&raquo; docker-machine start Boot2Docker
+<pre><code>&gt; docker-machine start Boot2Docker
 Starting "Boot2Docker"...
 (Boot2Docker) Waiting for host to start...
 Machine "Boot2Docker" was started.
@@ -81,7 +81,7 @@ Started machines may have new IP addresses. You may need to re-run the `docker-m
 <h3>Configuring Your Shell</h3>
 <p>To connect your Docker client to a running vm, use the command <strong>docker-machine env [MachineName]</strong>.</p>
 <pre><code>D:\src
-&Icirc;&raquo; docker-machine env Boot2Docker
+&gt; docker-machine env Boot2Docker
 $Env:DOCKER_TLS_VERIFY = "1"
 $Env:DOCKER_HOST = "tcp://192.168.0.113:2376"
 $Env:DOCKER_CERT_PATH = "C:\Users\rob.prouse\.docker\machine\machines\Boot2Docker"
@@ -93,7 +93,7 @@ $Env:DOCKER_MACHINE_NAME = "Boot2Docker"
 <h2>Test Your Docker Installation</h2>
 <p>Now that you are setup and have your shell configured, run <strong>docker run hello-world</strong> to check that everything is working.</p>
 <pre><code>D:\src
-&Icirc;&raquo; docker run hello-world
+&gt; docker run hello-world
 Unable to find image 'hello-world:latest' locally
 latest: Pulling from library/hello-world
 

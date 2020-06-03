@@ -23,15 +23,15 @@ comments: []
 <p><strong>2.</strong> Reference <strong>nunit.runner</strong>&nbsp;and <strong>nunit.framework&nbsp;</strong>in the project. It will be a NuGet package with the correct Xamarin dependencies.</p>
 <p><strong>3.</strong> In <strong>MainActivity.OnCreate()</strong> on Android or <strong>AppDelegate.FinishedLaunching()</strong> on iOS, swap the App object with the one we provide.</p>
 <h4>On Android:</h4>
-<pre><code> protected override void OnCreate(Bundle bundle)
+<pre><code class="csharp"> protected override void OnCreate(Bundle bundle)
  {
-&nbsp; &nbsp; base.OnCreate(bundle);
+    base.OnCreate(bundle);
 
-&nbsp; &nbsp; global::Xamarin.Forms.Forms.Init(this, bundle);
-&nbsp; &nbsp; LoadApplication(new NUnit.Runner.App());
+    global::Xamarin.Forms.Forms.Init(this, bundle);
+    LoadApplication(new NUnit.Runner.App());
  }</code></pre>
 <h4>On iOS:</h4>
-<pre><code> public override bool FinishedLaunching(UIApplication app, NSDictionary options)
+<pre><code class="csharp"> public override bool FinishedLaunching(UIApplication app, NSDictionary options)
  {
      global::Xamarin.Forms.Forms.Init();
      LoadApplication(new NUnit.Runner.App());

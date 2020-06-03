@@ -103,12 +103,12 @@ comments:
 <p>So, let's go green field, in Visual Studio, <strong>File | New | Project...</strong> and select <strong>Class Library (.NET Core)</strong> under the new <strong>C# | .NET Core</strong> node.</p>
 <p><img class="aligncenter size-full wp-image-540" src="/images/2016/05/2016-05-18-09_55_55-New-Project.png" alt="New .NET Core Project" width="941" height="653" /></p>
 <p>This it the code under test. To this, I have added the simple calculator class <a href="/2015/11/04/testing-net-core-using-nunit-3/">from the last post</a>.</p>
-<pre><code>public static class Calculator
+<pre><code class="csharp">public static class Calculator
 {
-    public static int Add(int x, int y) => x + y;
-    public static int Subtract(int x, int y) => x - y;
-    public static int Multiply(int x, int y) => x * y;
-    public static int Divide(int x, int y) => x / y;
+    public static int Add(int x, int y) =&gt; x + y;
+    public static int Subtract(int x, int y) =&gt; x - y;
+    public static int Multiply(int x, int y) =&gt; x * y;
+    public static int Divide(int x, int y) =&gt; x / y;
 }
 </code></pre>
 <p>If you look in <strong>global.json</strong>, the new standard is to put your code in <strong>src</strong> and tests in <strong>test</strong> directories. To conform with this, add a <strong>New Solution Folder</strong> named test.</p>
@@ -122,7 +122,7 @@ comments:
 <p>To this new <strong>test</strong> folder, add a new <strong>Console Application (.NET Core)</strong> as your test project and add a reference to the main project.</p>
 <p><img class="aligncenter size-full wp-image-545" src="/images/2016/05/2016-05-18-10_36_17-Add-New-Project.png" alt="Add New Console Project" width="941" height="653" /></p>
 <p>Now, add the <a href="https://www.nuget.org/packages/NUnitLite/" target="_blank">NUnitLite NuGet package</a> to the test project and change <strong>Main</strong> in <strong>Program.cs</strong>.</p>
-<pre><code>using NUnit.Common;
+<pre><code class="csharp">using NUnit.Common;
 using NUnitLite;
 using System;
 using System.Reflection;
@@ -140,7 +140,7 @@ namespace NUnitWithDotNetCoreRC2.Test
 }
 </code></pre>
 <p>You can now add your tests to the project.</p>
-<pre><code>using NUnit.Framework;
+<pre><code class="csharp">using NUnit.Framework;
 
 namespace NUnitWithDotNetCoreRC2.Test
 {

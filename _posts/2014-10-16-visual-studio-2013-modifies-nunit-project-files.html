@@ -29,7 +29,7 @@ comments: []
 <p>In Visual Studio 2013, we changed it so that Test Explorer package is loaded only when the solution contains one or more test projects. Test projects are identified in two different ways. Projects created from one of the built-in unit test project templates are identified using project type GUIDs. Other types of projects, such as Class Library project with XUnit or NUnit tests, are identified by Test Explorer during first test discovery and tagged with the Service/item.</p>
 <p>You can avoid Visual Studio automatically adding the Service/item to your test projects by creating them from any of the built-in unit test project templates. In other words, select the "Unit Test Project" template instead of the "Class Library" template in the New Project dialog.</p></blockquote>
 <p>If you want to change existing projects from a "Class Library" to a "Unit Test Project", edit the project file and add the following to the first PropertyGroup</p>
-<pre><code><ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-<TestProjectType>UnitTest</TestProjectType></code></pre>
+<pre><code class="xml">&lt;ProjectTypeGuids&gt;{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}&lt;/ProjectTypeGuids&gt;
+  &lt;TestProjectType&gt;UnitTest&lt;/TestProjectType&gt;</code></pre>
 <p>This isn't much different than the Service being added, but maybe it is more correct because it is a test project?</p>
 <p>Unfortunately, this doesn't work if anyone is using Xamarin studio since the Unit Test Project type is not supported.</p>

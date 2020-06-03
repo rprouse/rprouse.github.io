@@ -64,12 +64,12 @@ comments:
     rel=\"nofollow\">http://www.a2zmenu.com/CSharp/C%20sharp%20Null-Coalescing%20Operator.aspx</a>"
 ---
 <p>The first time I saw the ?? operator in C#, I did a double take and had to look it up. The operator, called the null coalescing operator was added in C# 2.0 and is pretty useful, but still fairly unknown.</p>
-<pre><code>Order order = GetOrder( id ) ?? new Order();</code></pre>
+<pre><code class="csharp">Order order = GetOrder( id ) ?? new Order();</code></pre>
 <p>In the above code, if the return value of&nbsp;GetOrder()&nbsp;is not null, it is assigned to order. If it is null,&nbsp;a new Order is created and assigned. Before the ?? operator, you would have to write something like this;</p>
-<pre><code>Order order = GetOrder( id );
+<pre><code class="csharp">Order order = GetOrder( id );
 if ( order == null )
     order = new Order();</code></pre>
 <p>It is also really useful for output. For example, instead of using the conditional operator,</p>
-<pre><code>Console.WriteLine( filename != null ? filename : "Filename is undefined" );</code></pre>
+<pre><code class="csharp">Console.WriteLine( filename != null ? filename : "Filename is undefined" );</code></pre>
 <p>You can use the null coalescing operator,</p>
-<pre><code>Console.WriteLine( filename ?? "Filename is undefined" );</code></pre>
+<pre><code class="csharp">Console.WriteLine( filename ?? "Filename is undefined" );</code></pre>

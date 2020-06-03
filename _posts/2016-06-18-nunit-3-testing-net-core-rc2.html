@@ -202,17 +202,17 @@ comments:
 <p>In Visual Studio, <strong>File | New | Project...</strong> and select <strong>Class Library (.NET Core)</strong> under the new <strong>C# | .NET Core</strong> node.</p>
 <p><img class="aligncenter size-full wp-image-540" src="/images/2016/05/2016-05-18-09_55_55-New-Project.png" alt="New .NET Core Project" width="941" height="653" /></p>
 <p>This it the code under test. To this, I have added the simple calculator class <a href="/2015/11/04/testing-net-core-using-nunit-3/">from the last post</a>.</p>
-<pre><code>public static class Calculator
+<pre><code class="csharp">public static class Calculator
 {
-    public static int Add(int x, int y) => x + y;
-    public static int Subtract(int x, int y) => x - y;
-    public static int Multiply(int x, int y) => x * y;
-    public static int Divide(int x, int y) => x / y;
+    public static int Add(int x, int y) =&gt; x + y;
+    public static int Subtract(int x, int y) =&gt; x - y;
+    public static int Multiply(int x, int y) =&gt; x * y;
+    public static int Divide(int x, int y) =&gt; x / y;
 }
 </code></pre>
 <h2>Create an NUnit .NET Core Test Project</h2>
 <p>If you look in <code>global.json</code>, the new standard is to put your code in <code>src</code> and tests in <code>test</code> directories. To conform with this, add a <code>New Solution Folder</code> named test.</p>
-<pre><code>{
+<pre><code class="json">{
   "projects": [ "src", "test" ],
   "sdk": {
     "version": "1.0.0-preview2-003121"
@@ -220,7 +220,7 @@ comments:
 }
 </code></pre>
 <p>To this new <code>test</code> folder, add another <strong>Class Library (.NET Core)</strong> as your test project and edit the <code>project.json</code> based on the following;</p>
-<pre><code>{
+<pre><code class="json">{
     "version": "1.1.0-*",
 
     "dependencies": {
@@ -252,7 +252,7 @@ comments:
 <p>Under frameworks, we need to add to the imports because NUnit is still a PCL assembly. The .NET Standard (netstandard) version of the NUnit Framework won't likely be ready until the 3.6 release this summer. We are waiting until after the final .NET Core release to start that work.</p>
 <h2>Add Tests</h2>
 <p>Next, you can add your tests to the project by adding a new class;</p>
-<pre><code>using NUnit.Framework;
+<pre><code class="csharp">using NUnit.Framework;
 
 namespace NUnitWithDotNetCoreRC2.Test
 {

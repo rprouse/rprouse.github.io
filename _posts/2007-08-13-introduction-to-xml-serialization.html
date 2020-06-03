@@ -90,7 +90,7 @@ comments:
 ---
 <p>Many projects that I work on require me to serialize objects out to the file system and then retrieve them later. When I am serializing out program settings that are loaded in every time the program runs, I tend to use the Settings that come as a part of C# projects. If however the user can load or save settings, documents or projects, then I use the <strong>XmlSerializer</strong> class to save instances of a class out to XML. This allows me to automatically create a new document type based on my data classes and save them out with a few lines of code.</p>
 <p>Because I do this so often, I have created a static helper class that has two methods that serialize/deserialize any type to/from an XML file. The two methods are:</p>
-<pre><code>public static void Serialize<T>( string filename, T data )
+<pre><code class="csharp">public static void Serialize&lt;T&gt;( string filename, T data )
 {
    TextWriter writer = null;
    try
@@ -108,7 +108,7 @@ comments:
    }
 }
 
-public static T Deserialize<T>( string filename )
+public static T Deserialize&lt;T&gt;( string filename )
 {
    TextReader reader = null;
    T data = default(T);
@@ -129,11 +129,11 @@ public static T Deserialize<T>( string filename )
 }</code></pre>
 <p><br></p>
 <p>With these two methods, you can serialize a class out to XML or restore a class from XML with one line of code.</p>
-<pre><code>// Serialize out a person to XML
+<pre><code class="csharp">// Serialize out a person to XML
 XmlSerializerHelper.Serialize<Person>( "person.xml", person );
 
 // Deserialize the person from XML
-Person person = XmlSerializerHelper.Deserialize<Person>( "person.xml" );</code></pre>
+Person person = XmlSerializerHelper.Deserialize&lt;Person&gt;( "person.xml" );</code></pre>
 <p>The XmlSerializer class will serialize out/in all public properties and members of the given class. One common error is that the class that you are serializing and all contained classes must have a public constructor that takes no parameters.</p>
 <p>The class that you are serializing does not need to be modified, but if you want to control how the XML is serialized out, you can use several attributes.</p>
 <p>By default, all properties are serialized out as XML elements. If you want to specify how the elements are serialized out, you can use the <strong>XmlElementAttribute</strong> and set properties on it such as <strong>ElementName</strong>.</p>

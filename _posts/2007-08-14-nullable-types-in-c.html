@@ -49,14 +49,14 @@ comments:
 ---
 <p>In .NET 1.0 and 1.1, if you wanted to store a null value for a value type (int, double, DateTime, etc) you would have to box it or write your own wrapper around it. The introduction of generics in .NET 2.0 allowed the concept of nullable types to be introduced into the language through the <strong>Nullable<t></strong> structure.</p>
 <p>Now if you want an int value that could be null, you could write,</p>
-<pre><code>Nullable<int> x = new Nullable<int>( 12 );</code></pre>
+<pre><code class="csharp">Nullable&lt;int&gt; x = new Nullable&lt;int&gt;( 12 );</code></pre>
 <p>This is a fair amount of typing, so luckily, there is compiler support for nullable types using the <strong>? operator</strong>.</p>
-<pre><code>
+<pre><code class="csharp">
 int? y = null;
 int? z = 14;
 </code></pre>
 <p>You can test if a value is null with the <strong>HasValue</strong> property, or you can simply compare to null.</p>
-<pre><code>if ( x.HasValue )
+<pre><code class="csharp">if ( x.HasValue )
 {
     // ...
 }
@@ -65,11 +65,11 @@ if ( y == null )
     // ...
 }</code></pre>
 <p>You can add two nullable types together and they will preserve the null values.</p>
-<pre><code>int? i = x + y; // i == null
+<pre><code class="csharp">int? i = x + y; // i == null
 int? j = x + z; // j == 26</code></pre>
 <p>To assign a nullable type back to a value type, you use the <strong>Value</strong> property.</p>
-<pre><code>int k = j.Value;</code></pre>
+<pre><code class="csharp">int k = j.Value;</code></pre>
 <p>The only problem with the above is that it will throw an exception if the value is null. To get around this, always check for null first, or use the <strong>GetValueOrDefault</strong> method.</p>
-<pre><code>int l = i.GetValueOrDefault(); // l == 0
+<pre><code class="csharp">int l = i.GetValueOrDefault(); // l == 0
 int m = i.GetValueOrDefault( -1 ); // m == -1;</code></pre>
 <p>Nullable types are fairly simple, but really powerful when you need them. Make sure they are in your tool belt.</p>

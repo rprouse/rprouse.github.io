@@ -22,13 +22,13 @@ comments: []
 <p>Open the node for the version of LocalDB you want to use and expand <strong>Databases | System Databases</strong>. Right click on <strong>master</strong> and select <strong>New Query...</strong></p>
 <p><img class="aligncenter size-full wp-image-510" src="/images/2016/03/New-Query.png" alt="New Query" width="463" height="395" /></p>
 <p>Execute the following query using the path to your database backup.</p>
-<pre><code>RESTORE FILELISTONLY
+<pre><code class="sql">RESTORE FILELISTONLY
 FROM DISK = 'D:\tmp\ivaraapplicationtesting75.bak'
 </code></pre>
 <p>In the results, take note of the <strong>LogicalName</strong>.</p>
 <p><img class="aligncenter size-full wp-image-512" src="/images/2016/03/LogicalName.png" alt="LogicalName" width="445" height="125" /></p>
 <p>Modify your query to do the restore, using your database name, backup and the LogicalName from the previous query. You can restore the database to any existing path, in this case, I am restoring to my home directory.</p>
-<pre><code>RESTORE DATABASE IvaraApplicationTesting
+<pre><code class="sql">RESTORE DATABASE IvaraApplicationTesting
 FROM DISK = 'D:\tmp\ivaraapplicationtesting75.bak'
 
 WITH MOVE 'ivara_data' TO 'C:\Users\rob.prouse\IvaraApplicationTesting.mdf',

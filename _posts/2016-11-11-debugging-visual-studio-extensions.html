@@ -26,13 +26,13 @@ comments:
 <p>The usual recommendation is to edit the project's Properties&nbsp;and enter the information in the Debug Tab. This works, but that information is not saved in the project file, so you need to do it whenever you get a clean copy of the source. I prefer saving the information in the project file itself.</p>
 <h2>Editing the Visual Studio Extension Project File</h2>
 <p>Unload the extension project in Visual Studio by right clicking on it and selecting <strong>Unload Project</strong>. Next, edit the project by right clicking and selecting&nbsp;<strong>Edit MyExtension.csproj</strong>.</p>
-<p>Add the following XML after the first <strong></PropertyGroup></strong> end tag in the project.</p>
-<pre><code><propertygroup>
-  <!-- Common debugging support -->
-  <startaction>Program</startaction>
-  <startprogram>$(DevEnvDir)\devenv.exe</startprogram>
-  <startarguments>/rootsuffix Exp</startarguments>
-</propertygroup>
+<p>Add the following XML after the first <strong>&lt;/PropertyGroup&gt;</strong> end tag in the project.</p>
+&lt;pre&gt;&lt;code class="xml"&gt;&lt;propertygroup&gt;
+  &lt;!-- Common debugging support --&gt;
+  &lt;startaction&gt;Program&lt;/startaction&gt;
+  &lt;startprogram&gt;$(DevEnvDir)\devenv.exe&lt;/startprogram&gt;
+  &lt;startarguments&gt;/rootsuffix Exp&lt;/startarguments&gt;
+&lt;/propertygroup&gt;
 </code></pre>
 <p><strong>Please note</strong>, the XML above should be PascalCase, in other words, <strong>propertygroup</strong> should be <strong>PropertyGroup</strong>. Wordpress keeps converting the code to lowercase. If anyone knows how to fix that, please let me know in the comments.</p>
 <p>This runs the current version of Visual Studio using the <strong>/rootsuffix Exp</strong> command line. If you save the file and reload it, you will now see the options in the Debug Tab of the project's Properties.</p>

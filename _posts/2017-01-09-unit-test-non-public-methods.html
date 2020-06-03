@@ -49,11 +49,11 @@ comments:
 
     Rob
 ---
-<p>You often want to unit test non-public methods and classes in .NET, but you don't want to make them public. The most common solution is to make the methods and classes&nbsp;<strong>internal</strong> and access them from your unit test project using the&nbsp;<a href="https://msdn.microsoft.com/en-us/library/system.runtime.compilerservices.internalsvisibletoattribute.aspx">InternalsVisibleTo</a> attribute.</p>
+<p>You often want to unit test non-public methods and classes in .NET, but you don't want to make them public. The most common solution is to make the methods and classes <strong>internal</strong> and access them from your unit test project using the&nbsp;<a href="https://msdn.microsoft.com/en-us/library/system.runtime.compilerservices.internalsvisibletoattribute.aspx">InternalsVisibleTo</a> attribute.</p>
 <p><!--more--></p>
 <h2>Unsigned Assemblies</h2>
-<p>If your assemblies are unsigned, edit&nbsp;<strong>AssemblyInfo.cs</strong> in the project you are unit testing and add the following attribute,</p>
-<pre><code>[assembly: InternalsVisibleTo("MyAssembly.Tests")]
+<p>If your assemblies are unsigned, edit <strong>AssemblyInfo.cs</strong> in the project you are unit testing and add the following attribute,</p>
+<pre><code class="csharp">[assembly: InternalsVisibleTo("MyAssembly.Tests")]
 </code></pre>
 <p>Remember to add the attribute to your main project and use the name of your test project. Once you do this, you can access internal classes and methods from your test project.</p>
 <h2>Signed Assemblies</h2>
@@ -78,7 +78,7 @@ c2a041faaf801521a769535de9a04cd3b4dedccbf73d1a6456bf4fe58814510e84983c72d0460b
 Public key token is a5778f560690a058
 </code></pre>
 <p>Copy the full public key and add it to the <a href="https://msdn.microsoft.com/en-us/library/system.runtime.compilerservices.internalsvisibletoattribute.aspx">InternalsVisibleTo</a> attribute in <strong>AssemblyInfo.cs</strong></p>
-<pre><code>[assembly: InternalsVisibleTo("MyAssembly.Tests, PublicKey=" +
+<pre><code class="csharp">[assembly: InternalsVisibleTo("MyAssembly.Tests, PublicKey=" +
             "0024000004800000940000000602000000240000525341310004000001000100750098646d1c04" +
             "c2a041faaf801521a769535de9a04cd3b4dedccbf73d1a6456bf4fe58814510e84983c72d0460b" +
             "8ba85c52a9cacdc4a0786af54e90cb7a81eb2049ecfe6b2c5e20a18fe4b9bff009ada232e980d2" +

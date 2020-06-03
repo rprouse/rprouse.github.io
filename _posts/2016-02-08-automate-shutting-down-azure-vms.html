@@ -54,7 +54,7 @@ comments: []
 <p>Create a new runbook called <strong>Stop-AzureVirtualMachines</strong> of type <strong>PowerShell Workflow</strong> and give it a meaningful description and click <strong>Create</strong>.</p>
 <p><img class="aligncenter size-full wp-image-459" src="/images/2016/02/2016-02-08-14_51_36-Runbook-Microsoft-Azure.png" alt="Runbook - Microsoft Azure" width="600" height="345" /></p>
 <p>A new Workflow Runbook will open in the editor, copy the following code in;</p>
-<pre><code><# .DESCRIPTION Stops all Azure Virtual Machines in an account. To stop classic VMs, change Get-AzureRmVM and Stop-AzureRmVM to Get-AzureVM and Stop-AzureVM .NOTES AUTHOR: Rob Prouse LASTEDIT: Feb 08, 2016 #>
+<pre><code>&lt;# .DESCRIPTION Stops all Azure Virtual Machines in an account. To stop classic VMs, change Get-AzureRmVM and Stop-AzureRmVM to Get-AzureVM and Stop-AzureVM .NOTES AUTHOR: Rob Prouse LASTEDIT: Feb 08, 2016 #&gt;
 workflow Stop-AzureVirtualMachines
 {
   #The name of the Automation Credential Asset this runbook will use to authenticate to Azure.
