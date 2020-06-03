@@ -21,6 +21,10 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: rprouse
 github_username:  rprouse
+linkedin_username: robprouse
+
+# refer to http://shopify.github.io/liquid/filters/date/ if you want to customize this
+date_format: "%b %-d, %Y"
 
 # Build settings
 markdown: kramdown

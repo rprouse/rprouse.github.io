@@ -1,33 +1,8 @@
-# minima
+# Alteridem.net
 
-*Minima is a one-size-fits-all Jekyll theme for writers*. It's Jekyll's default (and first) theme. It's what you get when you run `jekyll new`.
+## Theme
 
-[Theme preview](https://jekyll.github.io/minima/)
-
-![minima theme preview](/screenshot.png)
-
-## Installation
-
-Add this line to your Jekyll site's Gemfile:
-
-```ruby
-gem "minima"
-```
-
-And add this line to your Jekyll site:
-
-```yaml
-theme: minima
-```
-
-And then execute:
-
-    $ bundle
-
-
-## Contents At-A-Glance
-
-Minima has been scaffolded by the `jekyll new-theme` command and therefore has all the necessary files and directories to have a new Jekyll site up and running with zero-configuration.
+The theme was created from the default Jekyll Minima theme.
 
 ### Layouts
 
@@ -52,10 +27,10 @@ Refers to snippets of code within the `_includes` directory that can be inserted
 
 Refers to `.scss` files within the `_sass` directory that define the theme's styles.
 
-  - `minima.scss` &mdash; The core file imported by preprocessed `main.scss`, it defines the variable defaults for the theme and also further imports sass partials to supplement itself.
-  - `minima/_base.scss` &mdash; Resets and defines base styles for various HTML elements.
-  - `minima/_layout.scss` &mdash; Defines the visual style for various layouts.
-  - `minima/_syntax-highlighting.scss` &mdash; Defines the styles for syntax-highlighting.
+  - `alteridem.scss` &mdash; The core file imported by preprocessed `main.scss`, it defines the variable defaults for the theme and also further imports sass partials to supplement itself.
+  - `alteridem/_base.scss` &mdash; Resets and defines base styles for various HTML elements.
+  - `alteridem/_layout.scss` &mdash; Defines the visual style for various layouts.
+  - `alteridem/_syntax-highlighting.scss` &mdash; Defines the styles for syntax-highlighting.
 
 ### Assets
 
@@ -66,7 +41,7 @@ This directory can include sub-directories to manage assets of similar type, and
 
 ### Plugins
 
-Minima comes with [`jekyll-seo-tag`](https://github.com/jekyll/jekyll-seo-tag) plugin preinstalled to make sure your website gets the most useful meta tags. See [usage](https://github.com/jekyll/jekyll-seo-tag#usage) to know how to set it up.
+- [`jekyll-seo-tag`](https://github.com/jekyll/jekyll-seo-tag) plugin ensures your website gets the most useful meta tags. See [usage](https://github.com/jekyll/jekyll-seo-tag#usage) to know how to set it up.
 
 ## Usage
 
@@ -76,37 +51,15 @@ Minima comes with [`jekyll-seo-tag`](https://github.com/jekyll/jekyll-seo-tag) p
 
 #### Main Heading and Content-injection
 
-From Minima v2.2 onwards, the *home* layout will inject all content from your `index.md` / `index.html` **before** the **`Posts`** heading. This will allow you to include non-posts related content to be published on the landing page under a dedicated heading. *We recommended that you title this section with a Heading2 (`##`)*.
+The *home* layout will inject all content from your `index.md` / `index.html` **before** the **`Posts`** heading. This will allow you to include non-posts related content to be published on the landing page under a dedicated heading. *We recommended that you title this section with a Heading2 (`##`)*.
 
 Usually the `site.title` itself would suffice as the implicit 'main-title' for a landing-page. But, if your landing-page would like a heading to be explicitly displayed, then simply define a `title` variable in the document's front matter and it will be rendered with an `<h1>` tag.
 
 #### Post Listing
 
-This section is optional from Minima v2.2 onwards.<br/>
 It will be automatically included only when your site contains one or more valid posts or drafts (if the site is configured to `show_drafts`).
 
 The title for this section is `Posts` by default and rendered with an `<h2>` tag. You can customize this heading by defining a `list_title` variable in the document's front matter.
-
---
-
-### Customization
-
-To override the default structure and style of minima, simply create the concerned directory at the root of your site, copy the file you wish to customize to that directory, and then edit the file.
-e.g., to override the [`_includes/head.html `](_includes/head.html) file to specify a custom style path, create an `_includes` directory, copy `_includes/head.html` from minima gem folder to `<yoursite>/_includes` and start editing that file.
-
-The site's default CSS has now moved to a new place within the gem itself, [`assets/main.scss`](assets/main.scss). To **override the default CSS**, the file has to exist at your site source. Do either of the following:
-- Create a new instance of `main.scss` at site source.
-  - Create a new file `main.scss` at `<your-site>/assets/`
-  - Add the frontmatter dashes, and
-  - Add `@import "minima";`, to `<your-site>/assets/main.scss`
-  - Add your custom CSS.
-- Download the file from this repo
-  - Create  a new file `main.scss` at `<your-site>/assets/`
-  - Copy the contents at [assets/main.scss](assets/main.scss) onto the `main.scss` you just created, and edit away!
-- Copy directly from Minima 2.0 gem
-  - Go to your local minima gem installation directory ( run `bundle show minima` to get the path to it ).
-  - Copy the `assets/` folder from there into the root of `<your-site>`
-  - Change whatever values you want, inside `<your-site>/assets/main.scss`
 
 --
 
@@ -126,14 +79,12 @@ header_pages:
 
 ### Change default date format
 
-You can change the default date format by specifying `site.minima.date_format`
+You can change the default date format by specifying `site.date_format`
 in `_config.yml`.
 
 ```
-# Minima date format
 # refer to http://shopify.github.io/liquid/filters/date/ if you want to customize this
-minima:
-  date_format: "%b %-d, %Y"
+date_format: "%b %-d, %Y"
 ```
 
 --
@@ -202,17 +153,3 @@ To display post-excerpts on the Home Page, simply add the following to your `_co
 ```yaml
 show_excerpts: true
 ```
-
-## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/jekyll/minima. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
-
-## Development
-
-To set up your environment to develop this theme, run `script/bootstrap`.
-
-To test your theme, run `script/server` (or `bundle exec jekyll serve`) and open your browser at `http://localhost:4000`. This starts a Jekyll server using your theme and the contents. As you make modifications, your site will regenerate and you should see the changes in the browser after a refresh.
-
-## License
-
-The theme is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
