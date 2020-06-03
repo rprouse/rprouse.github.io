@@ -87,7 +87,7 @@ comments:
 <p>For example, adding </p>
 <pre><code>[DebuggerBrowsable( DebuggerBrowsableState.Never )]</code></pre>
 <p>to the private members of a class will cause them to be hidden in the watch window, thus cleaning up the view.</p>
-<p><img height="134" src="http://www.alteridem.net/wp-content/uploads/2007/09/windowslivewritereasierdebuggingwithattributes-a2c2debuggerdisplay13.jpg" width="486"></p>
+<p><img height="134" src="/images/2007/09/windowslivewritereasierdebuggingwithattributes-a2c2debuggerdisplay13.jpg" width="486"></p>
 <h3>DebuggerDisplay</h3>
 <p><strong><a href="http://msdn2.microsoft.com/en-us/library/system.diagnostics.debuggerdisplayattribute.aspx">DebuggerDisplay</a></strong> is my favourite attribute. Add it to a class and construct it with a string, and it will display that string in the watch window. Add any properties you want displayed within curly braces and they will automatically be substituted in. For example;</p>
 <pre><code>[DebuggerDisplay( "Name: {Name}, Age: {Age}" )]
@@ -95,6 +95,6 @@ public class Person
 {
     // ...
 }</code></pre>
-<p><img height="132" src="http://www.alteridem.net/wp-content/uploads/2007/09/windowslivewritereasierdebuggingwithattributes-a2c2debuggerdisplay20.jpg" width="486"> </p>
+<p><img height="132" src="/images/2007/09/windowslivewritereasierdebuggingwithattributes-a2c2debuggerdisplay20.jpg" width="486"> </p>
 <p>These are the three attributes that I use most often, but you may also want to look up <strong><a href="http://msdn2.microsoft.com/en-us/library/system.diagnostics.debuggerstepperboundaryattribute.aspx">DebuggerStepperBoundary</a></strong>, <strong><a href="http://msdn2.microsoft.com/en-us/library/system.diagnostics.debuggertypeproxyattribute.aspx">DebuggerTypeProxy</a></strong> and <strong><a href="http://msdn2.microsoft.com/en-us/library/system.diagnostics.debuggervisualizerattribute.aspx">DebuggerVisualizer</a>.</strong></p>
 <p>Happy Debugging!</p>

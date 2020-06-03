@@ -27,13 +27,13 @@ comments: []
 <h2>Restoring the DB Backup</h2>
 <p>In Visual Studio, open <strong>SQL Server Object Explorer</strong> (Ctrl+\, Ctrl+S) or under the View menu. Open the SQL Server node and you will likely have several LocalDB instances. If not, click the <strong>Add SQL Server</strong> button and from the dropdown, select <strong>(localdb)\MSSQLLocalDB</strong>.</p>
 <p>Open the node for the version of LocalDB you want to use and expand <strong>Databases | System Databases</strong>. Right click on <strong>master</strong> and select <strong>New Query...</strong></p>
-<p><img class="aligncenter size-full wp-image-510" src="http://www.alteridem.net/wp-content/uploads/2016/03/New-Query.png" alt="New Query" width="463" height="395" /></p>
+<p><img class="aligncenter size-full wp-image-510" src="/images/2016/03/New-Query.png" alt="New Query" width="463" height="395" /></p>
 <p>Execute the following query using the path to your database backup.</p>
 <pre><code>RESTORE FILELISTONLY
 FROM DISK = 'D:\tmp\ivaraapplicationtesting75.bak'
 </code></pre>
 <p>In the results, take note of the <strong>LogicalName</strong>.</p>
-<p><img class="aligncenter size-full wp-image-512" src="http://www.alteridem.net/wp-content/uploads/2016/03/LogicalName.png" alt="LogicalName" width="445" height="125" /></p>
+<p><img class="aligncenter size-full wp-image-512" src="/images/2016/03/LogicalName.png" alt="LogicalName" width="445" height="125" /></p>
 <p>Modify your query to do the restore, using your database name, backup and the LogicalName from the previous query. You can restore the database to any existing path, in this case, I am restoring to my home directory.</p>
 <pre><code>RESTORE DATABASE IvaraApplicationTesting
 FROM DISK = 'D:\tmp\ivaraapplicationtesting75.bak'
@@ -43,5 +43,5 @@ MOVE 'ivara_log' TO 'C:\Users\rob.prouse\IvaraApplicationTesting.ldf',
 REPLACE;
 </code></pre>
 <p>First time I did this, I thought it didn't work because it happened so quickly and because the database did not show up in <strong>SQL Server Object Explorer</strong>, but all you need to do is click refresh.</p>
-<p><img class="aligncenter size-full wp-image-515" src="http://www.alteridem.net/wp-content/uploads/2016/03/Results.png" alt="Results" width="251" height="177" /></p>
+<p><img class="aligncenter size-full wp-image-515" src="/images/2016/03/Results.png" alt="Results" width="251" height="177" /></p>
 <p>If you expand your new database, you will see that all of your tables are there and you can execute queries against it.</p>

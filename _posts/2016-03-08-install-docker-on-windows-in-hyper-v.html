@@ -28,15 +28,15 @@ comments: []
 <p>We're all Windows developers here, so I will assume that you are already using Hyper-V and that it is working.</p>
 <p>Download <a href="https://www.docker.com/products/docker-toolbox" target="_blank">Docker Toolbox</a> for Windows</p>
 <p>Run the installer. On the third screen, you cannot uncheck VirtualBox even though you don't need it. Damn you Docker! No worries, we can get around that...<br />
-<img class="aligncenter size-full wp-image-472" src="http://www.alteridem.net/wp-content/uploads/2016/03/2016-03-08-14_40_06-Setup-Docker-Toolbox.png" alt="Setup - Docker Toolbox" width="499" height="387" /></p>
+<img class="aligncenter size-full wp-image-472" src="/images/2016/03/2016-03-08-14_40_06-Setup-Docker-Toolbox.png" alt="Setup - Docker Toolbox" width="499" height="387" /></p>
 <p>On the fourth screen, select all options, then continue to click through all of the screens.</p>
 <p>At the end of the Docker Toolbox install, it will begin installing VirtualBox. A Windows Security dialog will pop up asking you if you want to install Oracle device software. Clicking <strong>Don't Install</strong> will abort the VirtualBox install.<br />
-<img class="aligncenter size-full wp-image-474" src="http://www.alteridem.net/wp-content/uploads/2016/03/2016-03-08-14_48_08-Windows-Security.png" alt="Windows Security" width="504" height="232" /></p>
+<img class="aligncenter size-full wp-image-474" src="/images/2016/03/2016-03-08-14_48_08-Windows-Security.png" alt="Windows Security" width="504" height="232" /></p>
 <p>The <strong>Docker Quickstart Terminal</strong> and <strong>Kitematic (Alpha)</strong> shortcuts won't work without VirtualBox, so skip them. We will install the Docker vm into Hyper-V manually.</p>
 <h2>Create a Boot2Docker Hyper-V Machine</h2>
 <p>If you have many virtual machines in Hyper-V, you will likely have several Virtual Switches. You must specify which Virtual Switch to use when you create the Docker VM, so open <strong>Hyper-V Manager</strong> and select <strong>Virtual Switch Manager</strong> from the actions on the right.</p>
 <p>Select a Virtual Switch that is connected directly to an external network interface, ideally to an ethernet connection, not to a wireless card. Copy the name of the switch, you will use it when you create the virtual machine.</p>
-<p><img class="aligncenter size-full wp-image-476" src="http://www.alteridem.net/wp-content/uploads/2016/03/2016-03-08-14_59_13-Settings.png" alt="Hyper-V Virtual Switch" width="717" height="372" /></p>
+<p><img class="aligncenter size-full wp-image-476" src="/images/2016/03/2016-03-08-14_59_13-Settings.png" alt="Hyper-V Virtual Switch" width="717" height="372" /></p>
 <p>Open an Admin command prompt and run <strong>docker-machine create</strong>, substituting your &nbsp;virtual switch name. In this example, the Hyper-V machine will be called Boot2Docker. See the <a href="https://docs.docker.com/machine/drivers/hyper-v/" target="_blank">Docker Hyper-V documentation</a> for more command line options.</p>
 <pre><code>D:\src
 &Icirc;&copy; docker-machine create --driver hyperv --hyperv-virtual-switch "Intel(R) Ethernet Connection I217-LM Virtual Switch" Boot2Docker
@@ -64,7 +64,7 @@ Docker is up and running!
 To see how to connect your Docker Client to the Docker Engine running on this virtual machine, run: C:\Program Files\Docker Toolbox\docker-machine.exe env Boot2Docker
 </code></pre>
 <p>As this is working, back in Hyper-V Manager, connect to your docker image to see what it is doing.</p>
-<p><img class="aligncenter size-full wp-image-481" src="http://www.alteridem.net/wp-content/uploads/2016/03/2016-03-08-15_17_34-Films-TV.png" alt="Boot2Docker" width="642" height="480" /></p>
+<p><img class="aligncenter size-full wp-image-481" src="/images/2016/03/2016-03-08-15_17_34-Films-TV.png" alt="Boot2Docker" width="642" height="480" /></p>
 <p>I don't like working as an admin if I don't need to, so close your admin command prompt and open a regular command prompt for the remaining work.</p>
 <p>That's it, you now have Docker installed and running in Hyper-V. Next up, let's configure the Docker client to connect to your vm.</p>
 <h2>Working with docker-machine</h2>

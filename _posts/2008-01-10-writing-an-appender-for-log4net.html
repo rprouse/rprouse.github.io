@@ -100,7 +100,7 @@ comments:
 ---
 <p>In <a href="http://logging.apache.org/">log4net</a> speak, an appender is an output destination for a log such as a file, the console, a database or even email.&nbsp; <a href="http://logging.apache.org/">log4net</a> ships with so many appenders that most of us will never need to write our own.&nbsp; There are cases where you may find a need for your own appender, for example, you may want to log errors to your company's bug tracking software.&nbsp; </p>
 <p>In our case, we simply wanted error logs to pop up a message box with the error and location.&nbsp; We run this internally so that developers run into errors immediately during development and can break into the debugger to fix them.&nbsp; We found that logging to a file was too easy to ignore.</p>
-<p><img height="232" alt="MessageBoxAppender" src="http://www.alteridem.net/wp-content/uploads/2008/01/messageboxappender.jpg" width="484" border="0"> </p>
+<p><img height="232" alt="MessageBoxAppender" src="/images/2008/01/messageboxappender.jpg" width="484" border="0"> </p>
 <p>I was pleasantly surprised how easy it is to write a new appender, but there is very little information on the web, so I thought it would be best to give an example.</p>
 <ol>
 <li>Create a new Class Library project in Visual Studio.
@@ -150,7 +150,7 @@ namespace Alteridem.log4net
                 Debugger.Break();
             }
         }
-        
+
         /// <summary>
         /// This appender requires a <see cref="Layout"/> to be set.
         /// </summary>

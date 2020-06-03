@@ -53,5 +53,5 @@ comments:
 <p>Next I looked at the Locals window (Ctrl+Alt+V,L). The parameter was showing up fine there! Then I noticed the difference, the name of the parameter in the locals window wasn't pluralized. Sure enough, I looked in the header file and it was spelled <strong>maxRow</strong> there.</p>
 <p>It turns out that the debug symbols are taken from the header files, so when you step into a method with parameters that are spelled differently, then you must use the values in the header file to inspect the variables.</p>
 <p>Here is an example I mocked up where the parameters were x and y in the header files.</p>
-<p><img style="border-right: 0px; border-top: 0px; border-left: 0px; border-bottom: 0px" height="184" alt="CppDebugging" src="http://www.alteridem.net/wp-content/uploads/2007/09/cppdebugging.jpg" width="443" border="0"> </p>
+<p><img style="border-right: 0px; border-top: 0px; border-left: 0px; border-bottom: 0px" height="184" alt="CppDebugging" src="/images/2007/09/cppdebugging.jpg" width="443" border="0"> </p>
 <p>I also tried this in unmanaged C++ and got the same result.</p>

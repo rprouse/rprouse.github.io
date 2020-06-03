@@ -43,7 +43,7 @@ comments:
 <p>I have been planning on learning <a href="http://rubyonrails.org/">Ruby on Rails</a> for awhile now, but I have heard that running it on Windows was problematic. The <a href="http://rubyonrails.org/download">download page</a> makes it sound pretty easy though, so I thought I would give it a try.</p>
 <h4>Install Ruby</h4>
 <p>First we need the Ruby language itself. I picked up the <a href="http://rubyforge.org/frs/?group_id=167">1.9.1 windows installer</a> from RubyForge. When I installed, I checked Add Ruby executables to your PATH and Associate .rb and .rbw files.</p>
-<p><img style="display: block; float: none; margin-left: auto; margin-right: auto; border-width: 0px;" title="Capture" src="http://www.alteridem.net/wp-content/uploads/2010/08/Capture.png" border="0" alt="Capture" width="372" height="288" /></p>
+<p><img style="display: block; float: none; margin-left: auto; margin-right: auto; border-width: 0px;" title="Capture" src="/images/2010/08/Capture.png" border="0" alt="Capture" width="372" height="288" /></p>
 <h4>Install Ruby Gems</h4>
 <p><strong>Update:</strong> <a rel="external nofollow" href="http://blog.mmediasys.com/">Luis Lavena</a> mentions in the comments that you do not have to install Gems because it comes with the installer which contradicted the installation instructions on the site I was using. I just tried installing on a new computer and Luis is correct. Just to be sure, I updated Gems with 'Gem update Gem'.</p>
 <p>Next, we need the Ruby package manager which allows us to install Rails and other Ruby packages. Download and extract the latest <a href="http://rubyforge.org/frs/?group_id=126">Ruby Gems ZIP file</a> from RubyForge.</p>
@@ -65,7 +65,7 @@ cd blog</code></pre>
 <p>The rails command created the blog application to use MySQL as the database. Next open the <strong>blog\config\database.yml</strong> file. Update the username and password where appropriate. Now let's try it.</p>
 <pre class="code">ruby script/server</code></pre>
 <p>The ruby command runs a development server on port 3000. If you see the Windows Firewall prompt, allow it. Test the installation by going to <a href="http://localhost:3000" target="_blank">http://localhost:3000</a>, you should see the following.</p>
-<p><img style="display: block; float: none; margin-left: auto; margin-right: auto; border-width: 0px;" title="web_1" src="http://www.alteridem.net/wp-content/uploads/2010/08/web_1.png" border="0" alt="web_1" width="644" height="452" /></p>
+<p><img style="display: block; float: none; margin-left: auto; margin-right: auto; border-width: 0px;" title="web_1" src="/images/2010/08/web_1.png" border="0" alt="web_1" width="644" height="452" /></p>
 <h4>What about Apache?</h4>
 <p>Once again, I am using <a href="http://www.apachefriends.org/en/xampp.html">XAMPP</a>, so I tried several ways to get it working, but never managed to get either the mod_rewrite and/or the CGI handlers working. I found quite a few tutorials. All got me to the Welcome Aboard page, but none actually worked when I clicked the About your application&acirc;&euro;&trade;s environment link. I guess for now I am going to have to stick with the built in WEBrick server.</p>
 <h4>Next Steps</h4>
