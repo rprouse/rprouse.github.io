@@ -1,0 +1,51 @@
+---
+layout: post
+status: publish
+published: true
+title: NUnit Console Runner NuGet Packages
+author:
+  display_name: Rob Prouse
+  login: admin
+  email: rob@prouse.org
+  url: http://www.alteridem.net
+author_login: admin
+author_email: rob@prouse.org
+author_url: http://www.alteridem.net
+excerpt: There are three different NUnit console runner NuGet packages. Knowing the
+  difference and selecting the right one for your project can be confusing at first.
+more_anchor: more
+wordpress_id: 691
+wordpress_url: http://www.alteridem.net/?p=691
+date: '2016-11-08 01:52:13 +0000'
+date_gmt: '2016-11-08 11:52:13 +0000'
+categories:
+- ".NET"
+- C#
+- NUnit
+tags: []
+comments: []
+---
+<p>There are three different versions of the NUnit Console runner on <a href="https://www.nuget.org/packages?q=nunit+console+runner" target="top">NuGet</a>. This can be confusing for new users who don't know which one to pick. The NUnit team has tried to make it easier to pick by changing the titles and descriptions, but Visual Studio shows the package name. Extensions add to the confusion, thus this guide.<a id="more"></a><a id="more-691"></a></p>
+<p><!-- more --></p>
+<h2 id="nunit.consolerunner">NUnit.ConsoleRunner</h2>
+<p>The <a href="https://www.nuget.org/packages/NUnit.ConsoleRunner/">NUnit.ConsoleRunner</a> package contains just the NUnit 3 console runner without any extensions. Because it doesn't have extensions, it cannot run NUnit 2 tests, it cannot export NUnit 2 XML results and it cannot report test progress to TeamCity.</p>
+<p>If you need any of functionality that is not shipped with NUnit.ConsoleRunner, you just need to install the NuGet packages for the extensions you need (see below) or to make it easy, install the <a href="https://www.nuget.org/packages/NUnit.Console/">NUnit.Console</a> package. Any installed extensions are automatically found by NUnit.</p>
+<p>After you install this package, the console runner will be in <code>packages\NUnit.ConsoleRunner.3.5.0\tools\nunit3-console.exe</code>.</p>
+<h2 id="nunit.console">NUnit.Console</h2>
+<p>The <a href="https://www.nuget.org/packages/NUnit.Console/">NUnit.Console</a> package is a meta-package that includes the <a href="https://www.nuget.org/packages/NUnit.ConsoleRunner/">NUnit.ConsoleRunner</a> package and commonly used extensions. A common cause of confusion is that after you download this extension, it doesn't have any files in it. You will find the console runner in the <a href="https://www.nuget.org/packages/NUnit.ConsoleRunner/">NUnit.ConsoleRunner</a> package. As I said, this is a meta-package, it is just a list of NuGet dependencies.</p>
+<h2 id="nunit.runners">NUnit.Runners</h2>
+<p><strong>Do not use this package</strong> <a href="https://www.nuget.org/packages/NUnit.Runners/">This package</a> has the most downloads because it is the original NUnit 2 package. This package is equivalent to the <a href="https://www.nuget.org/packages/NUnit.Console/">NUnit.Console</a> package in that it includes the console and common extensions.</p>
+<p>This package is <strong>deprecated</strong> and should no longer be used. Switch to the <a href="https://www.nuget.org/packages/NUnit.Console/">NUnit.Console</a> package. The NUnit Console package is deprecated because it used to contain both the console and GUI runners. It was decided to split each out into it's own package.</p>
+<h2 id="extensions">Extensions</h2>
+<p>Rather than ship with functionality that you may not use, NUnit allows you to add extensions. Out of the box, NUnit can run NUnit 3 tests and produce NUnit 3 test results. If you need more, install an extension.</p>
+<p>The most common extensions ship with the <a href="https://www.nuget.org/packages/NUnit.Console/">NUnit.Console</a> package and are,</p>
+<ul>
+<li><a href="https://www.nuget.org/packages/NUnit.Extension.NUnitProjectLoader/">NUnit.Extension.NUnitProjectLoader</a> - Loads the NUnit project file format</li>
+<li><a href="https://www.nuget.org/packages/NUnit.Extension.VSProjectLoader/">NUnit.Extension.VSProjectLoader </a> - Loads Visual Studio projects and solutions</li>
+<li><a href="https://www.nuget.org/packages/NUnit.Extension.NUnitV2ResultWriter/">NUnit.Extension.NUnitV2ResultWriter</a> - Writes test results in the NUnit 2 legacy format</li>
+<li><a href="https://www.nuget.org/packages/NUnit.Extension.NUnitV2Driver/">NUnit.Extension.NUnitV2Driver</a> - Runs tests written with the NUnit 2.x framework</li>
+<li><a href="https://www.nuget.org/packages/NUnit.Extension.TeamCityEventListener/">NUnit.Extension.TeamCityEventListener</a> - Reports test progress and results to TeamCity</li>
+</ul>
+<h2 id="which-package">Which Package?</h2>
+<p>Use the <a href="https://www.nuget.org/packages/NUnit.ConsoleRunner/">NUnit.ConsoleRunner</a> package and add any extensions that you need. The fewer extensions that you have, the quicker NUnit will start up and run your projects.</p>
+<p>If you don't want to think about it, install the <a href="https://www.nuget.org/packages/NUnit.Console/">NUnit.Console</a> package.</p>

@@ -1,0 +1,97 @@
+---
+layout: post
+status: publish
+published: true
+title: Debugging PHP on Windows with NetBeans
+author:
+  display_name: Rob Prouse
+  login: admin
+  email: rob@prouse.org
+  url: http://www.alteridem.net
+author_login: admin
+author_email: rob@prouse.org
+author_url: http://www.alteridem.net
+wordpress_id: 105
+wordpress_url: http://www.alteridem.net/2010/11/10/debugging-php-on-windows-with-netbeans/
+date: '2010-11-10 13:52:08 +0000'
+date_gmt: '2010-11-10 17:52:08 +0000'
+categories:
+- PHP
+- NetBeans
+tags: []
+comments:
+- id: 19099
+  author: Mike
+  author_email: webxperia@gmail.com
+  author_url: http://www.webxperia.com
+  date: '2012-02-06 13:02:07 +0000'
+  date_gmt: '2012-02-06 17:02:07 +0000'
+  content: Very Helpful, Many Thanks
+- id: 19835
+  author: Seeni
+  author_email: ponseenivasan@gmail.com
+  author_url: ''
+  date: '2012-04-04 09:59:55 +0000'
+  date_gmt: '2012-04-04 13:59:55 +0000'
+  content: Excellent. Thanks
+- id: 41492
+  author: Jackie
+  author_email: jorgito_sama@yahoo.es
+  author_url: ''
+  date: '2013-04-25 17:54:46 +0000'
+  date_gmt: '2013-04-25 21:54:46 +0000'
+  content: Really works, lot of thanks
+- id: 73189
+  author: Stas
+  author_email: stas@codelobster.com
+  author_url: http://www.codelobster.com
+  date: '2014-02-06 11:17:48 +0000'
+  date_gmt: '2014-02-06 15:17:48 +0000'
+  content: "Thanks for the article\r\nI suggest toll at once more very good and free
+    PHP IDE: http://www.codelobster.com"
+- id: 73239
+  author: Marwat Android
+  author_email: marwatandroid@gmail.com
+  author_url: ''
+  date: '2014-02-07 05:39:40 +0000'
+  date_gmt: '2014-02-07 09:39:40 +0000'
+  content: "when I click on debug the following error occurs.\r\nAccess Forbidden\r\nYou
+    don't have permission to access the requested object. It is either read-protected
+    or not readable by the server.\r\nwhat should I do to have access."
+---
+<p>It seems that whenever I set up a new computer to debug PHP, I need to Google around to remind myself of the steps, so I thought I would document them here for reference. The following is for an <a href="http://www.apachefriends.org/en/xampp.html">XAMPP</a> Apache/PHP install, but the basic steps are the same for any PHP install.</p>
+<h3>Install and Configure Xdebug for PHP</h3>
+<p>The first thing you need to do is get the <a href="http://xdebug.org/">Xdebug extension</a> for PHP installed and configured. Luckily, <a href="http://www.apachefriends.org/en/xampp.html">XAMPP</a> ships with <a href="http://xdebug.org/">Xdebug </a>and has the configuration already in php.ini, so you just need to make some minor changes and restart Apache.</p>
+<ol>
+<li>If you are also using <a href="http://www.apachefriends.org/en/xampp.html">XAMPP</a>, skip this step. If you are using an install of PHP without the Xdebug extension, go to the <a href="http://xdebug.org/find-binary.php">Xdebug Find Binary</a> page, paste in the output of phpinfo() or php &acirc;&euro;&ldquo;i and they will provide a link to the extension and custom installation instructions.</li>
+<li>Open php.ini in your favourite editor. For <a href="http://www.apachefriends.org/en/xampp.html">XAMPP</a>, it is likely in C:\xampp\php.</li>
+<li>Find and uncomment the extension.
+<pre class="code">zend_extension = "C:\xampp\php\ext\php_xdebug.dll"</code></pre>
+</li>
+<li>Find the [XDebug] section and uncomment and/or edit the following values. Many of these are defaults, but I am listing them just in case you have different values.
+<pre class="code">xdebug.profiler_enable = 1
+xdebug.profiler_enable_trigger = 1
+xdebug.remote_enable = 1
+xdebug.remote_host = "localhost"
+xdebug.remote_handler = "dbgp"
+xdebug.remote_mode = "req"
+xdebug.remote_port = 9000
+xdebug.trace_output_dir = "C:\xampp\tmp"</code></pre>
+</li>
+<li>Restart Apache with the XAMPP control panel.</li>
+<li>Bring up <a title="http://localhost/xampp/" href="http://localhost/xampp/">http://localhost/xampp/</a> and view phpinfo(). You should see Xdebug mentioned twice, once under the Zend engine and then as a PHP module.<img style="background-image: none; margin: 10px auto 5px; padding-left: 0px; padding-right: 0px; display: block; float: none; padding-top: 0px; border-width: 0px;" title="zend" alt="zend" src="http://www.alteridem.net/wp-content/uploads/2010/11/zend.png" width="608" height="88" border="0" />
+<p><img style="background-image: none; margin: 5px auto 10px; padding-left: 0px; padding-right: 0px; display: block; float: none; padding-top: 0px; border-width: 0px;" title="module" alt="module" src="http://www.alteridem.net/wp-content/uploads/2010/11/module.png" width="607" height="167" border="0" /></li>
+<li>You are done and ready to debug.</li>
+</ol>
+<h3>Debug with NetBeans</h3>
+<p>What is not to love about <a href="http://netbeans.org">NetBeans</a>? You can use it for Java, PHP, Ruby, Html and C/C++. It integrates well with many bug tracking and source control systems. It provides IntelliSense, database management, works great with <a href="http://www.smarty.net/">Smarty templates</a> and allows you to debug your code. If you haven&acirc;&euro;&trade;t tried <a href="http://netbeans.org">NetBeans</a> yet, I highly recommend it.</p>
+<ol>
+<li>Start the IDE and load your PHP project. In the Project window, right click on your project and select <strong>Properties</strong>. Go to the <strong>Run Configuration</strong> node. You should be running as a Local Web Site. The Project URL should point to the root of your project directory and the Index File should be the file you want to launch into.<img style="background-image: none; margin: 5px auto 10px; padding-left: 0px; padding-right: 0px; display: block; float: none; padding-top: 0px; border-width: 0px;" title="properties" alt="properties" src="http://www.alteridem.net/wp-content/uploads/2010/11/properties.png" width="623" height="348" border="0" /></li>
+<li>Right click again on your project. You can select <strong>Debug</strong> from here and get going right away, but if you first select <strong>Set as Main Project</strong>, you can just launch into the debugger with the <strong>Debug Main Project</strong> button on the toolbar or <strong>Ctrl+F5</strong>. (If <strong>Debug</strong> is not enabled, you probably need to enable the PHP plugin in NetBeans. Go to <strong>Tools | Plugins</strong>, click the <strong>Installed</strong> tab and make sure PHP is enabled.<img style="background-image: none; margin: 5px auto 10px; padding-left: 0px; padding-right: 0px; display: block; float: none; padding-top: 0px; border-width: 0px;" title="project" alt="project" src="http://www.alteridem.net/wp-content/uploads/2010/11/project.png" width="275" height="246" border="0" /></li>
+<li>When you start debugging, NetBeans will launch the browser to your start page. Notice how it appended the variable XDEBUG_SESSION_START=netbeans-xdebug to the end of the URL to start Apache debugging. If you see any Windows Firewall prompts at this point, accept them.</li>
+<li>As the page loads, NetBeans will break on the first line of PHP code. The line will be highlighted and there will be a little green arrow in the margin to indicate the current line of execution.
+<p><img style="background-image: none; margin: 5px auto 10px; padding-left: 0px; padding-right: 0px; display: block; float: none; padding-top: 0px; border-width: 0px;" title="debug1" alt="debug1" src="http://www.alteridem.net/wp-content/uploads/2010/11/debug1.png" width="381" height="104" border="0" /></li>
+<li>Congratulations, you are debugging. From here, you can set breakpoints by right clicking on the margin of your code and selecting <strong>Breakpoint | Toggle Line Breakpoint</strong>. You can step through code (<strong>F8</strong>) using the debug toolbar (if you don&acirc;&euro;&trade;t see it, right click on the toolbars and enable it.) You can inspect or even change variables and view the call stack.<img style="background-image: none; margin: 5px auto 10px; padding-left: 0px; padding-right: 0px; display: block; float: none; padding-top: 0px; border-width: 0px;" title="debug2" alt="debug2" src="http://www.alteridem.net/wp-content/uploads/2010/11/debug2.png" width="260" height="60" border="0" /></li>
+<li>If you are new to debugging code, read more about what you can do in the article on the NetBeans site,<a href="http://netbeans.org/kb/docs/php/debugging.html">Debugging PHP Source Code in the NetBeans IDE</a>.</li>
+</ol>
+<p>If I missed anything or you have any other suggestions, I would love to hear about it in the comments.</p>

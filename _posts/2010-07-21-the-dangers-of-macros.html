@@ -1,0 +1,32 @@
+---
+layout: post
+status: publish
+published: true
+title: The dangers of Macros
+author:
+  display_name: Rob Prouse
+  login: admin
+  email: rob@prouse.org
+  url: http://www.alteridem.net
+author_login: admin
+author_email: rob@prouse.org
+author_url: http://www.alteridem.net
+wordpress_id: 65
+wordpress_url: http://www.alteridem.net/?p=65
+date: '2010-07-21 10:02:44 +0000'
+date_gmt: '2010-07-21 15:02:44 +0000'
+categories:
+- C++
+- Tips'n'Tricks
+tags: []
+comments: []
+---
+<p>Another developer came to me with a problem today that he couldn&acirc;&euro;&trade;t figure out. He couldn&acirc;&euro;&trade;t believe what he was seeing in the debugger and needed a second set of eyes. He had a line of code like the following;</p>
+<pre name="code" class="cpp">return max( eRetVal, GetNumber() );</code></pre>
+<p>While debugging, he noticed that he was stepping into the GetNumber() method twice, and in his code, it had side-effects. We both puzzled over it for awhile. We looked at the disassembly and sure enough, it was getting called twice, but why? Then it hit me, <b>max</b> is a macro, not a function. If you go to the definition of <b>max</b>, you find;</p>
+<pre name="code" class="cpp">#ifndef max
+#define max(a,b)            (((a) > (b)) ? (a) : (b))
+#endif</code></pre>
+<p>So, if you expand that macro out, the original code gets compiles as;</p>
+<pre name="code" class="cpp">return (((eRetVal) > (GetNumber()) ? (eRetVal) : (GetNumber());</code></pre>
+<p>Once the macro is expanded, it is easy to see why the method is called twice. Obviously I have not being doing enough C++ lately. There was a time when I would have seen that immediately as it is the classic example, but I have been working in .NET so long now that I am forgetting all of the little ways that C++ can bite you.</p>

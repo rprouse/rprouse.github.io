@@ -1,0 +1,48 @@
+---
+layout: post
+status: publish
+published: true
+title: Debugging Visual Studio Extensions
+author:
+  display_name: Rob Prouse
+  login: admin
+  email: rob@prouse.org
+  url: http://www.alteridem.net
+author_login: admin
+author_email: rob@prouse.org
+author_url: http://www.alteridem.net
+wordpress_id: 696
+wordpress_url: http://www.alteridem.net/?p=696
+date: '2016-11-11 09:34:31 +0000'
+date_gmt: '2016-11-11 14:34:31 +0000'
+categories:
+- Visual Studio
+tags:
+- Visual Studio
+- Visual Studio Extensions
+comments:
+- id: 85795
+  author: 'Szumma #066 &#8211; 2016 46. h&Atilde;&copy;t | d/fuel'
+  author_email: ''
+  author_url: https://chevenix.wordpress.com/2016/11/21/szumma-066-2016-46-het/
+  date: '2016-11-20 19:01:35 +0000'
+  date_gmt: '2016-11-21 00:01:35 +0000'
+  content: "[&#8230;] Debugging Visual Studio Extensions [&#8230;]"
+---
+<p>Writing Visual Studio Extensions has gotten much easier with recent versions of Visual Studio, but figuring out how to debug them can be hard. When you debug an extension, you run it in an instance of Visual Studio using a separate set of settings called an experimental hive. When you launch this from Visual Studio, it takes care of installing your extension and the debugger is attached to Visual Studio itself.</p>
+<p><!--more--></p>
+<p>The usual recommendation is to edit the project's Properties&nbsp;and enter the information in the Debug Tab. This works, but that information is not saved in the project file, so you need to do it whenever you get a clean copy of the source. I prefer saving the information in the project file itself.</p>
+<h2>Editing the Visual Studio Extension Project File</h2>
+<p>Unload the extension project in Visual Studio by right clicking on it and selecting <strong>Unload Project</strong>. Next, edit the project by right clicking and selecting&nbsp;<strong>Edit MyExtension.csproj</strong>.</p>
+<p>Add the following XML after the first <strong></PropertyGroup></strong> end tag in the project.</p>
+<pre><code><propertygroup>
+  <!-- Common debugging support -->
+  <startaction>Program</startaction>
+  <startprogram>$(DevEnvDir)\devenv.exe</startprogram>
+  <startarguments>/rootsuffix Exp</startarguments>
+</propertygroup>
+</code></pre>
+<p><strong>Please note</strong>, the XML above should be PascalCase, in other words, <strong>propertygroup</strong> should be <strong>PropertyGroup</strong>. Wordpress keeps converting the code to lowercase. If anyone knows how to fix that, please let me know in the comments.</p>
+<p>This runs the current version of Visual Studio using the <strong>/rootsuffix Exp</strong> command line. If you save the file and reload it, you will now see the options in the Debug Tab of the project's Properties.</p>
+<p><img class="aligncenter size-full wp-image-703" src="http://www.alteridem.net/wp-content/uploads/2016/11/2016-11-11-06_29_56-GitHubExtension-Microsoft-Visual-Studio.png" alt="Debugging a Visual Studio Extension" width="656" height="265" /></p>
+<p>If you see something different, delete your <strong>.csproj.user</strong> file and don't change the values here otherwise they will be saved in the .csproj.user file. If you want to make changes, you must hand edit the file.</p>

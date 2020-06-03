@@ -1,0 +1,82 @@
+---
+layout: post
+status: publish
+published: true
+title: Null Coalescing Operator
+author:
+  display_name: Rob Prouse
+  login: admin
+  email: rob@prouse.org
+  url: http://www.alteridem.net
+author_login: admin
+author_email: rob@prouse.org
+author_url: http://www.alteridem.net
+wordpress_id: 24
+wordpress_url: http://www.alteridem.net/2007/08/17/null-coalescing-operator/
+date: '2007-08-17 13:11:38 +0000'
+date_gmt: '2007-08-17 18:11:38 +0000'
+categories:
+- C#
+- ".NET 2.0"
+tags: []
+comments:
+- id: 1153
+  author: 22 Links Today (2007-08-20)
+  author_email: ''
+  author_url: http://mhinze.com/22-links-today-2007-08-20/
+  date: '2007-08-20 10:20:58 +0000'
+  date_gmt: '2007-08-20 15:20:58 +0000'
+  content: "[...] Null Coalescing Operator: ?? [...]"
+- id: 1154
+  author: Forrest
+  author_email: dontera@gmail.com
+  author_url: ''
+  date: '2007-08-20 11:09:08 +0000'
+  date_gmt: '2007-08-20 16:09:08 +0000'
+  content: "Wow..  learn something new every day. Very handy shortcut of which I could
+    make Much use.\r\n\r\nThanks!"
+- id: 1155
+  author: Will Asrari
+  author_email: me@willasrari.com
+  author_url: http://www.willasrari.com
+  date: '2007-08-20 21:44:48 +0000'
+  date_gmt: '2007-08-21 02:44:48 +0000'
+  content: Very useful. Definitely slid in under the radar.
+- id: 1156
+  author: ItsAllEasy &raquo; Blog Archive &raquo; Null Coalescing Operator
+  author_email: ''
+  author_url: http://www.itsalleasy.com/2007/08/22/null-coalescing-operator/
+  date: '2007-08-22 01:25:38 +0000'
+  date_gmt: '2007-08-22 06:25:38 +0000'
+  content: "[...] != null){ a = b; }else{ a = c; }  I was reminded of it again today
+    when I learned it is called the &#8220;Null Coalescing Operator&#8221;. Javascript
+    has something similar with:  a = b || c;  I&#8217;ve used the hell out of it in
+    [...]"
+- id: 8272
+  author: Sandeep
+  author_email: sandeep.cs3@gmail.com
+  author_url: ''
+  date: '2010-04-25 02:54:54 +0000'
+  date_gmt: '2010-04-25 07:54:54 +0000'
+  content: "Have a look at  this link..\r\nIt show the good use of Null-Coalescing
+    Operator\r\n\r\n<a href=\"http://aspdotnethacker.blogspot.com/2010/04/c-null-coalescing-operator.html\"
+    rel=\"nofollow\">http://aspdotnethacker.blogspot.com/2010/04/c-null-coalescing-operator.html</a>"
+- id: 8658
+  author: rs emenu
+  author_email: rs.emenu@gmail.com
+  author_url: ''
+  date: '2010-06-29 14:35:00 +0000'
+  date_gmt: '2010-06-29 19:35:00 +0000'
+  content: "Have a look..\r\ngood example.\r\n\r\n<a href=\"http://www.a2zmenu.com/CSharp/C%20sharp%20Null-Coalescing%20Operator.aspx\"
+    rel=\"nofollow\">http://www.a2zmenu.com/CSharp/C%20sharp%20Null-Coalescing%20Operator.aspx</a>"
+---
+<p>The first time I saw the ?? operator in C#, I did a double take and had to look it up. The operator, called the null coalescing operator was added in C# 2.0 and is pretty useful, but still fairly unknown.</p>
+<pre><code>Order order = GetOrder( id ) ?? new Order();</code></pre>
+<p>In the above code, if the return value of&nbsp;GetOrder()&nbsp;is not null, it is assigned to order. If it is null,&nbsp;a new Order is created and assigned. Before the ?? operator, you would have to write something like this;</p>
+<pre><code>Order order = GetOrder( id );
+if ( order == null )
+    order = new Order();</code></pre>
+<p>It is also really useful for output. For example, instead of using the conditional operator,</p>
+<pre><code>Console.WriteLine( filename != null ? filename : "Filename is undefined" );</code></pre>
+<p>You can use the null coalescing operator,</p>
+<pre><code>Console.WriteLine( filename ?? "Filename is undefined" );</code></pre>

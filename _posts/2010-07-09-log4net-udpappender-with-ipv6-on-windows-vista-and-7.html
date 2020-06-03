@@ -1,0 +1,107 @@
+---
+layout: post
+status: publish
+published: true
+title: log4net UdpAppender with IPv6 on Windows Vista and 7
+author:
+  display_name: Rob Prouse
+  login: admin
+  email: rob@prouse.org
+  url: http://www.alteridem.net
+author_login: admin
+author_email: rob@prouse.org
+author_url: http://www.alteridem.net
+wordpress_id: 63
+wordpress_url: http://www.alteridem.net/2010/07/09/log4net-udpappender-with-ipv6-on-windows-vista-and-7/
+date: '2010-07-09 12:31:40 +0000'
+date_gmt: '2010-07-09 17:31:40 +0000'
+categories:
+- log4net
+tags: []
+comments:
+- id: 8782
+  author: SteveW
+  author_email: steve.c.wilkinson@gmail.com
+  author_url: http://cornerstonetechnology.com
+  date: '2010-07-20 14:55:46 +0000'
+  date_gmt: '2010-07-20 19:55:46 +0000'
+  content: Just found this - many thanks for putting the revised build up there!
+- id: 9723
+  author: Shlomi
+  author_email: shlomiw@gmail.com
+  author_url: ''
+  date: '2010-11-15 11:52:26 +0000'
+  date_gmt: '2010-11-15 15:52:26 +0000'
+  content: "Hi!\r\n\r\nThough your already moved to NLog - maybe for someone else
+    who read this post.\r\n\r\nWe found a simple solution for this issue:\r\ninstead
+    of using the UdpAppender on RemteAddress '127.0.0.2':\r\n\r\nfor local machine:\r\nuse
+    address such as 'log4view-local' and add on your hosts file (C:\\Windows\\System32\\drivers\\etc\\hosts)\r\n127.0.0.1
+    log4view-local\r\n\r\ndon't forget to flush dns with ipconfig /flushdns, and ping
+    log4view-local to make sure.\r\n\r\nfor other environments such as QA/Production
+    - just set in your DNS - for example: log4view.qa.yourdomain.com - the related
+    log4view machine's IP, and set in the UdpAppender RemoteAddress value 'log4view.qa.yourdomain.com'.\r\n\r\nworked
+    great for us!\r\n\r\ncheers,\r\nShlomi"
+- id: 11378
+  author: Ron Klein
+  author_email: solution@ronklein.co.il
+  author_url: http://heblog.ronklein.co.il
+  date: '2011-02-15 04:54:33 +0000'
+  date_gmt: '2011-02-15 08:54:33 +0000'
+  content: "I had the same problem.\r\nHere's a quick solution for those of you who
+    still want to use log4net ;-)\r\nEdit your Windows hosts file, and change the
+    line:\r\n# 127.0.0.1 localhost\r\nto:\r\n127.0.0.1 localhost\r\nYou'll need a
+    simple text editor, but I guess you should run it as an administrator, otherwise
+    your hosts file won't be saved.\r\nWorked for me.\r\nCheers!"
+- id: 12077
+  author: Create a .NET Windows Service in 5 steps with Topshelf &raquo; Christoph
+    De Baene
+  author_email: ''
+  author_url: http://www.christophdebaene.com/blog/2011/03/16/create-a-net-windows-service-in-5-steps-with-topshelf/
+  date: '2011-03-16 15:28:27 +0000'
+  date_gmt: '2011-03-16 19:28:27 +0000'
+  content: "[...] the output directory of log4net.config is set to &#8216;Copy always&#8217;
+    Note that there is an issue with log4net related to IPv6 and Windows Vista/7.
+    You can fix it by adding the following [...]"
+- id: 14653
+  author: "log4net UdpAppender with IPv6 on Windows Vista and 7 | EntLib.net &aelig;&Scaron;&euro;&aelig;&oelig;&macr;&aring;&circ;&dagger;&auml;&ordm;&laquo;&aring;&sup1;&sup3;&aring;\x8F&deg;"
+  author_email: ''
+  author_url: http://www.entlib.net/?p=565
+  date: '2011-07-29 12:32:15 +0000'
+  date_gmt: '2011-07-29 16:32:15 +0000'
+  content: "[...] log4net UdpAppender with IPv6 on Windows Vista and 7 [...]"
+- id: 29792
+  author: Bruce H
+  author_email: bruce.hearn@itron.com
+  author_url: http://www.itron.com
+  date: '2012-09-03 14:12:06 +0000'
+  date_gmt: '2012-09-03 18:12:06 +0000'
+  content: upgrading to log4net 1.2.11 appears to resolve all issues related to the
+    Udp appender problems in 1.2.10. A couple of bug fixes in that release related
+    to the IP address conversion and specific support added for IPv6 took care of
+    it. See the release notes at http://logging.apache.org/log4net/release/release-notes.html
+---
+<p><a href="http://logging.apache.org/log4net/index.html">log4net</a> is a great logging framework for .NET, but it hasn&acirc;&euro;&trade;t been updated in years. When we moved to Windows Vista, we noticed that the <a href="http://logging.apache.org/log4net/release/sdk/log4net.Appender.UdpAppender.html">UdpAppender</a> stopped working with <a href="http://logging.apache.org/chainsaw/index.html">Chainsaw</a> and with our internal logging tools when logging to <strong>localhost</strong>. After some Googling, we discovered that replacing <strong>localhost</strong> with <strong>127.0.0.2</strong> got everything working and we promptly forgot about it.</p>
+<p>Earlier this week, we moved one of our projects over to .NET 4.0 and once again logging failed. In the console window while debugging the app, I noticed the following,</p>
+<pre><code>log4net.Util.TypeConverters.ConversionNotSupportedException: Cannot convert from type [System.String]
+  value [127.0.0.2] to type [System.Net.IPAddress] --->
+  System.Net.Sockets.SocketException: No such host is known
+       at System.Net.Dns.InternalGetHostByAddress(IPAddress address, Boolean includeIPv6)
+       at System.Net.Dns.GetHostEntry(String hostNameOrAddress)
+       at log4net.Util.TypeConverters.IPAddressConverter.ConvertFrom(Object source)</code></pre>
+<p>So, I tried changing back to <strong>localhost</strong> and the error changed to,</p>
+<pre><code>log4net:ERROR [UdpAppender] Unable to send logging event to remote host ::1 on port 7071.
+      System.Net.Sockets.SocketException (0x80004005): An address incompatible with
+      the requested protocol was used
+       at System.Net.Sockets.Socket.SendTo(Byte[] buffer, Int32 offset, Int32 size, SocketFlags
+         socketFlags, EndPoint remoteEP)
+       at System.Net.Sockets.UdpClient.Send(Byte[] dgram, Int32 bytes, IPEndPoint endPoint)
+       at log4net.Appender.UdpAppender.Append(LoggingEvent loggingEvent)</code></pre>
+<p>At this point, I have some clues, specifically that localhost was being resolved as the IPv6 address ::1, not the IPv4 address 127.0.0.1. Looking through the reported issues I found that this problem had been <a href="https://issues.apache.org/jira/browse/LOG4NET-112">reported and fixed in 2007</a>. Unfortunately, that code isn&acirc;&euro;&trade;t in the release, so I downloaded the latest source and recompiled log4net. Of course, they don&acirc;&euro;&trade;t release the signing key, so I generated my own and signed the assembly myself.</p>
+<p>This fixed my problems with the UdpAppender, although, if you use <strong>localhost</strong> on a Windows Vista or Windows 7 machine, it will resolve to the IPv6 address, so make sure that your receiver is listening on the IPv6 address. For example, in <a href="http://log2console.codeplex.com/">log2console,</a> under Receivers, set Use IPv6 Addresses to true for the UDP receiver. If your receiver does not support IPv6, use <strong>127.0.0.2</strong> for the address.</p>
+<p>To save other people the hassle of recompiling log4net themselves to get the latest fixes, I have uploaded a release version of the assembly. Download it here.</p>
+<ul>
+<li><a href="http://www.alteridem.net/wp-content/uploads/2010/07/log4net_1.2.10.1.zip">log4net 1.2.10.1</a> -&nbsp; 260 KB Zip</li>
+</ul>
+<p>We are using this version of the assembly in our own projects, but I make no guarantees as to its stability.</p>
+<p><strong>Update:</strong> Just to&nbsp; be clear, this is not an official log4net release and it is only compiled against .NET 2.0. I have made no code changes, it is just the code that is currently in the repository. This is only intended to save you having to download and compile if you run into the same problems I did. It is also not extensively tested. We are using it and File, Rolling File, Event Log and UDP Appenders seem to be working fine.</p>
+<p><strong>Update 2:</strong> Since I have released this, I have found several bugs in the current source. For example, setting Append=true to a File or Rolling File causes every log message to truncate the file! Because of that <span style="color: #ff0000;"><strong>I would recommend that you don't download this</strong></span> unless you really need it. I have finally <a href="http://www.alteridem.net/2010/11/04/why-i-switched-from-log4net-to-nlog/">given up on log4net</a> and converted all of my projects over to <a href="http://nlog-project.org/">NLog</a>.</p>

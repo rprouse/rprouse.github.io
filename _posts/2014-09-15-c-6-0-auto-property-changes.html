@@ -1,0 +1,60 @@
+---
+layout: post
+status: publish
+published: true
+title: C# 6.0 &acirc;&euro;&ldquo; Auto-Property Changes
+author:
+  display_name: Rob Prouse
+  login: admin
+  email: rob@prouse.org
+  url: http://www.alteridem.net
+author_login: admin
+author_email: rob@prouse.org
+author_url: http://www.alteridem.net
+wordpress_id: 246
+wordpress_url: http://www.alteridem.net/?p=246
+date: '2014-09-15 14:06:04 +0000'
+date_gmt: '2014-09-15 18:06:04 +0000'
+categories:
+- ".NET"
+- C#
+- C# 6.0
+tags: []
+comments: []
+---
+<p>This is the second in a <a href="http://www.alteridem.net/category/net/csharp/csharp-60/">series of posts</a> on the new features that are coming in C# 6.0. There have been a few small improvements to Auto-Properties.</p>
+<h3>Auto-Property Initializers</h3>
+<p>I hinted at this feature in my last post on <a href="http://www.alteridem.net/2014/09/08/c-6-0-primary-constructors/">Primary Constructors</a>. Auto-Properties were introduced way back in C# 3.0, but unlike other members, you had to initialize their values in the constructor.</p>
+<pre><code>public class Product
+{
+    public string Name { get; set; }
+    public decimal Price { get; set; }
+
+    public Product()
+    {
+        Name = "Toy Car";
+        Price = 9.99m;
+    }
+}</code></pre>
+<p>In C# 6.0, you can now initialize the properties where they are declared.</p>
+<pre><code>public class Product
+{
+    public string Name { get; set; } = "Toy Car";
+    public decimal Price { get; set; } = 9.99m;
+}</code></pre>
+<h3>Getter Only Auto-Properties</h3>
+<p>You could always declare the setter of an auto-property private or protected to prevent it from being used outside of the class.</p>
+<pre><code>public decimal Price { get; private set; }</code></pre>
+<p>Now you can omit the setter and it makes the underlying field read-only, so you can only set it in the constructor. This is a great feature for creating and enforcing imutable classes.</p>
+<pre><code>public class Product
+{
+    public Product(string name, decimal price)
+    {
+        Name = name;
+        Price = price;
+    }
+
+    public string Name { get; }
+    public decimal Price { get; }
+}</code></pre>
+<p>If you want to check out the code for this series of posts, it is on GitHub at <a href="https://github.com/rprouse/CSharp60">https://github.com/rprouse/CSharp60</a>.</p>

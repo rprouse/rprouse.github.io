@@ -1,0 +1,104 @@
+---
+layout: post
+status: publish
+published: true
+title: Migrating from Subversion to Mercurial
+author:
+  display_name: Rob Prouse
+  login: admin
+  email: rob@prouse.org
+  url: http://www.alteridem.net
+author_login: admin
+author_email: rob@prouse.org
+author_url: http://www.alteridem.net
+wordpress_id: 70
+wordpress_url: http://www.alteridem.net/2010/07/28/migrating-from-subversion-to-mercurial/
+date: '2010-07-28 11:48:14 +0000'
+date_gmt: '2010-07-28 16:48:14 +0000'
+categories:
+- Source Control
+- Subversion
+- Mercurial
+tags: []
+comments:
+- id: 11439
+  author: JonAlb
+  author_email: John.F.P.Albrecht@googlemail.com
+  author_url: http://jonalb.com/
+  date: '2011-02-16 17:46:10 +0000'
+  date_gmt: '2011-02-16 21:46:10 +0000'
+  content: Excellent, I managed to convert before but my users weren't mapped properly.  I'm
+    going to try again but map the users correctly
+- id: 11440
+  author: JonAlb
+  author_email: John.F.P.Albrecht@googlemail.com
+  author_url: http://jonalb.com/
+  date: '2011-02-16 17:56:20 +0000'
+  date_gmt: '2011-02-16 21:56:20 +0000'
+  content: "In your last command I used -s svn, rather than -s hg\r\n\r\ni.e.\r\nhg
+    convert --authors authors.txt --filemap filemap.txt -s svn \\scm\\hg\\myrepository
+    \\scm\\hg\\project1"
+- id: 35437
+  author: From local Subversion to Mercurial on Bitbucket | TechBlog
+  author_email: ''
+  author_url: http://www.claudiobernasconi.ch/2012/12/31/from-local-subversion-to-mercurial-on-bitbucket/
+  date: '2012-12-31 07:48:16 +0000'
+  date_gmt: '2012-12-31 11:48:16 +0000'
+  content: "[...] projects, also known as commit log, I was forced to find a way to
+    achieve this. I quickly found an blog post from Alteridem Consulting, which I
+    followed [...]"
+---
+<p>I have been reading about <a href="http://git-scm.com/">Git</a> and <a href="http://mercurial.selenic.com/">Mercurial</a> everywhere lately, so I wanted to give them a try. I mainly develop on Windows and the tools for Windows are better for <a href="http://mercurial.selenic.com/">Mercurial</a>, so I decided to start with it.</p>
+<p>The best way to get a feel for is with real code, so I decided to migrate my <a href="http://subversion.tigris.org/">Subversion</a> repository to <a href="http://mercurial.selenic.com/">Mercurial</a>.</p>
+<p>The first step was to install <a href="http://tortoisehg.bitbucket.org/">TortoiseHg</a>, the Windows shell extension for <a href="http://mercurial.selenic.com/">Mercurial</a>. I then read that it is much quicker to work with a local copy of a <a href="http://subversion.tigris.org/">Subversion</a> repository, so my next step was to pull a copy down from the server.</p>
+<h4>Sync Subversion to the Local Machine</h4>
+<p> 
+<ol>
+<li>Create an \scm\svn (source control management) directory to house the local copy of the repository.
+<pre><code>  mkdir \scm\svn</code></pre>
+</li>
+<li>Create the local <a href="http://subversion.tigris.org/">Subversion</a> repository.
+<pre><code>  svnadmin create \scm\svn\myrepository</code></pre>
+</li>
+<li>Create an empty hooks\pre-revprop-change.bat file
+<pre><code>  echo @ECHO OFF > \scm\svn\myrepository\hooks\pre-revprop-change.bat&#160; </code></pre>
+</li>
+<li>Initialize the local repository for syncing to the remote repository
+<pre><code>  svnsync init file:///scm/svn/myrepository http://remote.repository.com/svn/myrepository</code></pre>
+</li>
+<li>Now run the sync.
+<pre><code>  svnsync sync file:///scm/svn/myrepository</code></pre>
+</li>
+</ol>
+<p>The last command pulls in all the revisions from the remote repository one at a time until it mirrors all of the changesets. Once this is done, you have a fully functional local copy of the SVN repository to work with.</p>
+<h4>Configure TortoiseHg</h4>
+<p>
+  <br />At a minimum, you should set your username and enable the convert extension. To do this, in Explorer, right click and select <strong>TortoiseHg | Global Settings</strong>. Set your username in the Commit section to your name/email in the format <em>First Last <youremail@domain.com></em>. Next go to the Extensions section and make sure the <strong>Convert extension</strong> is enabled.</p>
+<p><img style="border-right-width: 0px; display: block; float: none; border-top-width: 0px; border-bottom-width: 0px; margin-left: auto; border-left-width: 0px; margin-right: auto" title="TortoiseHg" border="0" alt="TortoiseHg" src="http://www.alteridem.net/wp-content/uploads/2010/07/TortoiseHg.png" width="562" height="538" /> </p>
+<h4>Do the Initial Convert of the Repository</h4>
+<p>
+  <br />I then did a trial run of converting the local SVN repository to an Hg repository.</p>
+<ol>
+<li>Create an \scm\hg directory to house the Mercurial repository.
+<pre><code>  mkdir \scm\hg</code></pre>
+</li>
+<li>Create the Mercurial repository to import the SVN repository into.
+<pre><code>  hg init \scm\hg\myrepository</code></pre>
+</li>
+<li>Run the conversion.
+<pre><code>  hg convert -s svn \scm\svn\myrepository \scm\hg\myrepository</code></pre>
+</li>
+</ol>
+<h4>Cleaning up the Conversion</h4>
+<p>
+  <br />Looking through the history of my newly imported repository, I noticed that my username changed over time depending on the Linux user account I was working with at the time. It would be nice to change all of these to the preferred mercurial format. Luckily, that is pretty easy, <b>hg convert</b> can use a file to map SVN usernames to Hg users. To do that, create a file called <b>authors.txt</b> with conversions like the following;</p>
+<pre><code>robprouse = Rob Prouse <rob@email.com>
+rprouse = Rob Prouse <rob@email.com>
+jdoe = John Doe <john@doe.com><br /></code></pre>
+<p>My repository is also a bit of a mess. It started out as a CVS repository years ago which was later migrated to SVN. Over the years, every project I worked on was filed away in there. One thing about Mercurial, is that it is best to have one project per repository since you can only clone the whole thing. To do this, I created a <b>filemap.txt</b> file and used it to pull out each project into its own repository.</p>
+<pre><code>include /projects/Project1/
+include /projects/Project1.Tests/</code></pre>
+<p>
+  <br />For more information, <a href="http://hgbook.red-bean.com/read/migrating-to-mercurial.html#id441801">check out the documentation</a>. I then reran the conversion that I did above, except I pull now from my newly converted Hg repository and I used the author and file map files. I updated the <strong>filemap.txt</strong> for each project that I wanted to export and re-ran the conversion.</p>
+<pre><code>hg init \scm\hg\project1
+hg convert --authors authors.txt --filemap filemap.txt -s hg \scm\hg\myrepository \scm\hg\project1</code></pre>

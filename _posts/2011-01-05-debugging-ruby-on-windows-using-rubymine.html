@@ -1,0 +1,61 @@
+---
+layout: post
+status: publish
+published: true
+title: Debugging Ruby on Windows using RubyMine
+author:
+  display_name: Rob Prouse
+  login: admin
+  email: rob@prouse.org
+  url: http://www.alteridem.net
+author_login: admin
+author_email: rob@prouse.org
+author_url: http://www.alteridem.net
+wordpress_id: 110
+wordpress_url: http://www.alteridem.net/2011/01/05/debugging-ruby-on-windows-using-rubymine/
+date: '2011-01-05 15:43:07 +0000'
+date_gmt: '2011-01-05 19:43:07 +0000'
+categories:
+- Ruby
+- Rails
+- RubyMine
+tags: []
+comments:
+- id: 32200
+  author: Baboon
+  author_email: cromwelll@gmail.com
+  author_url: http://baboon.eu
+  date: '2012-10-30 15:54:26 +0000'
+  date_gmt: '2012-10-30 19:54:26 +0000'
+  content: "It helped me, so thank you. Just a correction: gem install ruby-debug-ide19
+    -&acirc;&euro;&ldquo;platform=ruby\r\n\r\nIt needs \"--\" instead of \"-\" or
+    you get an error"
+- id: 32201
+  author: Baboon
+  author_email: cromwelll@gmail.com
+  author_url: http://baboon.eu
+  date: '2012-10-30 17:06:01 +0000'
+  date_gmt: '2012-10-30 21:06:01 +0000'
+  content: 'Now if you''re like me and you just installed your dev environment, you''re
+    gonna need a whole other gem: debugger (gem install debugger). It seems that ruby-debug19
+    is no longer actively supported.'
+---
+<p>Most of the installation instructions for the ruby debugger that I found were out of date for Windows, so I thought it would be useful to document how I got it working. </p>
+<ol>
+<li>First, you should start with Ruby installed from the <a href="http://rubyinstaller.org/downloads/">RubyInstaller</a>. If you have any problems with getting debugging working, I would suggest installing Ruby fresh from here and trying again. </li>
+<li>Second, you need to install DevKit. Download DevKit from the <a href="http://rubyinstaller.org/downloads/">RubyInstaller</a> page, then follow the installation instructions on the <a href="https://github.com/oneclick/rubyinstaller/wiki/development-kit">Development Kit</a> page. Their instructions are thorough, so I won&acirc;&euro;&trade;t reproduce them here. The DevKit install has changed recently and this was part of my problem getting the debugging gem installed. </li>
+<li>Install the <strong>ruby-debug-ide19</strong> gem with the following command line.
+<pre class="code">gem install ruby-debug-ide19 &acirc;&euro;&ldquo;platform=ruby</code></pre>
+</li>
+<li>You should now be able to debug in <a href="http://www.jetbrains.com/ruby/">RubyMine</a>. When I started debugging in <a href="http://www.jetbrains.com/ruby/">RubyMine</a>, it prompted to install additional debugging gems. I allowed it and they installed fine and debugging started.
+<p></li>
+<ol type="a">
+<li>Set a breakpoint by clicking in the gutter where you want the breakpoint
+<p><img style="background-image: none; border-right-width: 0px; margin: 0px 0px 10px; padding-left: 0px; padding-right: 0px; display: inline; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px; padding-top: 0px" title="breakpoint" border="0" alt="breakpoint" src="http://www.alteridem.net/wp-content/uploads/2011/01/breakpoint.png" width="186" height="60" /> </li>
+<li>Select your run/debug configuration in the toolbar and click on the <strong>Debug</strong> button
+<p><img style="background-image: none; border-right-width: 0px; margin: 0px 0px 10px; padding-left: 0px; padding-right: 0px; display: inline; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px; padding-top: 0px" title="debug" border="0" alt="debug" src="http://www.alteridem.net/wp-content/uploads/2011/01/debug.png" width="240" height="67" /> </li>
+<li>Visit the page you want to debug in your browser. You should hit the breakpoint and see the callstack and the values of all the variables in scope.
+<p><a href="http://www.alteridem.net/wp-content/uploads/2011/01/watch.png"><img style="background-image: none; border-right-width: 0px; margin: 0px 0px 10px; padding-left: 0px; padding-right: 0px; display: inline; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px; padding-top: 0px" title="watch" border="0" alt="watch" src="http://www.alteridem.net/wp-content/uploads/2011/01/watch_thumb.png" width="644" height="204" /></a> </li>
+<li>You should now be able to step through the code. See the <a href="http://www.jetbrains.com/ruby/webhelp/debugging.html">RubyMine debugging documentation</a> for more help. </li>
+</ol>
+</ol>

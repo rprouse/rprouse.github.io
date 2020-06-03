@@ -1,0 +1,270 @@
+---
+layout: post
+status: publish
+published: true
+title: Testing .NET Core with NUnit in Visual Studio 2017
+author:
+  display_name: Rob Prouse
+  login: admin
+  email: rob@prouse.org
+  url: http://www.alteridem.net
+author_login: admin
+author_email: rob@prouse.org
+author_url: http://www.alteridem.net
+wordpress_id: 774
+wordpress_url: http://www.alteridem.net/?p=774
+date: '2017-05-04 21:21:51 +0000'
+date_gmt: '2017-05-05 02:21:51 +0000'
+categories:
+- ".NET"
+- C#
+- Visual Studio
+- Testing
+- NUnit
+- ".NET Core"
+- Visual Studio Code
+tags: []
+comments:
+- id: 85822
+  author: NUnit 3 Tests for .NET Core RC2 and ASP.NET Core RC2 - Rob Prouse
+  author_email: ''
+  author_url: http://www.alteridem.net/2016/06/18/nunit-3-testing-net-core-rc2/
+  date: '2017-05-05 08:14:02 +0000'
+  date_gmt: '2017-05-05 13:14:02 +0000'
+  content: "[&#8230;] Update 2: The switch from the project.json format to the new
+    csproj format and the associated tooling changes made the dotnet-test-nunit adapter
+    obsolete by switching the test adapter API. I have released an update to the NUnit
+    Visual Studio Adapter that implements the new test API and supports .NET Core.
+    If you are using Visual Studio 2017 and/or the new .NET Core tooling, see Testing
+    .NET Core with NUnit in Visual Studio 2017. [&#8230;]"
+- id: 85823
+  author: G&Atilde;&frac14;nther Foidl
+  author_email: gfoidlkorporal@gmail.com
+  author_url: ''
+  date: '2017-05-10 14:14:00 +0000'
+  date_gmt: '2017-05-10 19:14:00 +0000'
+  content: "+1 Thanks!"
+- id: 85824
+  author: Compelling Sunday &acirc;&euro;&ldquo; 19 Posts on Programming and QA
+  author_email: ''
+  author_url: https://automatetheplanet.com/compelling-sunday-14052017/
+  date: '2017-05-14 15:25:01 +0000'
+  date_gmt: '2017-05-14 20:25:01 +0000'
+  content: "[&#8230;] Testing .NET Core with NUnit in Visual Studio 2017&Acirc;&nbsp;&#8211;&Acirc;&nbsp;Rob
+    Prouse [&#8230;]"
+- id: 85825
+  author: Christian Maslen
+  author_email: christian.maslen@gmail.com
+  author_url: ''
+  date: '2017-05-19 02:58:00 +0000'
+  date_gmt: '2017-05-19 07:58:00 +0000'
+  content: Great stuff! Been looking forward to being able to use NUnit with Core
+    and Standard projects.
+- id: 85826
+  author: Pius Ngugi
+  author_email: piusnjoka@gmail.com
+  author_url: ''
+  date: '2017-05-25 02:14:00 +0000'
+  date_gmt: '2017-05-25 07:14:00 +0000'
+  content: Works like a charm.  Thanks very much
+- id: 85827
+  author: Shubhang Mani Tripathi
+  author_email: shubhangm.tripathi@gmail.com
+  author_url: ''
+  date: '2017-05-30 06:35:00 +0000'
+  date_gmt: '2017-05-30 11:35:00 +0000'
+  content: How can I specify the category of the tests to be executed? (something
+    like --where cat == Unit)?
+- id: 85828
+  author: Rob Prouse
+  author_email: rob@prouse.org
+  author_url: ''
+  date: '2017-05-30 06:45:00 +0000'
+  date_gmt: '2017-05-30 11:45:00 +0000'
+  content: The current version of dotnet test does not pass any options on to the
+    adapter, it only passes them on to VSTest.Console.exe. That limits what NUnit
+    can do, but you can use the /TestCaseFilter command line option to pass categories.
+    Just be aware that you are using the VSTest format, not the NUnit --where format.
+    See https://msdn.microsoft.com/en-CA/library/jj155796.aspx for more info.
+- id: 85829
+  author: Shubhang Mani Tripathi
+  author_email: shubhangm.tripathi@gmail.com
+  author_url: ''
+  date: '2017-06-01 06:22:00 +0000'
+  date_gmt: '2017-06-01 11:22:00 +0000'
+  content: Using dotnet test command with '/TestCaseFilter' switch results in an 'Unknown
+    switch error'. What other options do I have for filtering test cases?
+- id: 85830
+  author: Rob Prouse
+  author_email: rob@prouse.org
+  author_url: ''
+  date: '2017-06-01 07:31:00 +0000'
+  date_gmt: '2017-06-01 12:31:00 +0000'
+  content: |-
+    Sorry, I hadn't tried it. The help for dotnet test states that extra command line options are passed through. It could be the format of your command, see dotnet vstest --help.
+
+    You could also try running with dotnet vstest.
+- id: 85831
+  author: Shubhang Mani Tripathi
+  author_email: shubhangm.tripathi@gmail.com
+  author_url: ''
+  date: '2017-06-01 08:01:00 +0000'
+  date_gmt: '2017-06-01 13:01:00 +0000'
+  content: "Thanks a lot, this option worked! Can you please get this in the official
+    documentation somewhere, so that others avoid getting stuck here?\n\nEdit: This
+    was my command \ndotnet vstest path_to_dll --TestCaseFilter:\"TestCategory=TestSuite.Unit\""
+- id: 85832
+  author: Jorge
+  author_email: jorgebaygondra@gmail.com
+  author_url: ''
+  date: '2017-06-14 06:26:00 +0000'
+  date_gmt: '2017-06-14 11:26:00 +0000'
+  content: You can use `dotnet test path/to/csproj --filter "TestCategory~Unit"`
+- id: 85839
+  author: Benoit Pudal
+  author_email: benoit.pudal@sage.com
+  author_url: ''
+  date: '2017-08-10 04:28:00 +0000'
+  date_gmt: '2017-08-10 09:28:00 +0000'
+  content: |-
+    Hi, is there a way to get a result file in nunit2 format with dotnet test ?
+    Thanks  in advance for your help.
+- id: 85840
+  author: Rob Prouse
+  author_email: rob@prouse.org
+  author_url: ''
+  date: '2017-08-16 15:29:00 +0000'
+  date_gmt: '2017-08-16 20:29:00 +0000'
+  content: Sorry, not at the moment. You can't even get them in the NUnit 3 format
+    yet, only the VSTest format. We are a bit limited by the API that Microsoft provides,
+    but are trying to figure out ways to work around them.
+- id: 85841
+  author: Robert Bratton
+  author_email: rebratton@gmail.com
+  author_url: ''
+  date: '2017-08-18 07:19:00 +0000'
+  date_gmt: '2017-08-18 12:19:00 +0000'
+  content: Thanks for this information! I was frustrated with running unit tests in
+    VS 2017 with Dot Net CORE until now.
+- id: 85843
+  author: Walter Pinson
+  author_email: walter@walterpinson.com
+  author_url: http://walterpinson.com/
+  date: '2017-09-15 03:39:00 +0000'
+  date_gmt: '2017-09-15 08:39:00 +0000'
+  content: Does this mean that we have to go and decorate all of our unit tests with
+    this TestCategory attribute just to filter it?
+- id: 85844
+  author: Shubhang Mani Tripathi
+  author_email: shubhangm.tripathi@gmail.com
+  author_url: ''
+  date: '2017-09-15 03:54:00 +0000'
+  date_gmt: '2017-09-15 08:54:00 +0000'
+  content: You can use this decorator at the beginning of the test class as well.
+    Individual tests in the class need not be decorated. But yes, to filter the tests,
+    you'll need to define categories somewhere
+- id: 85845
+  author: Walter Pinson
+  author_email: walter@walterpinson.com
+  author_url: http://walterpinson.com/
+  date: '2017-09-16 05:24:00 +0000'
+  date_gmt: '2017-09-16 10:24:00 +0000'
+  content: Okay.  That makes it not as onerous.  It would be great if we could merely
+    identify a folder/directory that contained all of our test projects.  NUnit allows
+    us to filter based on namespaces.  So we can set our builds up to look for tests
+    in Test.Unit.* or Test.Integration.* namespaces ...or both via Test.*.  I'll decorate
+    all of my test classes while patiently waiting for `dotnet test` to be updated
+    so that it passes the filter options to the NUnit adapter.
+- id: 85848
+  author: Angelo
+  author_email: angelo@airyndon.com
+  author_url: http://www.airyndon.com
+  date: '2017-10-05 00:17:00 +0000'
+  date_gmt: '2017-10-05 05:17:00 +0000'
+  content: |-
+    sweet..works as intended on  Microsoft.NET.Test.Sdk 15.3.0
+    NUnit 3.8.1
+    NUnit3TestAdapter 3.8.0
+---
+<p>The switch from the <strong>project.json</strong> format to the new <strong>csproj </strong>based format for .NET Core and .NET Standard projects also changed the API for test adapters. Because of this, NUnit's <a href="https://github.com/nunit/dotnet-test-nunit">dotnet-test-nunit adapter</a> stopped working and we had to update our existing <a href="https://github.com/nunit/nunit3-vs-adapter">Visual Studio test adapter</a>&nbsp;to support .NET Core. Last night I released the <a href="https://www.nuget.org/packages/NUnit3TestAdapter/3.8.0-alpha1">first alpha release of the test adapter to NuGet</a>&nbsp;enabling testing of .NET Core and .NET Standard projects using Visual Studio 2017, Visual Studio Code, TFS Build, and, the dotnet test CLI command.</p>
+<p><!--more--></p>
+<h2>Creating a Test Project</h2>
+<p>The following instructions are for Visual Studio, but the principles apply to all development environments.</p>
+<p>In the solution that you want to test, <strong>Add | New Project...</strong> and add a <strong>Visual C# | .NET Core | Class Library (.NET Core)</strong>.</p>
+<p><img src="http://www.alteridem.net/wp-content/uploads/2017/05/Add-.NET-Core-Class-Library.png" alt="Add .NET Core Class Library" width="656" height="421" align="center" /></p>
+<p>I am testing a .NET Standard library, but I am using a .NET Core class library for testing. Testing requires a platform to test on, so your test assembly must target a specific platform. I selected .NET Core, but I could also target .NET 4.5 or even multi-target the test assembly. Be aware that multi-targeted test projects are barely supported by Visual Studio and your results may vary. Hopefully we will see improvements in the tooling soon.</p>
+<h2>Adding NuGet References</h2>
+<p>First, you will want to add a project reference to the project you are testing, then add NuGet references to the test framework&nbsp;<strong>NUnit</strong> 3.6.1, to the test runner&nbsp;<strong>NUnit3TestAdapter</strong> 3.8.0-alpha1 and to the test SDK&nbsp;<strong>Microsoft.NET.Test.Sdk</strong> 15.0.0. Add the references either using the <strong>Manage NuGet Packages...</strong> user interface, or by editing the project file.</p>
+<p><img src="http://www.alteridem.net/wp-content/uploads/2017/05/Add-NuGet-References-to-Test-Project.png" alt="Add NuGet References to Test Project" width="790" height="429" align="center" /></p>
+<p>Your csproj file should end up looking similar to this. Notice how much cleaner the new format is.</p>
+<pre><code>
+<project Sdk="Microsoft.NET.Sdk">
+
+  <propertygroup>
+    <targetframework>netcoreapp1.1</targetframework>
+  </propertygroup>
+
+  <itemgroup>
+    <packagereference Include="Microsoft.NET.Test.Sdk" Version="15.0.0"></packagereference>
+    <packagereference Include="NUnit" Version="3.6.1"></packagereference>
+    <packagereference Include="NUnit3TestAdapter" Version="3.8.0-alpha1"></packagereference>
+  </itemgroup>
+
+  <itemgroup>
+    <projectreference Include="..\NetStandardLibrary\NetStandardLibrary.csproj"></projectreference>
+  </itemgroup>
+
+  <itemgroup>
+    <service Include="{82a7f48d-3b50-4b1e-b82e-3ada8210c358}"></service>
+  </itemgroup>
+
+</project>
+</code></pre>
+<p>From here, <a href="http://www.alteridem.net/2016/10/03/nunit-unit-tests/">write your unit tests</a> as you would for any project.</p>
+<h2>Running Tests in Visual Studio</h2>
+<p>Running tests in Visual Studio hasn't changed. See my previous post on <a href="http://www.alteridem.net/2016/10/20/nunit-visual-studio-adapter/">running NUnit tests in Visual Studio</a> if you have questions.</p>
+<p><img src="http://www.alteridem.net/wp-content/uploads/2017/05/Running-Unit-Tests.png" alt="Running Unit Tests in Visual Studio" width="259" height="291" align="center" /></p>
+<p>A few things to note,</p>
+<ul>
+<li>If you multi-target your tests, only one target will run in Visual Studio, I believe the first</li>
+<li>Code Coverage is not supported for .NET Core yet, that will be available in a future update to Visual Studio</li>
+<li>Live Unit Testing is also not available for .NET Core yet</li>
+</ul>
+<h2>Running Tests from the Command Line</h2>
+<p>Adding the <a href="https://www.nuget.org/packages/NUnit3TestAdapter/3.8.0-alpha1">NUnit 3 Test Adapter</a> to your project will also allow you to use the <strong>dotnet test</strong> CLI. Here is an example run with the unit tests targeting both .NET 4.5 and .NET Core 1.1.</p>
+<pre><code>
+C:\src\Spikes\NetStandardLibrary
+&Icirc;&raquo; dotnet test .\NetStandardLibrary.Tests\NetStandardLibrary.Tests.csproj
+Build started, please wait...
+Build completed.
+
+Test run for C:\src\Spikes\NetStandardLibrary\NetStandardLibrary.Tests\bin\Debug\net45\NetStandardLibrary.Tests.dll(.NETFramework,Version=v4.5)
+Microsoft (R) Test Execution Command Line Tool Version 15.0.0.0
+Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Starting test execution, please wait...
+NUnit Adapter 3.8.0.0: Test execution started
+Running all tests in C:\src\Spikes\NetStandardLibrary\NetStandardLibrary.Tests\bin\Debug\net45\NetStandardLibrary.Tests.dll
+NUnit3TestExecutor converted 18 of 18 NUnit test cases
+NUnit Adapter 3.8.0.0: Test execution complete
+
+Total tests: 18. Passed: 18. Failed: 0. Skipped: 0.
+Test Run Successful.
+Test execution time: 0.9096 Seconds
+
+
+Test run for C:\src\Spikes\NetStandardLibrary\NetStandardLibrary.Tests\bin\Debug\netcoreapp1.1\NetStandardLibrary.Tests.dll(.NETCoreApp,Version=v1.1)
+Microsoft (R) Test Execution Command Line Tool Version 15.0.0.0
+Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Starting test execution, please wait...
+NUnit Adapter 3.8.0.0: Test execution started
+Running all tests in C:\src\Spikes\NetStandardLibrary\NetStandardLibrary.Tests\bin\Debug\netcoreapp1.1\NetStandardLibrary.Tests.dll
+NUnit3TestExecutor converted 18 of 18 NUnit test cases
+NUnit Adapter 3.8.0.0: Test execution complete
+
+Total tests: 18. Passed: 18. Failed: 0. Skipped: 0.
+Test Run Successful.
+Test execution time: 1.1661 Seconds
+</code></pre>
+<p>The tests run for both targets and that you get the output from the <strong>dotnet test</strong> command, not the normal coloured NUnit output that you would get from the NUnit Console. Hopefully we will be releasing an updated console runner in the near future.</p>

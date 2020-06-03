@@ -1,0 +1,124 @@
+---
+layout: post
+status: publish
+published: true
+title: Running MongoDB on Windows
+author:
+  display_name: Rob Prouse
+  login: admin
+  email: rob@prouse.org
+  url: http://www.alteridem.net
+author_login: admin
+author_email: rob@prouse.org
+author_url: http://www.alteridem.net
+wordpress_id: 171
+wordpress_url: http://www.alteridem.net/?p=171
+date: '2014-06-10 14:52:48 +0000'
+date_gmt: '2014-06-10 18:52:48 +0000'
+categories:
+- NoSQL
+- mongoDB
+- Databases
+tags: []
+comments:
+- id: 84994
+  author: Chris
+  author_email: chris@mongolab.com
+  author_url: ''
+  date: '2014-06-11 16:06:05 +0000'
+  date_gmt: '2014-06-11 20:06:05 +0000'
+  content: "Hey Robert,\r\n\r\nWe'd love it if you give MongoLab a try for your next
+    hack! Fully-managed MongoDB-as-a-Service. Installed and configured with a click
+    of a button.\r\n\r\nCheers!"
+- id: 85026
+  author: serguey
+  author_email: sergueyrp@gmail.com
+  author_url: ''
+  date: '2014-07-17 15:49:34 +0000'
+  date_gmt: '2014-07-17 19:49:34 +0000'
+  content: Thanks for your help
+- id: 85035
+  author: javaMan
+  author_email: javaMan@gmail.com
+  author_url: ''
+  date: '2014-07-31 04:41:11 +0000'
+  date_gmt: '2014-07-31 08:41:11 +0000'
+  content: "when  I put the command of mongo.exe.\r\nI frequently get the following,
+    \"Failed to connect to 127.0.0.1.\r\nHow can I solve this matter? \r\nplz help
+    me out!!!"
+- id: 85037
+  author: SH
+  author_email: sethhubert1@gmail.com
+  author_url: ''
+  date: '2014-08-01 05:23:18 +0000'
+  date_gmt: '2014-08-01 09:23:18 +0000'
+  content: "I've got an issue with creating the Service. I'm running cmd as an administrator
+    on WIn7.\r\n\r\nI'm using the same version of Mongo as you, but have installed
+    it to its default of \"c:\\program files\\mongodb 2.6 standard\\\"\r\n\r\nI altered
+    the command to reflect the appropriate paths, but the command runs without error
+    and simply lists the instructions for correctly using the command. No service
+    is created, and no hint as to what went wrong.\r\n\r\nAny insights would be most
+    welcome :)"
+- id: 85752
+  author: Pavan Nayakanti
+  author_email: pavan130980@gmail.com
+  author_url: ''
+  date: '2016-02-15 05:41:00 +0000'
+  date_gmt: '2016-02-15 10:41:00 +0000'
+  content: "I know this is bit outdated thread - but thought to share in the benefit
+    of future references.\n\nTry this - \nmongod.exe --storageEngine=mmapv1"
+---
+<p><a href="http://www.mongodb.org/"><img class="alignright size-full wp-image-173" src="http://www.alteridem.net/wp-content/uploads/2014/06/MongoDbLogo.png" alt="MongoDbLogo" width="150" height="150" /></a>I've been working with <a title="MongoDB" href="http://www.mongodb.org/">MonogDB</a> lately. Getting it setup and running on a development box is easy, but I wanted to document the steps for reference.</p>
+<h3>Install MongoDB</h3>
+<p><a href="http://www.mongodb.org/downloads">Download MongoDB</a> from their website. For windows, I prefer&nbsp;the 64-bit&nbsp;Zip file. The MSI installs into Program Files, but I prefer to keep the binaries and the databases together and not have to run as an Admin.</p>
+<p>Extract the Zip file to <strong>c:\MongoDB</strong></p>
+<p>In the MongoDB directory, create a <strong>data</strong> subdirectory and in it add <strong>db</strong> and <strong>log</strong> subdirectories. The bin subdirectory should already be there. Your directory structure should now look like this,</p>
+<pre><code>c:\mongodb
+    \bin
+    \data
+        \db
+        \log</code></pre>
+<h3>Configure MongoDB</h3>
+<p>Add a text file called&nbsp;&nbsp;<strong>c:\MongoDB\mongod.cfg</strong> that contains the following,</p>
+<pre><code>systemLog:
+   destination: file
+   path: c:\mongodb\data\log\mongodb.log
+   logAppend: true
+storage:
+    dbPath: c:\mongodb\data\db
+net:
+   bindIp: 127.0.0.1
+   port: 27017</code></pre>
+<p>This sets the log and the db path and also sets the port to the default so it is easy to change later. Notice that I am only binding to 127.0.0.1 because my server is currently insecure so I do not want to expose it on the network. For more configuration options, <a href="http://docs.mongodb.org/manual/reference/configuration-options/#core-options">see the documentation</a>.</p>
+<h3>Test MongoDB</h3>
+<p>Now that I have it set up, it is time to test the installation. Start it at the command prompt like this,</p>
+<pre><code>C:\MongoDb\bin>mongod.exe -f ..\mongod.cfg</code></pre>
+<p>Then in another command window, connect to the running server to make sure it is up and running. I am shutting the server down while I am connected to it, thus the errors.</p>
+<pre><code>D:\MongoDb\bin>mongo
+MongoDB shell version: 2.6.1
+connecting to: test
+> use admin
+switched to db admin
+> db.shutdownServer()
+2014-06-10T14:28:35.567-0400 DBClientCursor::init call() failed
+server should be down...
+2014-06-10T14:28:35.571-0400 trying reconnect to 127.0.0.1:27017 (127.0.0.1) failed
+2014-06-10T14:28:36.579-0400 warning: Failed to connect to 127.0.0.1:27017, reason: errno:10061 No connection could be made because the target machine actively refused it.
+2014-06-10T14:28:36.579-0400 reconnect 127.0.0.1:27017 (127.0.0.1) failed failed couldn't connect to server 127.0.0.1:27017 (127.0.0.1), connection attempt failed
+> exit
+bye</code></pre>
+<h3>Install as a service</h3>
+<p>We now know that our configuration is correct, so now I want to install it as a service so that it is always running,</p>
+<p>Start an Administrator command prompt. On Windows 7, press <strong>WIN+R</strong>, then type cmd, them press <strong>CTRL+SHIFT+ENTER</strong>. On Windows 8, press <strong>WIN+X</strong>, then press <strong>A</strong>.</p>
+<p>Now run the command,</p>
+<pre><code>sc.exe create MongoDB binPath="C:\MongoDB\bin\mongod.exe --service --config=C:\MongoDB\mongod.cfg" DisplayName="MongoDB 2.6 Standard" start="auto"</code></pre>
+<p>You should then see,</p>
+<pre><code>[SC] CreateService SUCCESS</code></pre>
+<p>You can now start and stop the service with the following commands,</p>
+<pre><code>net start MongoDB
+net stop MongoDB</code></pre>
+<p>If you ever want to uninstall the service, the command is,</p>
+<pre><code>sc.exe delete MongoDB</code></pre>
+<h3>Next Steps</h3>
+<p>You now have a MongoDB development server running on your local system. It does not require authentication, but is not exposed on the network, only through 127.0.0.1. When you are ready to deploy to production, you will need to set up <a href="http://docs.mongodb.org/manual/core/security-introduction/">security</a> and <a href="http://docs.mongodb.org/manual/core/replication-introduction/">replication</a>.</p>
+<p>For development in .NET you will want to start with the <a href="http://www.nuget.org/packages/mongocsharpdriver/">Official MongoDB C# driver</a>&nbsp;NuGet package.</p>

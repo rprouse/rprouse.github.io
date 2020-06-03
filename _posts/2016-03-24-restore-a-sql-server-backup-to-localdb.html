@@ -1,0 +1,47 @@
+---
+layout: post
+status: publish
+published: true
+title: Restore a SQL Server Backup to LocalDb
+author:
+  display_name: Rob Prouse
+  login: admin
+  email: rob@prouse.org
+  url: http://www.alteridem.net
+author_login: admin
+author_email: rob@prouse.org
+author_url: http://www.alteridem.net
+wordpress_id: 508
+wordpress_url: http://www.alteridem.net/?p=508
+date: '2016-03-24 08:36:57 +0000'
+date_gmt: '2016-03-24 13:36:57 +0000'
+categories:
+- SQL
+- Databases
+tags:
+- SQL Server
+comments: []
+---
+<p>I'm experimenting with taking a 3-tier client/server/database application and creating a lightweight client application that uses an embedded database. We use stored procedures and our server application uses SQL Server, so <a href="https://blogs.msdn.microsoft.com/sqlexpress/2011/07/12/introducing-localdb-an-improved-sql-express/" target="_blank">SQL Express LocalDB</a> has potential. The only problem I ran into was restoring a backup taken from SQL Server to LocalDB and <a href="http://stackoverflow.com/questions/13126726/how-do-i-copy-sql-server-2012-database-to-localdb-instance" target="_blank">it appears that I am not the only one</a> that <a href="https://connect.microsoft.com/SQLServer/feedback/details/789845/localdb-cannot-restore-a-backup-whose-original-data-and-log-files-are-in-different-folders#" target="_blank">had problems</a>.<!--more--></p>
+<p>In the end though, it was pretty easy, it just required a few steps that most DB admins are already familiar with, but developers may stumble on. Here are the developer-centric instructions using Visual Studio.</p>
+<h2>Restoring the DB Backup</h2>
+<p>In Visual Studio, open <strong>SQL Server Object Explorer</strong> (Ctrl+\, Ctrl+S) or under the View menu. Open the SQL Server node and you will likely have several LocalDB instances. If not, click the <strong>Add SQL Server</strong> button and from the dropdown, select <strong>(localdb)\MSSQLLocalDB</strong>.</p>
+<p>Open the node for the version of LocalDB you want to use and expand <strong>Databases | System Databases</strong>. Right click on <strong>master</strong> and select <strong>New Query...</strong></p>
+<p><img class="aligncenter size-full wp-image-510" src="http://www.alteridem.net/wp-content/uploads/2016/03/New-Query.png" alt="New Query" width="463" height="395" /></p>
+<p>Execute the following query using the path to your database backup.</p>
+<pre><code>RESTORE FILELISTONLY
+FROM DISK = 'D:\tmp\ivaraapplicationtesting75.bak'
+</code></pre>
+<p>In the results, take note of the <strong>LogicalName</strong>.</p>
+<p><img class="aligncenter size-full wp-image-512" src="http://www.alteridem.net/wp-content/uploads/2016/03/LogicalName.png" alt="LogicalName" width="445" height="125" /></p>
+<p>Modify your query to do the restore, using your database name, backup and the LogicalName from the previous query. You can restore the database to any existing path, in this case, I am restoring to my home directory.</p>
+<pre><code>RESTORE DATABASE IvaraApplicationTesting
+FROM DISK = 'D:\tmp\ivaraapplicationtesting75.bak'
+
+WITH MOVE 'ivara_data' TO 'C:\Users\rob.prouse\IvaraApplicationTesting.mdf',
+MOVE 'ivara_log' TO 'C:\Users\rob.prouse\IvaraApplicationTesting.ldf',
+REPLACE;
+</code></pre>
+<p>First time I did this, I thought it didn't work because it happened so quickly and because the database did not show up in <strong>SQL Server Object Explorer</strong>, but all you need to do is click refresh.</p>
+<p><img class="aligncenter size-full wp-image-515" src="http://www.alteridem.net/wp-content/uploads/2016/03/Results.png" alt="Results" width="251" height="177" /></p>
+<p>If you expand your new database, you will see that all of your tables are there and you can execute queries against it.</p>

@@ -1,0 +1,129 @@
+---
+layout: post
+status: publish
+published: true
+title: Arduino based Build Indicator
+author:
+  display_name: Rob Prouse
+  login: admin
+  email: rob@prouse.org
+  url: http://www.alteridem.net
+author_login: admin
+author_email: rob@prouse.org
+author_url: http://www.alteridem.net
+wordpress_id: 522
+wordpress_url: http://www.alteridem.net/?p=522
+date: '2016-05-17 12:07:20 +0000'
+date_gmt: '2016-05-17 17:07:20 +0000'
+categories:
+- Electronics
+- Arduino
+- Agile
+tags:
+- Continuous Integration
+- Arduino
+- Maker
+comments: []
+---
+<p><img class="alignright size-full wp-image-535" src="http://www.alteridem.net/wp-content/uploads/2016/05/20160517_110652.jpg" alt="Arduino based build indicator" width="250" height="258" align="right" />I found a red strobe light in the bargain bin at a local electronics store and immediately knew what to do with it - create a build failed light. There is a long history of dev shops creating <a href="https://en.wikipedia.org/wiki/Build_light_indicator" target="_blank">build indicator lights</a> using lava lamps, stop lights and computer monitors mounted on the wall and I've always wanted to build one.<!--more--></p>
+<p>The strobe was rated at 12V, but I wanted to run it off USB, so I hooked it up to a 5V power supply. It strobed a bit slower, but it worked, so I checked the amps. It drew a steady 70mA which is too much to run directly off an Arduino pin which are limited to around 40mA, but still low enough to run off USB and the 5V pin on the Arduino. I could use a relay to switch the strobe, but it seemed like overkill, so I checked my parts drawer and found some <a href="https://en.wikipedia.org/wiki/2N2222" target="_blank">PN2222A</a> transistors which are rated to 40V and 800mA.</p>
+<h3>Software</h3>
+<p>Since I was going to power this project off USB, I decided to let the computer do the heavy lifting of checking the state of the build and signal the Arduino over serial. The Arduino code is pretty simple, listen on serial, if it receives a 0, set pin 13 LOW, if it receives a 1, set pin 13 HIGH.</p>
+<pre><code>// the setup function runs once when you press reset or power the board
+void setup() {
+  // initialize serial:
+  Serial.begin(9600);
+  while (!Serial) {
+    ; // wait for serial port to connect. Needed for native USB port only
+  }
+  // prints title with ending line break
+  Serial.println("Alert Ready. Enter 1=ON 0=OFF");
+  
+  // initialize digital pin 13 as an output.
+  pinMode(13, OUTPUT);
+}
+
+// the loop function runs over and over again forever
+void loop() {
+  if(Serial.available())
+  {
+    char input = Serial.read();
+    if(input == '0'){
+      digitalWrite(13, LOW);
+      Serial.println("Turning OFF alert");
+    }
+    else if(input == '1') {
+      digitalWrite(13, HIGH);
+      Serial.println("Turning ON alert");
+    }
+    else {
+      Serial.println("Unrecognized command.  Enter 1=ON 0=OFF");
+    }
+  }
+}
+</code></pre>
+<p>On the computer, I wrote a simple Python script to get the RSS feed for our CruiseControl.NET build results. RSS doesn't contain build specific nodes, so I just search for the word Success in the RSS title. The python script just loops, looks for new RSS items and sends a 0 or 1 to the Arduino over serial. It should be fairly simple to change the script to work with your build server.</p>
+<pre><code>#! python3
+
+import feedparser
+import serial
+import time
+
+COM_PORT  = 'COM6'
+BAUD_RATE = 9600
+FEED_URI  = 'http://ccbuild/ccnet/server/local/project/OurProductBuild/RSSFeed.aspx'
+CHECK_FREQUENCY = 60    # How often to check in seconds
+
+def printTitle(title):    
+    print('===================')
+    print('  ' + title)
+    print('===================')
+    print()
+
+id = '' # Track the last RSS entry we found
+port = serial.Serial(COM_PORT, BAUD_RATE)
+print(port.readline().decode())
+
+while True:
+    # get the feed data from the url
+    feed = feedparser.parse(FEED_URI)
+
+    # display info for the first post
+    num = len(feed.entries)
+    success = False
+    if num > 0:
+        entry = feed.entries[num-1]
+
+        # Have we already seen this entry?
+        if id == entry.id:
+            time.sleep(CHECK_FREQUENCY)
+            continue
+
+        id = entry.id
+        printTitle('New build found')
+        print(entry.title)
+        print()
+        success = 'Success' in entry.title
+    else:
+        printTitle('No build found')
+
+    # Switch the Arduino alert on/off
+    if success:
+        print('Build succeeded')
+        port.write(b'0')
+    else:
+        print('Build failed')
+        port.write(b'1')
+    
+    print(port.readline().decode())
+    time.sleep(CHECK_FREQUENCY)
+</code></pre>
+<h3>Hardware</h3>
+<p>I started by prototyping on a breadboard using a red LED to stand in for the strobe. The green LED is a power indicator. Once I knew the code and the hardware was working, I then added the strobe in parallel to the LED and its resistor.</p>
+<p><img class="aligncenter size-full wp-image-524" src="http://www.alteridem.net/wp-content/uploads/2016/05/Strobe_bb.png" alt="Strobe Breadboard" width="1812" height="723" /></p>
+<p>I then soldered the components for the transistor switching circuit onto a small prototyping board.</p>
+<p><img class="aligncenter size-full wp-image-532" src="http://www.alteridem.net/wp-content/uploads/2016/05/20160517_110809.jpg" alt="Transistor switching circuit" width="720" height="405" /></p>
+<p>Then wired the board to an old Arduino Uno, put it in a small box and screwed the strobe to the box.</p>
+<p><img class="aligncenter size-full wp-image-533" src="http://www.alteridem.net/wp-content/uploads/2016/05/20160517_110817.jpg" alt="Project box" width="720" height="405" /></p>
+<p>And then put the strobe up at work. Sorry, I couldn't catch the flashing...</p>
+<p><img class="aligncenter size-full wp-image-530" src="http://www.alteridem.net/wp-content/uploads/2016/05/20160504_170310.jpg" alt="Build indicator strobe" width="720" height="434" /></p>

@@ -1,0 +1,77 @@
+---
+layout: post
+status: publish
+published: true
+title: Visual Studio 2010 Command Prompt Here
+author:
+  display_name: Rob Prouse
+  login: admin
+  email: rob@prouse.org
+  url: http://www.alteridem.net
+author_login: admin
+author_email: rob@prouse.org
+author_url: http://www.alteridem.net
+wordpress_id: 93
+wordpress_url: http://www.alteridem.net/2010/09/02/visual-studio-2010-command-prompt-here/
+date: '2010-09-02 12:52:37 +0000'
+date_gmt: '2010-09-02 17:52:37 +0000'
+categories:
+- Visual Studio
+- Tips'n'Tricks
+tags: []
+comments:
+- id: 9205
+  author: Benjy
+  author_email: santosh.benjamin@gmail.com
+  author_url: http://santoshbenjamin.wordpress.com
+  date: '2010-09-24 05:51:57 +0000'
+  date_gmt: '2010-09-24 09:51:57 +0000'
+  content: Nice. After extracting i had to remove the _x64 otherwise when trying to
+    install it complained that it couldnt find the .INF file.
+- id: 14989
+  author: Michael Doney
+  author_email: michael@doney.com
+  author_url: ''
+  date: '2011-08-05 04:10:02 +0000'
+  date_gmt: '2011-08-05 08:10:02 +0000'
+  content: Thanks a lot!  As Benjy said above, you have to remove the _x86 or _x64
+    from the .INF file name before attempting to install.
+- id: 19291
+  author: Visual Studio 2010 Command Prompt Here On the Context Menu of Windows Explorer
+    &laquo; Andrew Chaa, cha cha
+  author_email: ''
+  author_url: http://andrewchaa.me.uk/2012/02/18/visual-studio-2010-command-prompt-here-on-the-context-menu-of-windows-explorer/
+  date: '2012-02-18 18:08:52 +0000'
+  date_gmt: '2012-02-18 22:08:52 +0000'
+  content: "[...] http://www.alteridem.net/2010/09/02/visual-studio-2010-command-prompt-here/
+    [...]"
+- id: 30190
+  author: Wael
+  author_email: ymnwael@gmail.com
+  author_url: ''
+  date: '2012-09-19 19:29:18 +0000'
+  date_gmt: '2012-09-19 23:29:18 +0000'
+  content: "Thanks a lot! The comments were very confusing for noobs, the proper way
+    of doing it is extracting the file from the zip in the visual studio path assuming
+    it is the default if not  you must edit the path by opening the file and editing
+    the line which specify the path.\r\nThe most important step is to RENAME the file
+    AND REMOVE the (_X86 or_X64) text part!"
+- id: 58145
+  author: Command prompt here collection - ajeff.com
+  author_email: ''
+  author_url: http://blog.ajeff.com/command-prompt-here-collection/
+  date: '2013-10-01 00:20:17 +0000'
+  date_gmt: '2013-10-01 04:20:17 +0000'
+  content: "[&#8230;] Visual Studio 2010 Command Prompt here (64 bit) vsnet2010cmdhere_x64.inf
+    ASSUMES YOUR INSTALL PATH IS : C:Program FilesMicrosoft Visual Studio 10.0VCvcvarsall.bat
+    Thanks to: http://www.alteridem.net/2010/09/02/visual-studio-2010-command-prompt-here/
+    [&#8230;]"
+---
+<p><img style="border-bottom: 0px; border-left: 0px; margin: 0px 0px 6px 6px; display: inline; border-top: 0px; border-right: 0px" title="CmdPrompt" border="0" alt="CmdPrompt" align="right" src="http://www.alteridem.net/wp-content/uploads/2010/09/CmdPrompt.png" width="310" height="296" /> Real developers live on the command line. Way back in 1996, Microsoft released the <a href="http://www.microsoft.com/windowsxp/downloads/powertoys/xppowertoys.mspx">Command Prompt Here Power Toy</a> to ease their pain. Industrious developers who preferred the Visual Studio command prompt took it and adopted it to run a Visual Studio command prompt with all of the paths to Visual Studio and .NET tools in the path.</p>
+<p>In the fine, time honored tradition, I have continued to update with each new Visual Studio release and have finally done so for Visual Studio 2010.</p>
+<p>To install, download, unzip and right click and install the INF file, it will add a &acirc;&euro;&oelig;VS 2010 Cmd Prompt Here&acirc;&euro; menu item when you right click on a folder in Explorer. Clicking on the menu item will launch a DOS prompt in that directory with all of the Visual Studio and .NET paths set correctly.</p>
+<ul>
+<li><a href="http://www.alteridem.net/wp-content/uploads/2010/09/vsnet2010cmdhere_x86.zip">Visual Studio 2010 Command Prompt Here (x86)</a></li>
+<li><a href="http://www.alteridem.net/wp-content/uploads/2010/09/vsnet2010cmdhere_x64.zip">Visual Studio 2010 Command Prompt Here (x64)</a></li>
+</ul>
+<p>This assumes that you have installed Visual Studio to the default directory on the C drive. If that is not the case, edit the INF file and change line 38 to the correct path for your installation.</p>

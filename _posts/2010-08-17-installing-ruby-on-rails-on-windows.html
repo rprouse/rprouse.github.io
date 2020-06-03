@@ -1,0 +1,83 @@
+---
+layout: post
+status: publish
+published: true
+title: Installing Ruby on Rails on Windows
+author:
+  display_name: Rob Prouse
+  login: admin
+  email: rob@prouse.org
+  url: http://www.alteridem.net
+author_login: admin
+author_email: rob@prouse.org
+author_url: http://www.alteridem.net
+wordpress_id: 80
+wordpress_url: http://www.alteridem.net/?p=80
+date: '2010-08-17 16:01:25 +0000'
+date_gmt: '2010-08-17 21:01:25 +0000'
+categories:
+- Ruby
+- Rails
+tags: []
+comments:
+- id: 8978
+  author: Luis Lavena
+  author_email: luislavena@gmail.com
+  author_url: http://blog.mmediasys.com
+  date: '2010-08-18 16:10:40 +0000'
+  date_gmt: '2010-08-18 21:10:40 +0000'
+  content: "Hello,\r\n\r\nYou don't need to install RubyGems with RubyInstaller, it
+    is already part of it.\r\n\r\nI would disagree with some of your statements (and
+    the ones from Roadmap for Learning Rails) but the lack of help from the community
+    is that every single guide out there point so many ways to achieve the same thing
+    that confuses developers.\r\n\r\nThat, combined with the previous bad state of
+    Ruby for Windows didn't attract many users to it."
+- id: 9229
+  author: Benjamin Liles
+  author_email: benhli37@gmail.com
+  author_url: ''
+  date: '2010-09-26 23:35:33 +0000'
+  date_gmt: '2010-09-27 03:35:33 +0000'
+  content: so, Luis, how do I get ruby to work with xampp?
+---
+<p>I have been planning on learning <a href="http://rubyonrails.org/">Ruby on Rails</a> for awhile now, but I have heard that running it on Windows was problematic. The <a href="http://rubyonrails.org/download">download page</a> makes it sound pretty easy though, so I thought I would give it a try.</p>
+<h4>Install Ruby</h4>
+<p>First we need the Ruby language itself. I picked up the <a href="http://rubyforge.org/frs/?group_id=167">1.9.1 windows installer</a> from RubyForge. When I installed, I checked Add Ruby executables to your PATH and Associate .rb and .rbw files.</p>
+<p><img style="display: block; float: none; margin-left: auto; margin-right: auto; border-width: 0px;" title="Capture" src="http://www.alteridem.net/wp-content/uploads/2010/08/Capture.png" border="0" alt="Capture" width="372" height="288" /></p>
+<h4>Install Ruby Gems</h4>
+<p><strong>Update:</strong> <a rel="external nofollow" href="http://blog.mmediasys.com/">Luis Lavena</a> mentions in the comments that you do not have to install Gems because it comes with the installer which contradicted the installation instructions on the site I was using. I just tried installing on a new computer and Luis is correct. Just to be sure, I updated Gems with 'Gem update Gem'.</p>
+<p>Next, we need the Ruby package manager which allows us to install Rails and other Ruby packages. Download and extract the latest <a href="http://rubyforge.org/frs/?group_id=126">Ruby Gems ZIP file</a> from RubyForge.</p>
+<p>Open a DOS command prompt where you unzipped Gems and run the command,</p>
+<pre class="code">ruby setup.rb</code></pre>
+<h4>Install Rails</h4>
+<p>At the DOS prompt, run</p>
+<pre class="code">gem install rails</code></pre>
+<p>Wow, that was easy! Next, create an application and try it out.</p>
+<h4>Install MySQL Driver</h4>
+<p>Slow down, not so quick. A few steps ahead, I discovered that the MySQL driver is no longer distributed with Rails 2.2, so I had to install it with the command</p>
+<pre class="code">gem install mysql</code></pre>
+<p>You may also run into a problem later when you try to run <strong>db:migrate</strong> and it says Not Connected. If you do, follow <a href="http://forums.aptana.com/viewtopic.php?f=20&amp;t=7563&amp;p=27407&amp;hilit=libmysql.dll#p27407">the steps in this post</a>, they got it working for me.</p>
+<h4>Initializing an Application</h4>
+<p>To start out, I am going to run through the screencast <a href="http://rubyonrails.org/screencasts">Creating a weblog in 15 minutes with Rails 2</a>, so I will create the application for that. Once again, at the command line, first cd to your test web root. I use <a href="http://www.apachefriends.org/en/xampp.html">XAMPP</a> for web development on Windows, so I am going to keep my Rails apps there.</p>
+<pre class="code">cd \xampp\htdocs
+rails &acirc;&euro;&ldquo;d mysql blog
+cd blog</code></pre>
+<p>The rails command created the blog application to use MySQL as the database. Next open the <strong>blog\config\database.yml</strong> file. Update the username and password where appropriate. Now let's try it.</p>
+<pre class="code">ruby script/server</code></pre>
+<p>The ruby command runs a development server on port 3000. If you see the Windows Firewall prompt, allow it. Test the installation by going to <a href="http://localhost:3000" target="_blank">http://localhost:3000</a>, you should see the following.</p>
+<p><img style="display: block; float: none; margin-left: auto; margin-right: auto; border-width: 0px;" title="web_1" src="http://www.alteridem.net/wp-content/uploads/2010/08/web_1.png" border="0" alt="web_1" width="644" height="452" /></p>
+<h4>What about Apache?</h4>
+<p>Once again, I am using <a href="http://www.apachefriends.org/en/xampp.html">XAMPP</a>, so I tried several ways to get it working, but never managed to get either the mod_rewrite and/or the CGI handlers working. I found quite a few tutorials. All got me to the Welcome Aboard page, but none actually worked when I clicked the About your application&acirc;&euro;&trade;s environment link. I guess for now I am going to have to stick with the built in WEBrick server.</p>
+<h4>Next Steps</h4>
+<p>We are now setup and configured, so what next?</p>
+<ul>
+<li>View the various <a href="http://rubyonrails.org/screencasts">Rails screencasts</a>. As I said, I am starting by following along with the <a href="http://rubyonrails.org/screencasts">Creating a weblog in 15 minutes with Rails 2</a> screencast.</li>
+<li>Learn more about the <a href="http://www.ruby-lang.org/en/">Ruby programming language</a>.</li>
+<li>Read through the <a href="http://rubyonrails.org/documentation">Rails documentation</a>.</li>
+<li>Check out the <a href="http://agilewebdevelopment.com/plugins">Rails extensions</a> that may make your projects go quicker.</li>
+<li>Don&acirc;&euro;&trade;t forget <a href="http://stdlib.rubyonrails.org/libdoc/test/unit/rdoc/classes/Test/Unit.html">Unit Testing</a></li>
+</ul>
+<h4>General Impressions</h4>
+<p>The general installation was easy, but I ran into several problems like the setting up Apache on Windows and getting MySQL working. At the bottom of the article <a href="http://techiferous.com/2010/07/roadmap-for-learning-rails/">Roadmap for Learning Rails</a>, it states,</p>
+<blockquote><p>When you&acirc;&euro;&trade;re first starting out, don&acirc;&euro;&trade;t make unusual choices, such as learning to program <a href="http://stackoverflow.com/questions/164896/limitations-in-running-ruby-rails-on-windows">Rails on Windows</a>. One of the strengths of Rails is the community, but if you&acirc;&euro;&trade;ve made unusual choices, you&acirc;&euro;&trade;ll quickly find yourself without much help.</p></blockquote>
+<p>In my opinion, Rails is not suitable for production deployment on Windows and probably anything beyond casual development is probably better on Linux or a Mac. If I stick with it, I will probably move all of my development over to Linux.</p>

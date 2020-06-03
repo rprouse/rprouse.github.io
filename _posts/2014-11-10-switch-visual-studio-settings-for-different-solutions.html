@@ -1,0 +1,32 @@
+---
+layout: post
+status: publish
+published: true
+title: Switch Visual Studio Settings for Different Solutions
+author:
+  display_name: Rob Prouse
+  login: admin
+  email: rob@prouse.org
+  url: http://www.alteridem.net
+author_login: admin
+author_email: rob@prouse.org
+author_url: http://www.alteridem.net
+wordpress_id: 299
+wordpress_url: http://www.alteridem.net/?p=299
+date: '2014-11-10 14:00:25 +0000'
+date_gmt: '2014-11-10 18:00:25 +0000'
+categories:
+- Development Tools
+- Visual Studio
+- Tips'n'Tricks
+tags: []
+comments: []
+---
+<p>Switching between projects with different formatting styles can be a real pain. I have finally found a solution if you are using Visual Studio and a partial solution for most other platforms.</p>
+<p>If you add two configuration files to the root of the solution, they will automatically configure your editor to the coding standards of the solution when you open it and restore your settings to your defaults when you close.</p>
+<h3>Editor Config</h3>
+<p>This file defines spacing and tabs for the files in the solution. There are plugins available for pretty much every editor and IDE out there including Visual Studio, Vi, Emacs and even Notepad++.</p>
+<p>For more information, got to http://editorconfig.org/. The Visual Studio extension is on <a href="https://github.com/editorconfig/editorconfig-visualstudio">GitHub</a>, and can be installed from the <a href="https://visualstudiogallery.msdn.microsoft.com/c8bccfe2-650c-4b42-bc5c-845e21f96328">Visual Studio Gallery</a>.</p>
+<h3>Rebracer</h3>
+<p>Rebracer sets all of the code formatting rules for the project when you open the solution and restores your defaults when you close. To change the settings you simply need to open edit the Visual Studio options and the changes will automatically be saved out to the Rebracer.xml file.</p>
+<p>Rebracer is also on <a href="https://github.com/SLaks/Rebracer">GitHub</a>, and can be installed from the <a href="https://visualstudiogallery.msdn.microsoft.com/410e9b9f-65f3-4495-b68e-15567e543c58">Visual Studio Gallery</a>.</p>

@@ -1,0 +1,133 @@
+---
+layout: post
+status: publish
+published: true
+title: Install Docker on Windows in Hyper-V
+author:
+  display_name: Rob Prouse
+  login: admin
+  email: rob@prouse.org
+  url: http://www.alteridem.net
+author_login: admin
+author_email: rob@prouse.org
+author_url: http://www.alteridem.net
+wordpress_id: 470
+wordpress_url: http://www.alteridem.net/?p=470
+date: '2016-03-08 16:13:14 +0000'
+date_gmt: '2016-03-08 21:13:14 +0000'
+categories:
+- Docker
+tags:
+- Docker
+- Containers
+- Hyper-V
+comments: []
+---
+<p><a href="https://medium.com/s-c-a-l-e/google-systems-guru-explains-why-containers-are-the-future-of-computing-87922af2cf95#.lodtq3bqu" target="_blank">Containers are the future</a>, so I need to be able to work with <a href="https://www.docker.com/" target="_blank">Docker</a>. On Windows, Docker runs inside a virtual machine and by default ships with VirtualBox. As a Windows developer, all of my virtual machines and emulators are Hyper-V images which conflicts with VirtualBox. In the past, I would <a href="http://www.hanselman.com/blog/SwitchEasilyBetweenVirtualBoxAndHyperVWithABCDEditBootEntryInWindows81.aspx" target="_blank">dual boot</a>&nbsp;to switch between Hyper-V and VirtualBox, but that is a huge pain, so I decided to figure out how to get Docker running in Hyper-V. It turns out that it isn't difficult, but most of the instructions assume VirtualBox or are out of date.<!--more--></p>
+<h2>Install Docker</h2>
+<p>We're all Windows developers here, so I will assume that you are already using Hyper-V and that it is working.</p>
+<p>Download <a href="https://www.docker.com/products/docker-toolbox" target="_blank">Docker Toolbox</a> for Windows</p>
+<p>Run the installer. On the third screen, you cannot uncheck VirtualBox even though you don't need it. Damn you Docker! No worries, we can get around that...<br />
+<img class="aligncenter size-full wp-image-472" src="http://www.alteridem.net/wp-content/uploads/2016/03/2016-03-08-14_40_06-Setup-Docker-Toolbox.png" alt="Setup - Docker Toolbox" width="499" height="387" /></p>
+<p>On the fourth screen, select all options, then continue to click through all of the screens.</p>
+<p>At the end of the Docker Toolbox install, it will begin installing VirtualBox. A Windows Security dialog will pop up asking you if you want to install Oracle device software. Clicking <strong>Don't Install</strong> will abort the VirtualBox install.<br />
+<img class="aligncenter size-full wp-image-474" src="http://www.alteridem.net/wp-content/uploads/2016/03/2016-03-08-14_48_08-Windows-Security.png" alt="Windows Security" width="504" height="232" /></p>
+<p>The <strong>Docker Quickstart Terminal</strong> and <strong>Kitematic (Alpha)</strong> shortcuts won't work without VirtualBox, so skip them. We will install the Docker vm into Hyper-V manually.</p>
+<h2>Create a Boot2Docker Hyper-V Machine</h2>
+<p>If you have many virtual machines in Hyper-V, you will likely have several Virtual Switches. You must specify which Virtual Switch to use when you create the Docker VM, so open <strong>Hyper-V Manager</strong> and select <strong>Virtual Switch Manager</strong> from the actions on the right.</p>
+<p>Select a Virtual Switch that is connected directly to an external network interface, ideally to an ethernet connection, not to a wireless card. Copy the name of the switch, you will use it when you create the virtual machine.</p>
+<p><img class="aligncenter size-full wp-image-476" src="http://www.alteridem.net/wp-content/uploads/2016/03/2016-03-08-14_59_13-Settings.png" alt="Hyper-V Virtual Switch" width="717" height="372" /></p>
+<p>Open an Admin command prompt and run <strong>docker-machine create</strong>, substituting your &nbsp;virtual switch name. In this example, the Hyper-V machine will be called Boot2Docker. See the <a href="https://docs.docker.com/machine/drivers/hyper-v/" target="_blank">Docker Hyper-V documentation</a> for more command line options.</p>
+<pre><code>D:\src
+&Icirc;&copy; docker-machine create --driver hyperv --hyperv-virtual-switch "Intel(R) Ethernet Connection I217-LM Virtual Switch" Boot2Docker
+Creating CA: C:\Users\rob.prouse\.docker\machine\certs\ca.pem
+Creating client certificate: C:\Users\rob.prouse\.docker\machine\certs\cert.pem
+Running pre-create checks...
+Creating machine...
+(Boot2Docker) Copying C:\Users\rob.prouse\.docker\machine\cache\boot2docker.iso to C:\Users\rob.prouse\.docker\machine\machines\Boot2Docker\boot2docker.iso...
+(Boot2Docker) Creating SSH key...
+(Boot2Docker) Creating VM...
+(Boot2Docker) Using switch "Intel(R) Ethernet Connection I217-LM Virtual Switch"
+(Boot2Docker) Creating VHD
+(Boot2Docker) Starting VM...
+(Boot2Docker) Waiting for host to start...
+Waiting for machine to be running, this may take a few minutes...
+Detecting operating system of created instance...
+Waiting for SSH to be available...
+Detecting the provisioner...
+Provisioning with boot2docker...
+Copying certs to the local machine directory...
+Copying certs to the remote machine...
+Setting Docker configuration on the remote daemon...
+Checking connection to Docker...
+Docker is up and running!
+To see how to connect your Docker Client to the Docker Engine running on this virtual machine, run: C:\Program Files\Docker Toolbox\docker-machine.exe env Boot2Docker
+</code></pre>
+<p>As this is working, back in Hyper-V Manager, connect to your docker image to see what it is doing.</p>
+<p><img class="aligncenter size-full wp-image-481" src="http://www.alteridem.net/wp-content/uploads/2016/03/2016-03-08-15_17_34-Films-TV.png" alt="Boot2Docker" width="642" height="480" /></p>
+<p>I don't like working as an admin if I don't need to, so close your admin command prompt and open a regular command prompt for the remaining work.</p>
+<p>That's it, you now have Docker installed and running in Hyper-V. Next up, let's configure the Docker client to connect to your vm.</p>
+<h2>Working with docker-machine</h2>
+<p>From this point on, everything is standard Docker commands, so check out the <a href="https://docs.docker.com/machine/overview/" target="_blank">docker-machine documentation</a>. Whenever you want to work with Docker, you use <strong>docker-machine</strong> to start and stop your machines, to list running machines and to configure your shell to connect to a running Docker instance.</p>
+<h3>Listing Docker Machines</h3>
+<p>You use <strong>docker-machine ls</strong> to view registered Docker machines and their state.</p>
+<pre><code>D:\src
+&Icirc;&raquo; docker-machine ls
+NAME          ACTIVE   DRIVER   STATE     URL                        SWARM   DOCKER    ERRORS
+Boot2Docker   -        hyperv   Running   tcp://192.168.0.113:2376           v1.10.2
+</code></pre>
+<h3>Starting and Stopping Machines</h3>
+<p>Use <strong>docker-machine start [MachineName]</strong> and <strong>docker-machine stop [MachineName]</strong> to start and stop virtual machines.</p>
+<pre><code>&Icirc;&raquo; docker-machine start Boot2Docker
+Starting "Boot2Docker"...
+(Boot2Docker) Waiting for host to start...
+Machine "Boot2Docker" was started.
+Waiting for SSH to be available...
+Detecting the provisioner...
+Started machines may have new IP addresses. You may need to re-run the `docker-machine env` command.
+</code></pre>
+<h3>Configuring Your Shell</h3>
+<p>To connect your Docker client to a running vm, use the command <strong>docker-machine env [MachineName]</strong>.</p>
+<pre><code>D:\src
+&Icirc;&raquo; docker-machine env Boot2Docker
+$Env:DOCKER_TLS_VERIFY = "1"
+$Env:DOCKER_HOST = "tcp://192.168.0.113:2376"
+$Env:DOCKER_CERT_PATH = "C:\Users\rob.prouse\.docker\machine\machines\Boot2Docker"
+$Env:DOCKER_MACHINE_NAME = "Boot2Docker"
+# Run this command to configure your shell:
+# &amp; "C:\Program Files\Docker Toolbox\docker-machine.exe" env Boot2Docker | Invoke-Expression
+</code></pre>
+<p>The last line tells you what you need to run to configure your shell. I am using PowerShell, so I need to run <strong>&amp; docker-machine env Boot2Docker | Invoke-Expression</strong> to set the required environment variables.</p>
+<h2>Test Your Docker Installation</h2>
+<p>Now that you are setup and have your shell configured, run <strong>docker run hello-world</strong> to check that everything is working.</p>
+<pre><code>D:\src
+&Icirc;&raquo; docker run hello-world
+Unable to find image 'hello-world:latest' locally
+latest: Pulling from library/hello-world
+
+03f4658f8b78: Pull complete ================================================>]    601 B/601 BB
+a3ed95caeb02: Pull complete ================================================>]     32 B/32 BB
+Digest: sha256:8be990ef2aeb16dbcb9271ddfe2610fa6658d13f6dfb8bc72074cc1ca36966a7
+Status: Downloaded newer image for hello-world:latest
+
+Hello from Docker.
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker Hub account:
+ https://hub.docker.com
+
+For more examples and ideas, visit:
+ https://docs.docker.com/userguide/
+</code></pre>
+<p>From here, if you are new to Docker, I would suggest continuing with the <a href="https://docs.docker.com/windows/step_two/" target="_blank">Docker on Windows Getting Started Step 2 - Understanding images &amp; containers</a> which picks up from this point.</p>

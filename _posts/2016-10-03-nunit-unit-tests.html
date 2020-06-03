@@ -1,0 +1,130 @@
+---
+layout: post
+status: publish
+published: true
+title: Introduction to Unit Tests with NUnit
+author:
+  display_name: Rob Prouse
+  login: admin
+  email: rob@prouse.org
+  url: http://www.alteridem.net
+author_login: admin
+author_email: rob@prouse.org
+author_url: http://www.alteridem.net
+wordpress_id: 631
+wordpress_url: http://www.alteridem.net/?p=631
+date: '2016-10-03 16:31:08 +0000'
+date_gmt: '2016-10-03 21:31:08 +0000'
+categories:
+- Visual Studio
+- Testing
+- NUnit
+tags: []
+comments:
+- id: 85785
+  author: Using NUnit&#039;s TestCase Attribute - Rob Prouse
+  author_email: ''
+  author_url: http://www.alteridem.net/2016/10/17/nunit-testcase-attribute/
+  date: '2016-10-17 04:38:58 +0000'
+  date_gmt: '2016-10-17 09:38:58 +0000'
+  content: "[&#8230;] the last post, we setup an NUnit test project and ran it in
+    Visual Studio. In this post we are going to expand on that code to add more unit
+    tests using the NUnit TestCase [&#8230;]"
+- id: 85849
+  author: Gabriel Burdeti
+  author_email: radu-gabriel.burdeti@hec.ca
+  author_url: ''
+  date: '2017-11-24 16:18:00 +0000'
+  date_gmt: '2017-11-24 21:18:00 +0000'
+  content: Thanks for the information. It's really useful.
+---
+<p>You have a new project and you want to add unit tests, where do you start? &nbsp;This tutorial&nbsp;walks you through adding an <a href="http://nunit.org/">NUnit</a> test project, writing your first tests and running them in Visual Studio.</p>
+<p>This walk-through assumes you already have a project that you want to test. I am starting here with a project that contains a simple class that contains an extension method that converts an enum value to a friendly string by splitting the enum name at capitals. For example, System.Windows.Forms.Keys.BrowserBack would become "Browser Back".<!--more--></p>
+<p>The source code for <a href="https://github.com/rprouse/IntroToNUnit">this tutorial is on GitHub</a>.</p>
+<h2>Add a Unit Test Project</h2>
+<p>It is best practice to keep your unit tests separate from your production code, so we will add a new project that contains our tests. It is also common to name your test project the same as the project it is testing and appending <strong>.Tests</strong>. My main project is <strong>IntroToNUnit</strong>, so I will add <strong>IntroToNUnit.Tests</strong>.</p>
+<ol>
+<li>Right click on your solution in Visual Studio</li>
+<li>Click on <strong>Add | New project...</strong></li>
+<li>Click on&nbsp;<strong>Visual C# | Windows</strong> and click on&nbsp;<strong>Class Library.</strong></li>
+<li>Enter the name of your test project and click&nbsp;<strong>OK</strong>.</li>
+</ol>
+<p><img class="aligncenter wp-image-634 size-full" src="http://www.alteridem.net/wp-content/uploads/2016/10/2016-10-03-16_23_21-Add-New-Project.png" alt="Add new unit test project" width="795" height="497" /></p>
+<h2>Add a Reference to NUnit</h2>
+<p>Before you can write unit tests, you need to add a reference to a test framework, in this case NUnit.</p>
+<ol>
+<li>Right click on your unit test project</li>
+<li>Click on&nbsp;<strong>Manage NuGet packages...</strong></li>
+<li>Click on <strong>Browse</strong></li>
+<li>Select&nbsp;<strong>NUnit</strong> and click the&nbsp;<strong>Install</strong> button. At the time of this writing, NUnit is number three in the list. If that changes, use the search bar to find it.</li>
+</ol>
+<p><img class="aligncenter wp-image-636 size-full" src="http://www.alteridem.net/wp-content/uploads/2016/10/2016-10-03-16_31_47-IntroToNUnit-Microsoft-Visual-Studio.png" alt="Add reference to NUnit" width="792" height="414" /></p>
+<h2>Add a Reference to Your Project</h2>
+<p>In order to test the code in your main project, you need to add a reference to it in your test project.</p>
+<ol>
+<li>Right click on your test project</li>
+<li>Click on&nbsp;<strong>Add | Reference...</strong></li>
+<li>Select&nbsp;<strong>Projects | Solution</strong></li>
+<li>Add a checkmark on your main project.</li>
+<li>Click&nbsp;<strong>OK</strong>.</li>
+</ol>
+<p><img class="aligncenter size-full wp-image-638" src="http://www.alteridem.net/wp-content/uploads/2016/10/2016-10-03-16_38_46-Reference-Manager-IntroToNUnit.Tests_.png" alt="Add Project Reference" width="686" height="343" /></p>
+<h2>Write Unit Tests</h2>
+<p>Another common convention is to name the test class the same as the class being tested with Tests appended. The class I want to test is called&nbsp;<strong>EnumToStringConverter.cs</strong>, so I rename&nbsp;<strong>Class1.cs</strong> to&nbsp;<strong>EnumToStringConverterTests.cs</strong>.</p>
+<p>To this class, I add the&nbsp;<strong>[TestFixture]</strong> attribute. You also need to&nbsp;add the <strong>using NUnit.Framework</strong>. My first test is going to make sure that the converter splits multiple words correctly, so I add a test enum and the first unit test. Add this point, my code looks like this.</p>
+<pre><code>using NUnit.Framework;
+
+namespace IntroToNUnit.Tests
+{
+    public enum TestTypes
+    {
+        None,
+        UnitTesting,
+        IntegrationTesting,
+        FlyByTheSeatOfYourPantsTesting
+    }
+
+    [TestFixture]
+    public class EnumToStringConverterTests
+    {
+        [Test]
+        public void CanConvertEnumIntoMultipleWords()
+        {
+        }
+    }
+}
+</code></pre>
+<p>Notice that my test method is public and returns void and that it has a <strong>[Test]</strong> attribute to identify it as a test. You can have more complicated test methods which I will cover in future posts.</p>
+<h2>Arrange, Act, Assert</h2>
+<p>Now it is time to write the first unit test. The most common structure is known as <a href="http://c2.com/cgi/wiki?ArrangeActAssert">Arrange, Act, Assert</a>. What this means is that you group the code in your test method into setting up for the test (Arrange), then you perform the action that you want to test (Act), then you check the results (Assert). Sometimes you will find that the arrange and act steps are combined for simpler tests as in this case. That is fine.</p>
+<pre><code>[Test]
+public void CanConvertEnumIntoMultipleWords()
+{
+    // Arrange/Act
+    var actual = TestTypes.UnitTesting.ToFriendlyString();
+
+    // Assert
+    Assert.That(actual, Is.EqualTo("Unit Testing"));
+}
+</code></pre>
+<p>In this test, I have executed the code that I want to test, then I asserted what I expected the value to be. The <strong>Assert</strong>&nbsp;class is provided by NUnit and allows&nbsp;check many conditions in your tests. In this case I am only checking that the string returned is equal to what I expected. I will cover more types of NUnit Asserts in a later post.</p>
+<p>NUnit has two assert syntaxes. In the example code, I used the <a href="http://Constraint Model">Constraint Model</a> or sometimes the Fluent Syntax. It is called the fluent syntax because it reads very much like English and because you can continue to append extra conditions. For example, I could have also checked for null with,</p>
+<pre><code>Assert.That(actual, Is.Not.Null.And.EqualTo("Unit Testing"));</code></pre>
+<p>NUnit also has a <a href="https://github.com/nunit/docs/wiki/Classic-Model">classic model/syntax</a> that you are likely to see in other tutorials. The above Assert could also be written as,</p>
+<pre><code>Assert.NotNull(actual);
+Assert.AreEqual("Unit Testing", actual);
+</code></pre>
+<p>Some people prefer the classic syntax, but I recommend that you use the fluent syntax. New features in NUnit are always added to the fluent syntax and only rarely get added to the classic syntax.</p>
+<h2>Run the Unit Tests in Visual Studio</h2>
+<p>To run your unit tests in Visual Studio, you first need to install the&nbsp;<a href="https://visualstudiogallery.msdn.microsoft.com/0da0f6bd-9bb6-4ae3-87a8-537788622f2d">NUnit 3 Test Adapter</a>. To do so,</p>
+<ol>
+<li>In the main menu, click&nbsp;<strong>Tools | Extensions and Updates...</strong></li>
+<li>Click on <strong>Online | Visual Studio Gallery</strong>,</li>
+<li>Search for&nbsp;<strong>NUnit</strong> and install&nbsp;<strong>NUnit 3 Test Adapter</strong></li>
+<li>After you install, click the button at the bottom to&nbsp;<strong>Restart</strong> Visual Studio</li>
+</ol>
+<p><img class="aligncenter size-full wp-image-643" src="http://www.alteridem.net/wp-content/uploads/2016/10/2016-10-03-17_18_57-Extensions-and-Updates.png" alt="Add NUnit Visual Studio Adapter" width="782" height="325" /></p>
+<p>Back in Visual Studio with your solution open, you need to open the&nbsp;<strong>Test Explorer Window</strong>. To do this, in the main menu, click&nbsp;<strong>Test | Windows | Test Explorer</strong>.</p>
+<p>The window that opens will list your unit tests and allow you to run or debug them. Click&nbsp;<strong>Run All</strong> to run your tests. Successful tests will go green and failed tests will be red. You can see the results of any test by clicking on it and viewing the results at the bottom of the window. In a future post, I will cover other ways to run your tests and how to use the Test Adapter in Visual Studio in more detail.</p>
+<p><img class="aligncenter size-full wp-image-645" src="http://www.alteridem.net/wp-content/uploads/2016/10/2016-10-03-17_30_21-IntroToNUnit.png" alt="Test Explorer" width="655" height="233" /></p>
+<p>Congratulations, you have your first unit test.</p>

@@ -1,0 +1,94 @@
+---
+layout: post
+status: publish
+published: true
+title: Unit Test Non-Public Methods and Classes
+author:
+  display_name: Rob Prouse
+  login: admin
+  email: rob@prouse.org
+  url: http://www.alteridem.net
+author_login: admin
+author_email: rob@prouse.org
+author_url: http://www.alteridem.net
+wordpress_id: 728
+wordpress_url: http://www.alteridem.net/?p=728
+date: '2017-01-09 11:52:44 +0000'
+date_gmt: '2017-01-09 16:52:44 +0000'
+categories:
+- ".NET"
+- C#
+- Testing
+- NUnit
+tags: []
+comments:
+- id: 85797
+  author: Niklas Engberg
+  author_email: niklas.engberg@creuna.se
+  author_url: ''
+  date: '2017-01-10 03:03:00 +0000'
+  date_gmt: '2017-01-10 08:03:00 +0000'
+  content: |-
+    Hi Rob,
+
+    I used to do this a while back ago as well but I've realized that it just doesn't feel right.
+    My common scenario was that I adapted my methods from being private to internal to be able to test them.
+    Nowadays I strive to test them through the public API instead. I am interesting if you have any use cases where you cannot cover the private methods by testing the public API?
+
+    Regards
+    Niklas
+- id: 85798
+  author: Rob Prouse
+  author_email: rob@prouse.org
+  author_url: ''
+  date: '2017-01-10 12:36:00 +0000'
+  date_gmt: '2017-01-10 17:36:00 +0000'
+  content: |-
+    Niklas,
+
+    I think it is a balance between two things that don't feel right, the first making private methods internal vs true unit tests. I tend to break my methods down into as many small methods as possible and I prefer to unit test those smaller methods on their own and write them in a TDD style. I find that I drift into a tendency to write fewer tests if I only test through the public methods because of the additional setup for each test. I also feel that these larger tests start leaning towards the integration test end of the scale. I think those are necessary too, but prefer smaller, more succinct unit tests too.
+
+    I would also argue that we have a tendency to make too much public. Take a look at most projects and I think you will find the majority of classes are public (if not all). How many of those classes are ever called from outside the assembly they are declared in? Shouldn't they be internal?
+
+    This has actually become a problem for us developing NUnit. We have public classes that are intended to be used when writing tests and public APIs that are intended to be consumed by 3rdParty developers. For testing however, most of our classes are public and we have many issues reported where people are using these classes incorrectly where we didn't intend them to be used externally. We have started making those classes internal to prevent incorrect use. It also has the advantage of reducing the number of classes that show up in Intellisense.
+
+    To sum up, I don't think we should dismiss something out of hand because it offends our sense of purity. If making a method internal instead of private makes our code or our tests easier to write, read, consume and understand, then go for it. Evaluate and decide if the code is better or worse :)
+
+    Rob
+---
+<p>You often want to unit test non-public methods and classes in .NET, but you don't want to make them public. The most common solution is to make the methods and classes&nbsp;<strong>internal</strong> and access them from your unit test project using the&nbsp;<a href="https://msdn.microsoft.com/en-us/library/system.runtime.compilerservices.internalsvisibletoattribute.aspx">InternalsVisibleTo</a> attribute.</p>
+<p><!--more--></p>
+<h2>Unsigned Assemblies</h2>
+<p>If your assemblies are unsigned, edit&nbsp;<strong>AssemblyInfo.cs</strong> in the project you are unit testing and add the following attribute,</p>
+<pre><code>[assembly: InternalsVisibleTo("MyAssembly.Tests")]
+</code></pre>
+<p>Remember to add the attribute to your main project and use the name of your test project. Once you do this, you can access internal classes and methods from your test project.</p>
+<h2>Signed Assemblies</h2>
+<p>If your assemblies are signed, you must sign your test assembly and include the <strong>full</strong> public key in the <a href="https://msdn.microsoft.com/en-us/library/system.runtime.compilerservices.internalsvisibletoattribute.aspx">InternalsVisibleTo</a> attribute.</p>
+<p>To do this, use the <a href="https://msdn.microsoft.com/en-us/library/k5b5tt23.aspx" target="_blank">Strong Name Tool (sn.exe)</a> to extract the public key from your test assembly.</p>
+<ol>
+<li>Open a Visual Studio command prompt</li>
+<li>CD to the bin directory where your test assembly was built</li>
+<li>Run the command <strong>sn -Tp MyAssembly.Tests</strong></li>
+</ol>
+<p>Running this command will produce the following output,</p>
+<pre><code>Microsoft (R) .NET Framework Strong Name Utility  Version 4.0.30319.0
+Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Public key (hash algorithm: sha1):
+0024000004800000940000000602000000240000525341310004000001000100750098646d1c04
+c2a041faaf801521a769535de9a04cd3b4dedccbf73d1a6456bf4fe58814510e84983c72d0460b
+8ba85c52a9cacdc4a0786af54e90cb7a81eb2049ecfe6b2c5e20a18fe4b9bff009ada232e980d2
+20b3c9586c9c5ee29c29aee8853db7bb90cf5a4c704f5244e1a1085c43060085350329021ec902
+47e70eb2
+
+Public key token is a5778f560690a058
+</code></pre>
+<p>Copy the full public key and add it to the <a href="https://msdn.microsoft.com/en-us/library/system.runtime.compilerservices.internalsvisibletoattribute.aspx">InternalsVisibleTo</a> attribute in <strong>AssemblyInfo.cs</strong></p>
+<pre><code>[assembly: InternalsVisibleTo("MyAssembly.Tests, PublicKey=" +
+            "0024000004800000940000000602000000240000525341310004000001000100750098646d1c04" +
+            "c2a041faaf801521a769535de9a04cd3b4dedccbf73d1a6456bf4fe58814510e84983c72d0460b" +
+            "8ba85c52a9cacdc4a0786af54e90cb7a81eb2049ecfe6b2c5e20a18fe4b9bff009ada232e980d2" +
+            "20b3c9586c9c5ee29c29aee8853db7bb90cf5a4c704f5244e1a1085c43060085350329021ec902" +
+            "47e70eb2")]
+</code></pre>

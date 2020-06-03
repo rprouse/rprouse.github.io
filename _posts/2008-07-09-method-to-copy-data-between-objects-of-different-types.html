@@ -1,0 +1,202 @@
+---
+layout: post
+status: publish
+published: true
+title: Method to Copy Data Between Objects of Different Types
+author:
+  display_name: Rob Prouse
+  login: admin
+  email: rob@prouse.org
+  url: http://www.alteridem.net
+author_login: admin
+author_email: rob@prouse.org
+author_url: http://www.alteridem.net
+wordpress_id: 48
+wordpress_url: http://www.alteridem.net/2008/07/09/method-to-copy-data-between-objects-of-different-types/
+date: '2008-07-09 11:05:00 +0000'
+date_gmt: '2008-07-09 16:05:00 +0000'
+categories:
+- C#
+- Tips'n'Tricks
+- ".NET 1.x"
+tags: []
+comments:
+- id: 2145
+  author: Craig Shoemaker
+  author_email: craig@polymorphicpodcast.com
+  author_url: http://polymorphicpodcast.com/
+  date: '2008-07-18 15:39:53 +0000'
+  date_gmt: '2008-07-18 20:39:53 +0000'
+  content: "> Do you think this is a good idea?\r\nI had to laugh at this question...\r\n\r\nI
+    suppose that there *might* be some performance implications involved with using
+    the reflection... but I really like the concept.\r\n\r\nWe'll have to see what
+    your code looks like for the 2.0 and 3.5 versions look like. Generics will probably
+    help a lot. \r\n\r\nPerhaps you could provide some performance benchmarks?\r\n\r\nAm
+    I missing something or will taking the extension method route force you to implement
+    a CopyTo method for each type, while the \"2.0\" approach using generics/fluent
+    interface work for all types?"
+- id: 2146
+  author: Extending CopyHelper using Generics &raquo; Alteridem Consulting
+  author_email: ''
+  author_url: http://www.alteridem.net/2008/07/21/extending-copyhelper-using-generics/
+  date: '2008-07-21 10:34:00 +0000'
+  date_gmt: '2008-07-21 15:34:00 +0000'
+  content: "[...] Method to Copy Data Between Objects of Different Types     21st
+    Jul, [...]"
+- id: 2154
+  author: Extending CopyHelper using Extension Methods &raquo; Alteridem Consulting
+  author_email: ''
+  author_url: http://www.alteridem.net/2008/07/22/extending-copyhelper-using-extension-methods/
+  date: '2008-07-22 08:23:19 +0000'
+  date_gmt: '2008-07-22 13:23:19 +0000'
+  content: "[...] my last two posts, I have been developing a small utility library
+    to do the grunt work of copying data from an [...]"
+- id: 4864
+  author: Darshak
+  author_email: darshak1981@gmail.com
+  author_url: ''
+  date: '2009-06-27 00:38:25 +0000'
+  date_gmt: '2009-06-27 05:38:25 +0000'
+  content: "hi, i have the similar requirement, but can u guid me how i can copy members
+    of different types.\r\nEg. Class A contain Member called ContactDetail and Class
+    B contain Member called ContactDetail\r\n\r\nhere the name of property is same,
+    but both contactDetail members are different. so i want to copy common members
+    from ContactDetail. i think if propertyType is not same i have call recursively
+    this method.\r\n\r\nThanks"
+- id: 9076
+  author: IanT8
+  author_email: ian.taite@googlemail.com
+  author_url: ''
+  date: '2010-09-01 02:49:39 +0000'
+  date_gmt: '2010-09-01 07:49:39 +0000'
+  content: How about AutoMapper?
+- id: 40503
+  author: Gustavejxd
+  author_email: fzcxlh035@mail.ru
+  author_url: http://www.dieselsalejp.com/
+  date: '2013-04-10 00:18:50 +0000'
+  date_gmt: '2013-04-10 04:18:50 +0000'
+  content: "[url=http://www.guccibagsjpbagu.com/]GUCCI &egrave;&sup2;&iexcl;&aring;&cedil;&fnof;[/url]\r\n
+    \r\n[url=http://www.pradabagsmise.com/]PRADA &egrave;&sup2;&iexcl;&aring;&cedil;&fnof;[/url]\r\n
+    \r\n[url=http://www.dieselsalejp.com/]&atilde;&fnof;&Dagger;&atilde;&sbquo;&pound;&atilde;&fnof;&frac14;&atilde;&sbquo;&frac14;&atilde;&fnof;&laquo;
+    &eacute;&euro;&scaron;&egrave;&sup2;&copy;[/url]"
+---
+<p>One thing that I find tiresome when using the various <a href="http://polymorphicpodcast.com/shows/mv-patterns/">Model/View patterns</a> is the constant copying of data between the model and the view. Too often, I find myself writing code like this to copy data between an <strong>ICustomer</strong> and an <strong>ICustomerView</strong>;</p>
+<p><a name="listing1"></a></p>
+<div class="wlWriterSmartContent" id="scid:812469c5-0cb0-4c63-8c15-c81123a09de7:2ee7dfba-ed37-4b8e-9881-03d732dd1547" style="padding-right: 0px; display: inline; padding-left: 0px; float: none; padding-bottom: 0px; margin: 0px; padding-top: 0px">
+<pre name="code" class="c#:nogutter">// Copy the data from the customer to the view
+view.Address = customer.Address;
+view.Country = customer.Country;
+view.FirstName = customer.FirstName;
+view.LastName = customer.LastName;
+view.PostalCode = customer.PostalCode;
+view.Province = customer.Province;</code></pre>
+</div>
+<p>I would much rather write something like one of the following lines;</p>
+<p><a name="listing2"></a></p>
+<div class="wlWriterSmartContent" id="scid:812469c5-0cb0-4c63-8c15-c81123a09de7:d4534127-22e3-47de-9638-6bc33333d17b" style="padding-right: 0px; display: inline; padding-left: 0px; float: none; padding-bottom: 0px; margin: 0px; padding-top: 0px">
+<pre name="code" class="c#">// Copy the data from the customer to the view (using reflection in .NET 1.x)
+CopyHelper.Copy( typeof(ICustomer), customer, typeof(ICustomerView), view );
+
+// Copy the data from the customer to the view (using reflection and generics in .NET 2.0)
+Copier<ICustomer>.Copy( customer ).To<ICustomerView>( view );
+
+// Copy the data from the customer to the view (using extension methods in C# 3.0)
+customer.CopyTo<ICustomerView>( view );</code></pre>
+</div>
+<p>It got me to thinking that there must be a better way, so I began writing code that would do the grunt work for me. Too often,</p>
+<p>Over the next few days, I will blog about my thought process in developing this method and take it through the various iterations that can be seen in lines 2, 5 &amp; 8 above.</p>
+<p>Today, I will start with the .NET 1.x version. I will start with some design decisions;</p>
+<ul>
+<li>I want to be able to specify the types that I am copying between, not infer them using reflection. This way, I can use the interfaces, not the concrete classes when I am copying between the objects. </li>
+<li>For now, I am going to assume that if both interfaces have a non-static get/set property with the same <strong>name</strong> and <strong>type</strong> I will copy between them. </li>
+<li>I need to check that neither object is null and that I am not trying to copy an object over to itself. </li>
+</ul>
+<p>This was simple enough. I created a static helper class called <strong>CopyHelper</strong> with one static <strong>Copy</strong> method. I use <a href="http://msdn.microsoft.com/en-us/library/kyaxdd3x.aspx">Type.GetProperties</a> to get the non-static, public properties with getters and setters. If the name and type match, I use the <a href="http://msdn.microsoft.com/en-us/library/b05d59ty.aspx">GetValue</a> and <a href="http://msdn.microsoft.com/en-us/library/xb5dd1f1.aspx">SetValue</a> methods on the <a href="http://msdn.microsoft.com/en-us/library/system.reflection.propertyinfo.aspx">PropertyInfo</a> class to copy the value across from one object to the next. This is the result;</p>
+<p><a name="listing3"></a></p>
+<div class="wlWriterSmartContent" id="scid:812469c5-0cb0-4c63-8c15-c81123a09de7:c3141718-afd0-45c0-af12-a896a062b949" style="padding-right: 0px; display: inline; padding-left: 0px; float: none; padding-bottom: 0px; margin: 0px; padding-top: 0px">
+<pre name="code" class="c#">#region Copyright &copy; Alteridem Consulting 2008
+//
+// All rights are reserved. Reproduction or transmission in whole or in part, in
+// any form or by any means, electronic, mechanical or otherwise, is prohibited
+// without the prior written consent of the copyright owner.
+//
+// Filename: CopyHelper.cs
+// Date:     06/06/2008 11:18 AM
+// Author:   Rob Prouse
+//
+#endregion
+
+#region Using Directives
+
+using System;
+using System.Collections.Generic;
+using System.Reflection;
+
+#endregion
+
+namespace Alteridem.ModelViewHelpers
+{
+    public static class CopyHelper
+    {
+        #region Private Members
+
+        // We are interested in non-static, public properties with getters and setters
+        private const BindingFlags flags = BindingFlags.Public | BindingFlags.Instance | BindingFlags.GetProperty | BindingFlags.SetProperty;
+
+        #endregion
+
+        /// <summary>
+        /// Copies all public properties from one object to another.
+        /// </summary>
+        /// <param name="fromType">The type of the from object, preferably an interface. We could infer this using reflection, but this allows us to contrain the copy to an interface.</param>
+        /// <param name="from">The object to copy from</param>
+        /// <param name="toType">The type of the to object, preferably an interface. We could infer this using reflection, but this allows us to contrain the copy to an interface.</param>
+        /// <param name="to">The object to copy to</param>
+        public static void Copy( Type fromType, object from, Type toType, object to )
+        {
+            if ( fromType == null )
+                throw new ArgumentNullException( "fromType", "The type that you are copying from cannot be null" );
+
+            if ( from == null )
+                throw new ArgumentNullException( "from", "The object you are copying from cannot be null" );
+
+            if ( toType == null )
+                throw new ArgumentNullException( "toType", "The type that you are copying to cannot be null" );
+
+            if ( to == null )
+                throw new ArgumentNullException( "to", "The object you are copying to cannot be null" );
+
+            // Don't copy if they are the same object
+            if ( !ReferenceEquals( from, to ) )
+            {
+                // Get all of the public properties in the toType with getters and setters
+                Dictionary<string, PropertyInfo> toProperties = new Dictionary<string, PropertyInfo>();
+                PropertyInfo[] properties = toType.GetProperties( flags );
+                foreach ( PropertyInfo property in properties )
+                {
+                    toProperties.Add( property.Name, property );
+                }
+
+                // Now get all of the public properties in the fromType with getters and setters
+                properties = fromType.GetProperties( flags );
+                foreach ( PropertyInfo fromProperty in properties )
+                {
+                    // If a property matches in name and type, copy across
+                    if ( toProperties.ContainsKey( fromProperty.Name ) )
+                    {
+                        PropertyInfo toProperty = toProperties[fromProperty.Name];
+                        if ( toProperty.PropertyType == fromProperty.PropertyType )
+                        {
+                            object value = fromProperty.GetValue( from, null );
+                            toProperty.SetValue( to, value, null );
+                        }
+                    }
+                }
+            }
+        }
+    }
+}</code></pre>
+</div>
+<p>Using this <a href="#listing3">class</a>, you can now write code like in <a href="#listing2">line 2 of the second listing</a> above. In my <a href="http://www.alteridem.net/2008/07/21/extending-copyhelper-using-generics/">next post</a>, I am going to extend this code using generics and give it a <a href="http://en.wikipedia.org/wiki/Fluent_interface">fluent interface</a> for better readability.</p>
+<p>I am very interested in hearing your feedback on this, so be sure to post to the comments. Do you think this is a good idea? Do you have suggestions for improvements? Let me know.</p>

@@ -1,0 +1,88 @@
+---
+layout: post
+status: publish
+published: true
+title: Using Ninject for Prism for Xamarin.Forms
+author:
+  display_name: Rob Prouse
+  login: admin
+  email: rob@prouse.org
+  url: http://www.alteridem.net
+author_login: admin
+author_email: rob@prouse.org
+author_url: http://www.alteridem.net
+wordpress_id: 405
+wordpress_url: http://www.alteridem.net/?p=405
+date: '2016-01-03 08:51:52 +0000'
+date_gmt: '2016-01-03 13:51:52 +0000'
+categories:
+- ".NET"
+- C#
+- Xamarin
+- Prism
+tags:
+- Xamarin
+comments:
+- id: 85730
+  author: Brian Lagunas
+  author_email: brian.lagunas@live.com
+  author_url: http://brianlagunas.com
+  date: '2016-01-06 20:41:40 +0000'
+  date_gmt: '2016-01-07 01:41:40 +0000'
+  content: Great walkthrough!  I was thinking of renaming "PrismApplication" to be
+    container specific, i.e. "PrismNinjectApplication", or "PrismUnityApplication".  What
+    do you think?  Should I just leave it the way it is?
+- id: 85733
+  author: Robert Prouse
+  author_email: rob@prouse.org
+  author_url: http://www.alteridem.net
+  date: '2016-01-09 10:56:58 +0000'
+  date_gmt: '2016-01-09 15:56:58 +0000'
+  content: I think that making the application IoC container specific would help to
+    highlight where it is coming from. Given the name, I would have expected it to
+    be part of the main project, not the IoC addon. It might also make it easier for
+    developers to make the mental switch between IoC containers when looking at documentation
+    for the other.
+---
+<p>I started a <a href="https://xamarin.com/forms">Xamarin.Forms mobile project</a> recently and decided to use the <a href="https://www.nuget.org/packages/Prism.Forms/">Prism for Xamarin.Forms framework</a>. I followed the directions for <a href="http://brianlagunas.com/first-look-at-the-prism-for-xamarin-forms-preview/">getting started with Prism for Xamarin.Forms</a> and was up and running in no time.</p>
+<p>My only issue was that the only IoC container that was supported was <a href="https://github.com/unitycontainer/unity">Unity</a>. I won't debate the merits of various IoC containers, but I prefer <a href="http://www.ninject.org/">Ninject</a>, so I submitted a large <a href="https://github.com/PrismLibrary/Prism/pull/282">pull request adding Ninject support to Prism for Xamarin.Forms</a> which is now available on NuGet as <a href="https://www.nuget.org/packages/Prism.Ninject/">Ninject for Prism</a>.<!--more--></p>
+<p><a href="http://brianlagunas.com/first-look-at-the-prism-for-xamarin-forms-preview/">Brian Lagunas's getting started with Prism for Xamarin.Forms</a>&nbsp;and <a href="http://brianlagunas.com/prism-for-xamarin-forms-6-2-0-preview/">Prism for Xamarin.Forms 6.2.0 Preview</a> is fairly complete, so I will only outline getting up and running using Ninject instead of Unity.</p>
+<h3>Getting Started</h3>
+<p>First, download and install the <a href="https://visualstudiogallery.msdn.microsoft.com/e7b6bde2-ba59-43dd-9d14-58409940ffa0">Prism Template Pack</a> extension for Visual Studio. It contains a project template for a Xamarin.Forms Prism Unity App which is a good start.</p>
+<p>In Visual Studio, add a new <strong>Prism Unity App (Forms)</strong> project. There isn't currently a Ninject template, so we will modify the Unity version.</p>
+<p><img class="aligncenter size-full wp-image-408" src="http://www.alteridem.net/wp-content/uploads/2016/01/2016-01-02-14_29_17-New-Project.png" alt="New Prism Project" width="799" height="498" /></p>
+<p>This is a multi-project template that will create a shared library and three platform specific projects for Android, iOS and Windows Phone 8.0.</p>
+<p><img class="aligncenter size-full wp-image-410" src="http://www.alteridem.net/wp-content/uploads/2016/01/2016-01-02-14_36_35-PrismNinjectDemo-Microsoft-Visual-Studio.png" alt="Prism Ninject Demo Solution" width="331" height="283" /></p>
+<p>Now we will switch out Unity for Ninject. Right-click on the solution and <strong>Manage NuGet Packages for Solution...</strong> and uninstall the Prism.Unity, Unity and CommonServiceLocator NuGet packages from all projects in that order.</p>
+<p>Next, search for and install the <a href="https://www.nuget.org/packages/Prism.Ninject/">Prism.Ninject</a> NuGet package to all solutions. As of today, the package is prerelease, so make sure you select the <strong>Include prereleases</strong> checkbox and install at least version <strong>6.2.0-pre2</strong>.</p>
+<p>The code in the portable project needs to be switched from using Unity to Ninject. Open <strong>App.xaml</strong> and switch the two instances of <strong>Prism.Unity</strong> to <strong>Prism.Ninject</strong>.</p>
+<pre><code></code></pre>
+<p>Then open <strong>App.xaml.cs</strong>, switch <strong>using Prism.Unity;</strong> to <strong>using Prism.Ninject;</strong> and change all instances of <strong>Container</strong> to <strong>Kernel</strong>. You can use the Kernel property on the App class as you would in any application using Ninject. Add your bindings in the RegisterTypes method and as an added bonus, the Ninject Kernel will resolve interfaces registered with the <a href="https://developer.xamarin.com/guides/xamarin-forms/dependency-service/">Xamarin DependencyService</a> so you can use existing Xamarin plugins and resolve them in a consistent way.</p>
+<pre><code>using Prism.Ninject;
+using PrismNinjectDemo.Views;
+
+namespace PrismNinjectDemo
+{
+    public partial class App : PrismApplication
+    {
+        public App()
+        {
+            InitializeComponent();
+        }
+
+        protected override void OnInitialized()
+        {
+            NavigationService.Navigate("MainNavigationPage/ViewA?message=Hello%20From%20Xamarin.Forms");
+        }
+
+        protected override void RegisterTypes()
+        {
+            Kernel.RegisterTypeForNavigation();
+            Kernel.RegisterTypeForNavigation();
+            Kernel.RegisterTypeForNavigation();
+        }
+    }
+}
+</code></pre>
+<p>From here, follow the instructions in <a href="http://brianlagunas.com/first-look-at-the-prism-for-xamarin-forms-preview/">Getting started with Prism for Xamarin.Forms</a> and <a href="http://brianlagunas.com/prism-for-xamarin-forms-6-2-0-preview/">Prism for Xamarin.Forms 6.2.0 Preview</a> to learn more about using Prism with Xamarin.Forms.</p>
+<p>A <a href="https://github.com/rprouse/PrismNinjectDemo">demo project using Prism for Ninject for Xamarin.Forms</a> is available on GitHub.</p>

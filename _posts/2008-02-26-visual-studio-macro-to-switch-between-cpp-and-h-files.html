@@ -1,0 +1,350 @@
+---
+layout: post
+status: publish
+published: true
+title: Visual Studio Macro to switch between CPP and H files
+author:
+  display_name: Rob Prouse
+  login: admin
+  email: rob@prouse.org
+  url: http://www.alteridem.net
+author_login: admin
+author_email: rob@prouse.org
+author_url: http://www.alteridem.net
+wordpress_id: 42
+wordpress_url: http://www.alteridem.net/2008/02/26/visual-studio-macro-to-switch-between-cpp-and-h-files/
+date: '2008-02-26 10:30:02 +0000'
+date_gmt: '2008-02-26 15:30:02 +0000'
+categories:
+- Visual Studio
+- Tips'n'Tricks
+tags: []
+comments:
+- id: 2021
+  author: Dima&#8217;s blog &raquo; Blog Archive &raquo; &ETH;&Yuml;&ETH;&micro;&Ntilde;&euro;&ETH;&micro;&ETH;&ordm;&ETH;&raquo;&Ntilde;Ž&Ntilde;&Dagger;&ETH;&micro;&ETH;&frac12;&ETH;&cedil;&ETH;&micro;
+    &ETH;&frac14;&ETH;&micro;&ETH;&para;&ETH;&acute;&Ntilde;&fnof; H &ETH;&cedil;
+    CPP &Ntilde;&bdquo;&ETH;&deg;&ETH;&sup1;&ETH;&raquo;&ETH;&deg;&ETH;&frac14;&ETH;&cedil;
+    &ETH;&sup2; Visual Studio 7/7.1/8/9
+  author_email: ''
+  author_url: http://blogpost.am9.ru/?p=14
+  date: '2008-04-01 22:12:11 +0000'
+  date_gmt: '2008-04-02 03:12:11 +0000'
+  content: "[...] Visual Studio Macro to switch between CPP and H files [...]"
+- id: 3431
+  author: philselmer
+  author_email: philselmer@acm.org
+  author_url: ''
+  date: '2009-03-21 13:29:11 +0000'
+  date_gmt: '2009-03-21 18:29:11 +0000'
+  content: "I have been looking for something to do this for months.  I had been using
+    WndTabs for VS6, but there is no equal for VS2008.\r\n\r\nIf you want to make
+    a button you can click to do this, follow these steps:\r\n1) R-click on toolbar,
+    select Customize\r\n2) In the Commands tab, under Categories, select Macros then
+    the macro you just made (mine was at the top)\r\n3) Drag the name of the macro
+    onto the toolbar you want to use (you can make a new one, or add it somewhere)\r\n4)
+    R-click on the button you just added (the Customize Window needs to be open) and
+    change the name to something shorter (\"CPPH\")"
+- id: 3463
+  author: Aaron Smith
+  author_email: alterego200@yahoo.com
+  author_url: ''
+  date: '2009-03-30 21:34:00 +0000'
+  date_gmt: '2009-03-31 02:34:00 +0000'
+  content: "Thank you so much!!!\r\n\r\nAnyone know how to do this in Textpad?"
+- id: 3992
+  author: "[d3m0n]"
+  author_email: demon.code.monkey@gmail.com
+  author_url: ''
+  date: '2009-05-20 06:21:08 +0000'
+  date_gmt: '2009-05-20 11:21:08 +0000'
+  content: "This is perfect. Thanks!\r\n\r\nSlight mod to avoid error message when
+    the matching file doesn't exist:\r\n\r\ninstead of:\r\n   Application.Documents.Open(documentName,
+    \"Text\")\r\n\r\nchange to:\r\n  If FileIO.FileSystem.FileExists(documentName)
+    Then\r\n    Application.Documents.Open(documentName, \"Text\")\r\n  End If"
+- id: 5277
+  author: Eli
+  author_email: alteridem@elib.otherinbox.com
+  author_url: http://megastructure.org/
+  date: '2009-07-16 10:30:56 +0000'
+  date_gmt: '2009-07-16 15:30:56 +0000'
+  content: "Thanks, great macro. I started working at home recently and I don't have
+    Visual Assist, which adds Alt+O as this option, I've been missing it.\r\n\r\nAlt+O
+    is back =)\r\n-Eli"
+- id: 5851
+  author: Yariv
+  author_email: aaa@dfdf.com
+  author_url: ''
+  date: '2009-09-09 10:48:56 +0000'
+  date_gmt: '2009-09-09 15:48:56 +0000'
+  content: "You are the greatest,\r\nThanks also to philselmer"
+- id: 6343
+  author: Piyush Soni
+  author_email: piyush_soni@yahoo.com
+  author_url: ''
+  date: '2009-10-23 18:36:40 +0000'
+  date_gmt: '2009-10-23 23:36:40 +0000'
+  content: "Thanks very much! I was looking for this for long. Many times though,
+    you store header files in a folder called 'blah/blah/include/file.h' and source
+    file in 'blah/blah/source/file.cpp'. So If the file to be opened doesn't exist,
+    I try by replacing documentName.replace(\"source\",\"include\") and vice versa
+    if that file exists to open. As someone already pointed out, we could directly
+    do a File.Exists() to test for it. \r\n\r\nThe only thing remaining now is that
+    it is a 'bit' slow (not much, but not negligible also) for me in VS 2005. Does
+    anyone know how to make it instantaneous."
+- id: 6376
+  author: Piyush Soni
+  author_email: piyush_soni@yahoo.com
+  author_url: ''
+  date: '2009-11-03 14:47:37 +0000'
+  date_gmt: '2009-11-03 19:47:37 +0000'
+  content: I got it why it was slow for me. I always keep a lot of files open in Visual
+    Studio, and since the macro goes through all of the open files and activates it
+    if it's found, (opens otherwise) it becomes slow. I think there's no need for
+    doing this. If you try to 'open' the file when it's already open, Visual Studio
+    anyway just activates that. Result, the switching becomes very fast.
+- id: 7117
+  author: Jaero
+  author_email: jaero16ar@hotmail.com
+  author_url: ''
+  date: '2010-01-13 14:28:40 +0000'
+  date_gmt: '2010-01-13 19:28:40 +0000'
+  content: So easy! Thanks a lot for this great help!
+- id: 7836
+  author: Mots
+  author_email: maverickmots@gmail.com
+  author_url: ''
+  date: '2010-03-02 08:21:48 +0000'
+  date_gmt: '2010-03-02 13:21:48 +0000'
+  content: "Thanks for the macro!\r\n\r\nThanks Piyush for the optimization!\r\n\r\nCheers"
+- id: 8077
+  author: Piyush Soni
+  author_email: piyush_soni@yahoo.com
+  author_url: ''
+  date: '2010-04-02 19:36:25 +0000'
+  date_gmt: '2010-04-03 00:36:25 +0000'
+  content: Glad that helped someone. :)
+- id: 8133
+  author: Eggplant
+  author_email: eggplant@ijeremy.com
+  author_url: ''
+  date: '2010-04-09 01:07:18 +0000'
+  date_gmt: '2010-04-09 06:07:18 +0000'
+  content: "Way cool.\r\n\r\nFolks might also be interested in PhatStudio (free open
+    source Visual Studio plugin), which has a header switch feature.   It's written
+    in C# and the code is also available on the website.\r\n\r\nhttp://phatstudio.sourceforge.net/"
+- id: 9443
+  author: Axl
+  author_email: alessandro.sortino@antos.it
+  author_url: http://www.antos.it
+  date: '2010-10-25 04:53:31 +0000'
+  date_gmt: '2010-10-25 08:53:31 +0000'
+  content: Grazie molte!!!! ...funziona alla grande!!
+- id: 9545
+  author: Florian&#039;s Blog &raquo; Visual Studio &#8211; Switch between cpp and
+    header
+  author_email: ''
+  author_url: http://isource.de/wordpress/?p=61
+  date: '2010-11-03 10:51:40 +0000'
+  date_gmt: '2010-11-03 14:51:40 +0000'
+  content: "[...] ORIGINAL POST FROM: Visual Studio Macro to switch between CPP and
+    H files [...]"
+- id: 12836
+  author: jaimerios.com &raquo; How to switch between a header file and implementation
+    file in Visual Studio
+  author_email: ''
+  author_url: http://www.jaimerios.com/?p=895
+  date: '2011-04-25 06:35:42 +0000'
+  date_gmt: '2011-04-25 10:35:42 +0000'
+  content: "[...] is a macro though that brings that functionality back: I want my
+    toggle button back!    Categories: Coding, Tip Tags: toggle button, visual studio
+    \       Comments (0) Trackbacks (0) [...]"
+- id: 18034
+  author: A macro to flip between the source and header file (and back again) &laquo;
+    C++ &laquo; Code &laquo; WebBiscuit
+  author_email: ''
+  author_url: http://www.webbiscuit.co.uk/2011/12/01/a-macro-to-flip-between-the-source-and-header-file-and-back-again/
+  date: '2011-12-01 19:17:17 +0000'
+  date_gmt: '2011-12-01 23:17:17 +0000'
+  content: "[...] The easiest thing to do is to take the filename in full, check if
+    it ends in .cpp or .h, and then replace with .h or .cpp to get the paired source
+    file. This is basically what the following code does (more or less based on the
+    code found here) [...]"
+- id: 18166
+  author: ie extension by alain - Pearltrees
+  author_email: ''
+  author_url: http://www.pearltrees.com/alain/ie-extension/id3829371
+  date: '2011-12-09 06:37:19 +0000'
+  date_gmt: '2011-12-09 10:37:19 +0000'
+  content: "[...] Visual Studio Macro to switch between CPP and H files &Acirc;&raquo;
+    Alteridem Consulting Application.Documents.Open(documentName, &acirc;&euro;&oelig;Text&acirc;&euro;\x9D)
+    [...]"
+- id: 19059
+  author: Dave
+  author_email: dwmkerr@googlemail.com
+  author_url: http://www.dwmkerr.com
+  date: '2012-02-04 06:08:18 +0000'
+  date_gmt: '2012-02-04 10:08:18 +0000'
+  content: You can also use the Switch addin - http://www.dwmkerr.com/page/Switch.aspx.
+    It allows you to switch between source and header, code and designer, xaml and
+    codebehind etc etc.
+- id: 19500
+  author: Avinash
+  author_email: avinash.mp@gmail.com
+  author_url: ''
+  date: '2012-03-02 07:01:06 +0000'
+  date_gmt: '2012-03-02 11:01:06 +0000'
+  content: 'This macro works only if cpp and h files are in same directory. What if
+    they are in different directories. ex: h file in "inc" dir and cpp file in "src"?'
+- id: 19501
+  author: Avinash
+  author_email: avinash.mp@gmail.com
+  author_url: ''
+  date: '2012-03-02 07:03:00 +0000'
+  date_gmt: '2012-03-02 11:03:00 +0000'
+  content: "Modified to handle c and h in different directories\r\n\r\n'=====================================================================
+    \ \r\n    ' If the currently open document is a CPP or an H file, attempts to
+    \ \r\n    ' switch between the CPP and the H file.  \r\n    '=====================================================================
+    \ \r\n    Public Sub SwitchBetweenSourceAndHeader()\r\n        Dim currentDocument
+    As String\r\n        Dim targetDocument As String\r\n\r\n        currentDocument
+    = ActiveDocument.FullName\r\n\r\n        If currentDocument.EndsWith(\".cpp\",
+    StringComparison.InvariantCultureIgnoreCase) Then\r\n            targetDocument
+    = Left(currentDocument, Len(currentDocument) - 3) + \"h\"\r\n            targetDocument
+    = targetDocument.Substring(targetDocument.LastIndexOf(\"\\\") + 1)\r\n            OpenDocument(targetDocument)\r\n
+    \       ElseIf currentDocument.EndsWith(\".h\", StringComparison.InvariantCultureIgnoreCase)
+    Then\r\n            targetDocument = Left(currentDocument, Len(currentDocument)
+    - 1) + \"cpp\"\r\n            targetDocument = targetDocument.Substring(targetDocument.LastIndexOf(\"\\\")
+    + 1)\r\n            OpenDocument(targetDocument)\r\n        End If\r\n\r\n    End
+    Sub\r\n\r\n    '=====================================================================
+    \ \r\n    ' Given a document name, attempts to activate it if it is already open,
+    \ \r\n    ' otherwise attempts to open it.  \r\n    '=====================================================================
+    \ \r\n    Private Sub OpenDocument(ByRef documentName As String)\r\n        Dim
+    document As EnvDTE.Document\r\n        Dim activatedTarget As Boolean\r\n        activatedTarget
+    = False\r\n\r\n        For Each document In Application.Documents\r\n            If
+    document.Name = documentName Then\r\n                documentName = document.FullName\r\n
+    \               If document.Windows.Count > 0 Then\r\n                    document.Activate()\r\n
+    \                   activatedTarget = True\r\n                    Exit For\r\n
+    \               End If\r\n            End If\r\n        Next\r\n        If Not
+    activatedTarget Then\r\n            Application.Documents.Open(documentName, \"Text\")\r\n
+    \       End If\r\n    End Sub"
+- id: 27985
+  author: walfud
+  author_email: walfud@yahoo.com.cn
+  author_url: ''
+  date: '2012-07-04 22:21:55 +0000'
+  date_gmt: '2012-07-05 02:21:55 +0000'
+  content: Thank you very much!
+- id: 31455
+  author: Setup Visual Studio IDE for C++ work | Dune Scientific&#039;s Blog
+  author_email: ''
+  author_url: http://www.dunescientific.com/blog/archive/setup-visual-studio-ide-for-c-work/
+  date: '2012-10-18 15:26:39 +0000'
+  date_gmt: '2012-10-18 19:26:39 +0000'
+  content: "[...] See&Acirc;&nbsp;http://www.alteridem.net/2008/02/26/visual-studio-macro-to-switch-between-cpp-and-h-files/
+    \  This entry was posted in Other. Bookmark the permalink.    &larr; CodeGear
+    IDE Setup for work using mtk [...]"
+- id: 43796
+  author: Michael Willis
+  author_email: michael.willis@outlook.com
+  author_url: ''
+  date: '2013-05-24 12:27:32 +0000'
+  date_gmt: '2013-05-24 16:27:32 +0000'
+  content: "Thanks for this. I also modified it to support cpp and h in different
+    directories and to open the document by finding it in the project:\r\n\r\n\r\n
+    \   '=====================================================================  \r\n
+    \   ' If the currently open document is a CPP or an H file, attempts to  \r\n
+    \   ' switch between the CPP and the H file.  \r\n    '=====================================================================
+    \ \r\n    Public Sub SwitchBetweenSourceAndHeader()\r\n        Dim currentDocument
+    As String\r\n        Dim targetDocument As String\r\n\r\n        currentDocument
+    = ActiveDocument.FullName\r\n\r\n        If currentDocument.EndsWith(\".cpp\",
+    StringComparison.InvariantCultureIgnoreCase) Then\r\n            targetDocument
+    = Left(currentDocument, Len(currentDocument) - 3) + \"h\"\r\n            OpenDocument(targetDocument)\r\n
+    \       ElseIf currentDocument.EndsWith(\".h\", StringComparison.InvariantCultureIgnoreCase)
+    Then\r\n            targetDocument = Left(currentDocument, Len(currentDocument)
+    - 1) + \"cpp\"\r\n            OpenDocument(targetDocument)\r\n        End If\r\n\r\n
+    \   End Sub\r\n\r\n    '=====================================================================
+    \ \r\n    ' Given a document name, attempts to activate it if it is already open,
+    \ \r\n    ' otherwise attempts to open it.  \r\n    '=====================================================================
+    \ \r\n    Private Sub OpenDocument(ByRef documentName As String)\r\n        Dim
+    document As EnvDTE.Document\r\n\r\n        For Each document In Application.Documents\r\n
+    \           If document.FullName = documentName And document.Windows.Count > 0
+    Then\r\n                document.Activate()\r\n                Return\r\n                Exit
+    For\r\n            End If\r\n        Next\r\n\r\n        Dim documentShortName
+    As String = Right(documentName, Len(documentName) - documentName.LastIndexOf(\"\\\")
+    - 1)\r\n\r\n        For Each document In Application.Documents\r\n            If
+    document.Name = documentShortName And document.Windows.Count > 0 Then\r\n                document.Activate()\r\n
+    \               Return\r\n                Exit For\r\n            End If\r\n        Next\r\n
+    \r\n        Dim item As EnvDTE.ProjectItem = DTE.Solution.FindProjectItem(documentShortName)\r\n
+    \       If item Is Nothing Then\r\n            Return\r\n        End If\r\n        item.Open()\r\n
+    \       item.Document.Activate()\r\n\r\n    End Sub"
+- id: 56877
+  author: edward
+  author_email: edward@infokoets.com
+  author_url: ''
+  date: '2013-09-20 05:13:31 +0000'
+  date_gmt: '2013-09-20 09:13:31 +0000'
+  content: thanks
+- id: 73916
+  author: Vitalij
+  author_email: vitalij.mast@mage-dev.de
+  author_url: http://www.mage-dev.de/
+  date: '2014-02-14 20:22:43 +0000'
+  date_gmt: '2014-02-15 00:22:43 +0000'
+  content: "Thanks, works fine with VS2010.\r\n\r\nAdded folowing to avoid errors
+    if nothing is opened:\r\nIf ActiveDocument Is Nothing Then\r\nReturn\r\nEnd If"
+---
+<p>I've been doing a lot of managed C++ programming lately and I had forgotten what a pain it is switching back and forth between the header file and source file.&nbsp; Back in the days of Visual Studio 6 I had a macro that switched between the CPP and H file, so I went googling, but the macro I <a href="http://www.codeguru.com/cpp/v-s/devstudio_macros/article.php/c3093/">found</a> didn't work very well in VS2008.&nbsp; Like any good coder, I decided to write it myself instead.</p>
+<p>If you haven't written a macro before, here are the steps.</p>
+<ol>
+<li>In Visual Studio, go to <strong>Tools | Macros | Macros IDE</strong>. A new window should open and in the Project Explorer, the MyMacros project should be open.
+<li>Right click on the <em>MyMacros</em> project and select <strong>Add | Add Module</strong>. Name it <em>CppUtilities</em>.&nbsp; The <em>CppUtilities</em> should open in the editor window.
+<li>Add the code from below into the module and save the project.</li>
+</ol>
+<pre name="code" class="vb:nogutter">
+&acirc;&euro;&tilde;=====================================================================
+&acirc;&euro;&tilde; If the currently open document is a CPP or an H file, attempts to
+&acirc;&euro;&tilde; switch between the CPP and the H file.
+&acirc;&euro;&tilde;=====================================================================
+Public Sub SwitchBetweenSourceAndHeader()
+  Dim currentDocument As String
+  Dim targetDocument As String
+
+  currentDocument = ActiveDocument.FullName
+
+  If currentDocument.EndsWith(&acirc;&euro;&oelig;.cpp&acirc;&euro;, StringComparison.InvariantCultureIgnoreCase) Then
+    targetDocument = Left(currentDocument, Len(currentDocument) - 3) + &acirc;&euro;&oelig;h&acirc;&euro;
+    OpenDocument(targetDocument)
+  ElseIf currentDocument.EndsWith(&acirc;&euro;&oelig;.h&acirc;&euro;, StringComparison.InvariantCultureIgnoreCase) Then
+    targetDocument = Left(currentDocument, Len(currentDocument) - 1) + &acirc;&euro;&oelig;cpp&acirc;&euro;
+    OpenDocument(targetDocument)
+  End If
+
+End Sub
+
+&acirc;&euro;&tilde;=====================================================================
+&acirc;&euro;&tilde; Given a document name, attempts to activate it if it is already open,
+&acirc;&euro;&tilde; otherwise attempts to open it.
+&acirc;&euro;&tilde;=====================================================================
+Private Sub OpenDocument(ByRef documentName As String)
+  Dim document As EnvDTE.Document
+  Dim activatedTarget As Boolean
+  activatedTarget = False
+
+  For Each document In Application.Documents
+    If document.FullName = documentName And document.Windows.Count > 0 Then
+      document.Activate()
+      activatedTarget = True
+      Exit For
+    End If
+  Next
+  If Not activatedTarget Then
+    Application.Documents.Open(documentName, &acirc;&euro;&oelig;Text&acirc;&euro;)
+  End If
+End Sub
+</code></pre>
+<p>If you switch back to Visual Studio and open the Macro Explorer, you should see the new module <em>CppUtilities</em> and the new macro <em>SwitchBetweenSourceAndHeader</em> in the tree.&nbsp; You could run the macro from here, but it is much easier to bind it to a keystroke.</p>
+<ol>
+<li>Click on <strong>Tools | Options</strong> then go to the <strong>Environment | Keyboard</strong> tab.</li>
+<li>In the <strong>Show commands containing: </strong>box, type <em>CppUtilities.</em> This should filter the list down to one entry, <em>Macros.MyMacros.CppUtilitities.SwitchBetweenSourceAndHeader</em>.</li>
+<li>Click on the <strong>Press shortcut keys:</strong> text box and then press the keystroke you would like to use to run the macro. If the keystroke is already used, it will show you below in the <strong>Shortcut currently used by:</strong> dropdown.&nbsp; When you find one that is unused, click the <strong>Assign</strong> button to use it.&nbsp; I use <strong>Ctrl+Shift+Alt+Bkspce</strong>.</li>
+<li>Click <strong>OK</strong> then open a CPP or H file and give it a try.</li>
+</ol>

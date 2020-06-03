@@ -1,0 +1,91 @@
+---
+layout: post
+status: publish
+published: true
+title: Why I Switched from log4net to NLog
+author:
+  display_name: Rob Prouse
+  login: admin
+  email: rob@prouse.org
+  url: http://www.alteridem.net
+author_login: admin
+author_email: rob@prouse.org
+author_url: http://www.alteridem.net
+wordpress_id: 97
+wordpress_url: http://www.alteridem.net/2010/11/04/why-i-switched-from-log4net-to-nlog/
+date: '2010-11-04 16:23:06 +0000'
+date_gmt: '2010-11-04 20:23:06 +0000'
+categories:
+- log4net
+- NLog
+tags: []
+comments:
+- id: 9560
+  author: log4net UdpAppender with IPv6 on Windows Vista and 7 &raquo; Alteridem Consulting
+  author_email: ''
+  author_url: http://www.alteridem.net/2010/07/09/log4net-udpappender-with-ipv6-on-windows-vista-and-7/
+  date: '2010-11-04 16:29:31 +0000'
+  date_gmt: '2010-11-04 20:29:31 +0000'
+  content: '[...] that I would recommend that you don&#8217;t download this unless
+    you really need it. I have finally given up on log4net and converted all of my
+    projects over to NLog.  If you found this post helpful, please "Kick" it so [...]'
+- id: 14219
+  author: Sn3akyP3t3
+  author_email: idlemystery@gmail.com
+  author_url: ''
+  date: '2011-07-13 16:08:48 +0000'
+  date_gmt: '2011-07-13 20:08:48 +0000'
+  content: Thanks for this!  It was because of this post that I researched log4net's
+    history and found that it hasn't been actively developed since version 1.2.10!  Thank
+    god I caught this before I got too far into development!  Thanks again.
+- id: 29615
+  author: Nestor
+  author_email: nestor@nsuli.com
+  author_url: ''
+  date: '2012-08-22 22:41:51 +0000'
+  date_gmt: '2012-08-23 02:41:51 +0000'
+  content: Thank you! I followed your steps and got an easy move from log4net to NLog
+- id: 33091
+  author: Lucien
+  author_email: CyberSupport@MeSoKinky.com
+  author_url: http://www.MeSoKinky.com
+  date: '2012-11-13 11:52:00 +0000'
+  date_gmt: '2012-11-13 15:52:00 +0000'
+  content: This was useful, but it would have been nice if you'd included the RegEx's...
+    I hate doing those things. ;)
+- id: 34806
+  author: Amr Ellafy
+  author_email: amrlafi@gmail.com
+  author_url: http://blog.webunusual.com
+  date: '2012-12-14 05:54:45 +0000'
+  date_gmt: '2012-12-14 09:54:45 +0000'
+  content: may be the switch would have been easier if you were using Common.Logging
+- id: 44287
+  author: Sn3akyP3t3
+  author_email: NLogMay302013.sn3akyp3t3@spamgourmet.com
+  author_url: ''
+  date: '2013-05-30 18:45:48 +0000'
+  date_gmt: '2013-05-30 22:45:48 +0000'
+  content: I'm still going to continue use of NLog, but it does look like development
+    of log4net has picked up again so if anyone reads this and has debate to use one
+    over the other at this point they both support 4.5 so it really boils down to
+    needs and complexity and maybe also future development support.  NLog has not
+    updated since Jul 18, 2011 whereas log4net has been last updated on Feb 16, 2012.  It
+    also seems that NLog's main developer now works with Java and has very little
+    time to work with it.  http://nlog-project.org/2012/07/23/moving-forward.html  It
+    looks like I backed the wrong horse and I'll have to switch in the future, but
+    for now I'm good.
+---
+<p>As the people who know me know, I have been a big <a href="http://www.alteridem.net/2008/01/28/speaking-at-toronto-code-camp/">proponent of log4net</a> over the <a href="http://www.alteridem.net/category/net/log4net/">years</a>. I tried very hard to stick with <a href="http://logging.apache.org/log4net/index.html">log4net</a> despite years of inactivity of the project. Over the years, I found, reported and fixed issues, but the patches have never been applied. I have reached out to the remaining members of the team to get involved and help revive the project, but received few responses. I even applied patches and released an <a href="http://www.alteridem.net/2010/07/09/log4net-udpappender-with-ipv6-on-windows-vista-and-7/">updated version myself</a>.</p>
+<p>As I started to use that <a href="http://www.alteridem.net/2010/07/09/log4net-udpappender-with-ipv6-on-windows-vista-and-7/">updated version</a>, I soon discovered that the current source has many bugs and actually fails many of its own test suites. I tried to get the test suites running and submitted more patches for those, but still the project remains dormant. Without the support of at least one member of the team, it is difficult to revive a project without forking it, which I don&acirc;&euro;&trade;t want to do.</p>
+<p>I ended up talking with a member of the <a href="http://nhforge.org/">NHibernate</a> team, I learned that they were also moving away from <a href="http://logging.apache.org/log4net/index.html">log4net</a> and were looking at <a href="http://nlog-project.org/">NLog</a>, the new player in .NET logging. I read through the website, followed the forums and liked what I saw, so I decided to move over to <a href="http://nlog-project.org/">NLog</a>.</p>
+<p>Switching over actually turned out to be fairly straight-forward once I managed a few regular expressions for search and replace. Roughly, I performed the following steps,</p>
+<ol>
+<li>I did a search and replace using <a href="http://notepad-plus-plus.org/">Notepad++</a> in all of my project files to switch the references over.</li>
+<li>I then replaced all of my using statements.</li>
+<li>Next came the log instantiation. log4net uses <strong>ILog</strong> where NLog uses <strong>Logger</strong>. In log4net you also tend to use <strong>GetLogger( typeof( MyClass ) )</strong> where in NLog you just use <strong>GetCurrentClassLogger()</strong>. This required a bit of RegEx magic.</li>
+<li>The hardest step was finding every instance of <strong>log.Warn( msg, exception)</strong> and converting them to <strong>log.WarnException( msg, Exception )</strong>. I did this nearly manually for each of the log levels, inspecting to see where I was passing in exceptions.</li>
+<li>Then for each of the log levels, I converted instances of <strong>log.WarnFormat( "Substitute this {0}", val )</strong> to <strong>log.Warn( "Substitute this {0}", val )</strong>. This was another easy file replacement.</li>
+<li>Lastly, I removed my <strong>XmlConfigurator</strong> attributes and changed my log configurations. A quick recompile, a few minor fixes and I was up and running. Painless!</li>
+</ol>
+<p>So far, I don&acirc;&euro;&trade;t regret my choice at all. I find the configuration of NLog to be much more intuitive and the Intellisense for the config file in Visual Studio sure helps. The documentation is still a bit sparse in places, but it is getting better. I do worry because it is currently a one man show, but it <a href="http://jkowalski.com/">Jaroslaw Kowalski</a> does seem fairly active and committed. Time will tell&acirc;&euro;&brvbar;</p>

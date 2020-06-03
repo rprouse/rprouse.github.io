@@ -1,0 +1,229 @@
+---
+layout: post
+status: publish
+published: true
+title: Testing .NET Core using NUnit 3
+author:
+  display_name: Rob Prouse
+  login: admin
+  email: rob@prouse.org
+  url: http://www.alteridem.net
+author_login: admin
+author_email: rob@prouse.org
+author_url: http://www.alteridem.net
+wordpress_id: 348
+wordpress_url: http://www.alteridem.net/?p=348
+date: '2015-11-04 15:57:45 +0000'
+date_gmt: '2015-11-04 19:57:45 +0000'
+categories:
+- NUnit
+- ".NET Core"
+tags:
+- NUnit
+- TDD
+- Testing
+- DNX
+- ".NET Core"
+comments:
+- id: 85704
+  author: Uri Goldstein
+  author_email: uri.goldstein@gmail.com
+  author_url: http://urig.io/
+  date: '2015-12-24 07:35:11 +0000'
+  date_gmt: '2015-12-24 12:35:11 +0000'
+  content: "Thanks for posting these instructions Robert. I am indeed able to run
+    my NUnit tests from within Visual Studio 2015 using the 'test' command.\r\n\r\nHowever,
+    I would like to have the tests run using ReSharper's Unit Test Explorer. This
+    is very easy when testing non-DNX projects but for DNX projects it fails with
+    \"System,IO.FileNotFoundException: Could not load file or assembly 'SUT.dll'...\"\r\n\r\nMight
+    you know why this is happening and how to fix it?\r\n\r\nThanks in advance,\r\nUri
+    Goldstein"
+- id: 85725
+  author: Robert Prouse
+  author_email: rob@prouse.org
+  author_url: http://www.alteridem.net
+  date: '2016-01-06 15:55:53 +0000'
+  date_gmt: '2016-01-06 20:55:53 +0000'
+  content: Uri, neither Resharper, nor the NUnit.Engine support running unit tests
+    in DNX with NUnit yet. I am working on adding support to NUnit now for the 3.2
+    release. Hopefully Resharper support will follow soon after.
+- id: 85756
+  author: Enrico Buonanno
+  author_email: enrico.buonanno@gmail.com
+  author_url: ''
+  date: '2016-05-05 15:39:00 +0000'
+  date_gmt: '2016-05-05 20:39:00 +0000'
+  content: "Thanks, this article was really helpful, as was the code sample on github.
+    \n\nI created one test runner for all my test projects, seems cleaner.\n\nOne
+    problem I have is that ouput is black/white, using dnx451... that's almost a deal
+    breaker, because it makes it hard to see if anything has broken! any ideas?"
+- id: 85757
+  author: Rob Prouse
+  author_email: rob@prouse.org
+  author_url: ''
+  date: '2016-05-05 17:36:00 +0000'
+  date_gmt: '2016-05-05 22:36:00 +0000'
+  content: |-
+    Glad you liked the article. Unfortunately, we haven't managed to get color working for DNX yet. The only thing I can think of is to wrap your EXE in a batch file, check the return code and make it more obvious if it fails.
+
+    You might also run the tests as a post build step that would fail the build if the return code was non-zero.
+---
+<p><strong>Update 3</strong> - full <a href="http://www.alteridem.net/2016/06/18/nunit-3-testing-net-core-rc2/">NUnit 3 support for .NET Core and ASP.NET Core has been released</a>.</p>
+<p><strong>Update 2</strong> - I have <a href="http://www.alteridem.net/2016/05/18/testing-net-core-rc2-using-nunit-3/">rewritten this post for .NET Core RC2</a> with <a href="https://github.com/rprouse/NUnitWithDotNetCoreRC2">new code on GitHub</a>. I would suggest reading it and only come back to this post for details that I might have glossed over.</p>
+<p><strong>Update</strong> - This post was originally written against a pre-release version of NUnit 3. I have updated the code to reflect the changes in NUnit 3.2. Further updates will come once the RC2 of .NET Core is released.</p>
+<p>We added <a href="https://dotnet.github.io/core/">.NET Core</a> (DNX) support to the <a href="https://github.com/nunit/nunit/releases/tag/3.0.0-rc">RC&nbsp;release of NUnit 3.0</a>, but it probably isn't obvious on how to test your .NET Core applications. The test runner that ships with NUnit 3, nunit3-console.exe is a .NET 2.0 application that cannot run NUnit tests that reference the portable version of the framework. After the final 3.0 release, we plan on writing a DNX based runner, but until then, you can test your applications using the <a href="https://www.nuget.org/packages/NUnitLite/3.0.0-rc">NUnitLite NuGet package</a>&nbsp;to create self-executing tests. I will walk through doing this in Visual Studio.<!--more--></p>
+<p>The <a href="https://github.com/rprouse/NUnitDnxTest">full source from this walk-through</a> is on GitHub.</p>
+<p>Most of the steps below are the same as for any test project, but I wanted to document everything. Similarly, I will go through the standard steps for going through running a DNX application. These will be familiar to anyone who has worked with .NET Core already, but may help new users.</p>
+<p>I assume that you already have a project you want to test. In my case, it is just a simple Class Library (Package)&nbsp;with one class,</p>
+<pre><code>namespace MyDnxProject
+{
+    public static class Calculator
+    {
+        public static int Add(int x, int y) => x + y;
+        public static int Subtract(int x, int y) => x - y;
+        public static int Multiply(int x, int y) => x * y;
+        public static int Divide(int x, int y) => x / y;
+    }
+}
+</code></pre>
+<p>To test this project, I simply add a new test project by right-clicking on my solution and <strong>Add | New Project...</strong>. I then navigate to the <strong>Visual C# | Web</strong> node and create a new <strong>Console Application (Package)</strong>.</p>
+<p><img class="aligncenter size-full wp-image-351" src="http://www.alteridem.net/wp-content/uploads/2015/11/2015-11-04-10_59_25-Add-New-Project.png" alt="2015-11-04 10_59_25-Add New Project" width="955" height="660" /></p>
+<p>&nbsp;</p>
+<p>I then add a project reference to the project under test,</p>
+<p><img class="aligncenter size-full wp-image-353" src="http://www.alteridem.net/wp-content/uploads/2015/11/2015-11-04-11_01_38-NUnitDnxTest-Microsoft-Visual-Studio.png" alt="2015-11-04 11_01_38-NUnitDnxTest - Microsoft Visual Studio" width="341" height="446" /></p>
+<p>Next, I Manage NuGet Packages on the test project. <del datetime="2016-04-19T00:17:27+00:00">Make sure you check <strong>Include prerelease</strong> and search for <strong>nunitlite.</strong></del> Adding the NUnitLite package will also pull in NUnit 3.</p>
+<p>Now open&nbsp;<strong>Program.cs</strong> and replace it with the following, adjusting the namespace accordingly.</p>
+<pre><code>using NUnit.Common;
+using NUnit.Framework;
+using NUnitLite;
+using System;
+using System.Reflection;
+
+namespace MyDnxProject.Test
+{
+    public class Program
+    {
+        public int Main(string[] args)
+        {
+            return new AutoRun(typeof(Program).GetTypeInfo().Assembly)
+                .Execute(args, new ExtendedTextWrapper(Console.Out), Console.In);
+        }
+    }
+}
+</code></pre>
+<p><del datetime="2016-04-19T00:17:27+00:00">The #if DNX451 is unfortunate, but the Console is not available in the NUnit portable library, so we need to pass it in. We hope to make this easier in the future.</del></p>
+<p>Now, add test fixtures to the test project as you would with any test framework. Here are some simple ones for this test project.</p>
+<pre><code>using NUnit.Framework;
+
+namespace MyDnxProject.Test
+{
+    [TestFixture]
+    public class CalculatorTests
+    {
+        [TestCase(1, 1, 2)]
+        [TestCase(-1, -1, -2)]
+        [TestCase(100, 5, 105)]
+        public void CanAddNumbers(int x, int y, int expected)
+        {
+            Assert.That(Calculator.Add(x, y), Is.EqualTo(expected));
+        }
+
+        [TestCase(1, 1, 0)]
+        [TestCase(-1, -1, 0)]
+        [TestCase(100, 5, 95)]
+        public void CanSubtract(int x, int y, int expected)
+        {
+            Assert.That(Calculator.Subtract(x, y), Is.EqualTo(expected));
+        }
+
+        [TestCase(1, 1, 1)]
+        [TestCase(-1, -1, 1)]
+        [TestCase(100, 5, 500)]
+        public void CanMultiply(int x, int y, int expected)
+        {
+            Assert.That(Calculator.Multiply(x, y), Is.EqualTo(expected));
+        }
+
+        [TestCase(1, 1, 1)]
+        [TestCase(-1, -1, 1)]
+        [TestCase(100, 5, 20)]
+        public void CanDivide(int x, int y, int expected)
+        {
+            Assert.That(Calculator.Divide(x, y), Is.EqualTo(expected));
+        }
+    }
+}
+</code></pre>
+<p>You can now run and debug your tests from Visual Studio by setting the test project as the <strong>Startup Project</strong> and running. You may want to add the <strong>--wait</strong> command line option to the project settings under <strong>Debug | Application Arguments</strong>. This isn't needed under .NET Core which keeps the console window open at the end of the run, but it is needed by .NET 4.5.1.</p>
+<p>In Visual Studio, to change from running DNX 4.5.1 to DNX Core 5.0, drop down the debug project button in the toolbar and switch the CLR Type;</p>
+<p><img class="aligncenter size-full wp-image-357" src="http://www.alteridem.net/wp-content/uploads/2015/11/2015-11-04-13_55_32-NUnitDnxTest-Microsoft-Visual-Studio.png" alt="2015-11-04 13_55_32-NUnitDnxTest - Microsoft Visual Studio" width="644" height="208" /></p>
+<p>You will notice that if you run DNX 4.5.1, you get the full colour console output, but if you switch to DNX Core 5.0, you get the same information, but in a one colour console. We hope to update NUnitLite for DNX to support full colour soon.</p>
+<p>Now, I assume you are going to want to run your tests from the command line. The following are the steps that will be needed. All of this is just standard .NET Core stuff, but I wanted to document it for new users.</p>
+<p>First, go into the project settings for your test project and enable <strong>Produce outputs on build</strong> for all configurations on the Build tab.</p>
+<p><img class="aligncenter size-full wp-image-359" src="http://www.alteridem.net/wp-content/uploads/2015/11/2015-11-04-14_03_55-NUnitDnxTest-Microsoft-Visual-Studio.png" alt="2015-11-04 14_03_55-NUnitDnxTest - Microsoft Visual Studio" width="397" height="134" /></p>
+<p>Open up a command prompt and navigate to the root of your solution. .NET Core builds projects into an <em>artifacts</em> directory in the solution root. CD into <em>artifacts\bin\MyDnxProject.Test\Debug</em>. You will notice that there are NuGet packages in this folder and <em>app</em>, <em>dnx451</em> and <em>dnxcore50</em> directories.</p>
+<pre><code>&Icirc;&raquo; ls
+
+    Directory: D:\src\Spikes\NUnitDnxTest\artifacts\bin\MyDnxProject.Test\Debug
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+d-----       2015-11-04   2:15 PM                app
+d-----       2015-11-04   2:07 PM                dnx451
+d-----       2015-11-04   2:07 PM                dnxcore50
+-a----       2015-11-04   2:07 PM           7018 MyDnxProject.Test.1.0.0.nupkg
+-a----       2015-11-04   2:07 PM          10958 MyDnxProject.Test.1.0.0.symbols.nupkg
+</code></pre>
+<p>First run <strong>dnvm list</strong> to view the list of frameworks you have installed.</p>
+<pre><code>&Icirc;&raquo; dnvm list
+
+Active Version     Runtime Architecture OperatingSystem Alias
+------ -------     ------- ------------ --------------- -----
+       1.0.0-beta5 clr     x64          win
+       1.0.0-beta5 clr     x86          win
+       1.0.0-beta5 coreclr x64          win
+       1.0.0-beta5 coreclr x86          win
+       1.0.0-beta8 clr     x64          win             clr-x64
+       1.0.0-beta8 clr     x86          win             clr-x86, default
+  *    1.0.0-beta8 coreclr x64          win             coreclr-x64
+       1.0.0-beta8 coreclr x86          win             coreclr-x86
+</code></pre>
+<p>Select the framework you want to run under. If it does not have a * beside it, switch to it with a command line like the following;</p>
+<pre><code>&Icirc;&raquo; dnvm use 1.0.0-beta8 -r coreclr -a x64
+Adding C:\Users\rob.prouse\.dnx\runtimes\dnx-coreclr-win-x64.1.0.0-beta8\bin to process PATH 
+</code></pre>
+<p>Next run <strong>dnu restore</strong> to fetch needed NuGet packages,</p>
+<pre><code>&Icirc;&raquo; dnu restore
+Microsoft .NET Development Utility CoreClr-x64-1.0.0-beta8-15858
+
+  CACHE https://api.nuget.org/v3/index.json
+Restoring packages for D:\src\Spikes\NUnitDnxTest\artifacts\bin\MyDnxProject.Test\Debug\app\project.json
+Writing lock file D:\src\Spikes\NUnitDnxTest\artifacts\bin\MyDnxProject.Test\Debug\app\project.lock.json
+Restore complete, 308ms elapsed
+
+NuGet Config files used:
+    C:\Users\rob.prouse\AppData\Roaming\NuGet\nuget.config
+    D:\src\Spikes\NUnitDnxTest\nuget.config
+
+Feeds used:
+    https://api.nuget.org/v3-flatcontainer/
+</code></pre>
+<p>You can now run your tests using the CMD file in the app folder;</p>
+<pre><code>&Icirc;&raquo; .\app\MyDnxProject.Test.cmd
+NUnitLite 3.0.5783 (Portable)
+Copyright (C) 2015 Charlie Poole
+
+Test Files
+    MyDnxProject.Test
+
+Run Settings
+
+
+Test Run Summary
+   Overall result: Passed
+   Tests run: 12, Passed: 12, Errors: 0, Failures: 0, Inconclusive: 0
+     Not run: 0, Invalid: 0, Ignored: 0, Explicit: 0, Skipped: 0
+  Start time: 2015-11-04 19:58:56Z
+    End time: 2015-11-04 19:58:56Z
+    Duration: 0.038 seconds
+</code></pre>

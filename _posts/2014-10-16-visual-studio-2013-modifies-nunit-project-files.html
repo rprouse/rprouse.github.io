@@ -1,0 +1,42 @@
+---
+layout: post
+status: publish
+published: true
+title: Visual Studio 2013 Modifies NUnit Project Files
+author:
+  display_name: Rob Prouse
+  login: admin
+  email: rob@prouse.org
+  url: http://www.alteridem.net
+author_login: admin
+author_email: rob@prouse.org
+author_url: http://www.alteridem.net
+wordpress_id: 290
+wordpress_url: http://www.alteridem.net/?p=290
+date: '2014-10-16 15:44:46 +0000'
+date_gmt: '2014-10-16 19:44:46 +0000'
+categories:
+- Visual Studio
+- Testing
+- NUnit
+- XUnit
+tags: []
+comments: []
+---
+<p>I've seen this several times now and an <a href="https://github.com/nunit/nunit-vs-adapter/issues/51">issue was just reported</a> against the NUnit Visual Studio adapter, so I thought I would document my findings on this.</p>
+<p>If you run non-Microsoft unit tests in Visual Studio using a test adapter, Visual Studio 2013 will modify the project file and add the following lines.</p>
+<pre><code><ItemGroup>
+  <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+</ItemGroup></code></pre>
+<p>This happens for NUnit, XUnit and other 3rd Party test adapters. This behavior is a new feature of Visual Studio 2013.</p>
+<p>In <a href="https://connect.microsoft.com/VisualStudio/feedback/details/800245/vs2013rc-adds-to-vs2012-c-project-section-itemgroup">this issue on Connect</a>, Microsoft says it is intentional and provides what I see as a less than ideal workaround.</p>
+<blockquote><p><em>Posted by Microsoft on 10/24/2013 at 7:38 AM</em></p>
+<p>This behavior is intentional.</p>
+<p>To support third-party test frameworks, like NUnit and XUnit, Visual Studio 2012 loaded Test Explorer on solution open, regardless of whether it contained test projects. This added seconds of delay to startup and solution open scenarios for all users, majority of whom don't use tests.</p>
+<p>In Visual Studio 2013, we changed it so that Test Explorer package is loaded only when the solution contains one or more test projects. Test projects are identified in two different ways. Projects created from one of the built-in unit test project templates are identified using project type GUIDs. Other types of projects, such as Class Library project with XUnit or NUnit tests, are identified by Test Explorer during first test discovery and &acirc;&euro;&oelig;tagged&acirc;&euro; with the Service/item.</p>
+<p>You can avoid Visual Studio automatically adding the Service/item to your test projects by creating them from any of the built-in unit test project templates. In other words, select the "Unit Test Project" template instead of the "Class Library" template in the New Project dialog.</p></blockquote>
+<p>If you want to change existing projects from a "Class Library" to a "Unit Test Project", edit the project file and add the following to the first PropertyGroup</p>
+<pre><code><ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+<TestProjectType>UnitTest</TestProjectType></code></pre>
+<p>This isn't much different than the Service being added, but maybe it is more correct because it is a test project?</p>
+<p>Unfortunately, this doesn't work if anyone is using Xamarin studio since the Unit Test Project type is not supported.</p>

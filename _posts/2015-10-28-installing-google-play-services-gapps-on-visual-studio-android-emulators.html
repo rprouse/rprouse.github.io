@@ -1,0 +1,228 @@
+---
+layout: post
+status: publish
+published: true
+title: Installing Google Play Services (GAPPS) on Visual Studio Android Emulators
+author:
+  display_name: Rob Prouse
+  login: admin
+  email: rob@prouse.org
+  url: http://www.alteridem.net
+author_login: admin
+author_email: rob@prouse.org
+author_url: http://www.alteridem.net
+wordpress_id: 338
+wordpress_url: http://www.alteridem.net/?p=338
+date: '2015-10-28 12:40:50 +0000'
+date_gmt: '2015-10-28 16:40:50 +0000'
+categories:
+- Visual Studio
+- Android
+- Xamarin
+tags:
+- Xamarin
+comments:
+- id: 85686
+  author: Greg
+  author_email: gregko@hyperionics.com
+  author_url: http://www.hyperionics.com
+  date: '2015-12-04 12:49:20 +0000'
+  date_gmt: '2015-12-04 16:49:20 +0000'
+  content: Does not work for Android v5 or v6 Visual Studio emulators... Nothing works
+    at all, did you have any success with new versions of Android emulators?
+- id: 85687
+  author: Rob Prouse
+  author_email: rob@prouse.org
+  author_url: http://www.alteridem.net
+  date: '2015-12-04 13:10:42 +0000'
+  date_gmt: '2015-12-04 17:10:42 +0000'
+  content: I am running GAPPS in the latest release of the Visual Studio Emulator
+    for Android against a 5.1.1 image right now. I haven't tried Marshmallow yet though.
+- id: 85688
+  author: Greg
+  author_email: gregko@hyperionics.com
+  author_url: http://www.hyperionics.com
+  date: '2015-12-04 13:24:02 +0000'
+  date_gmt: '2015-12-04 17:24:02 +0000'
+  content: I was getting an error when installing OpenGapps package. The TeamAndroid.com
+    package actually installed in 5.1.1, but they seem to have packages for ARM processor
+    only, not for Intel, which is what emulators use. So different apps crash, but
+    disabled the crashing AOSP keyboard, upgraded something else and for now seems
+    to be fine. Will see how it goes afterwards, thank you!
+- id: 85689
+  author: Greg
+  author_email: gregko@hyperionics.com
+  author_url: http://www.hyperionics.com
+  date: '2015-12-04 15:28:22 +0000'
+  date_gmt: '2015-12-04 19:28:22 +0000'
+  content: Managed to install e.g. Google Chrome browser from Google Play on the 5.1.1
+    emulator mentioned previously, but Chrome just crashes in it. Also Arm vs. Intel
+    processor issue or something else? No idea...
+- id: 85691
+  author: Thanos
+  author_email: skizofrenito@gmail.com
+  author_url: ''
+  date: '2015-12-07 18:25:24 +0000'
+  date_gmt: '2015-12-07 22:25:24 +0000'
+  content: "Where is the install_zip.sh ? I downloaded the last version of Gapps for
+    API 23 from the link you provided:\r\nhttp://www.teamandroid.com/gapps/\r\nand
+    doesn't include such a script.."
+- id: 85692
+  author: Robert Prouse
+  author_email: rob@prouse.org
+  author_url: http://www.prouse.org
+  date: '2015-12-07 20:54:40 +0000'
+  date_gmt: '2015-12-08 00:54:40 +0000'
+  content: install_zip.sh is on the emulator, I believe in the root directory. You
+    should be able to run it from the adb command prompt when you opened in step 10.
+- id: 85693
+  author: Thanos
+  author_email: skizofrenito@gmail.com
+  author_url: ''
+  date: '2015-12-07 21:43:46 +0000'
+  date_gmt: '2015-12-08 01:43:46 +0000'
+  content: "I'm trying to install Google Services on stock Android Emulator,\r\nrunning
+    an AVD of Android 6.0 (Marshmallow), without using Visual Studio..\r\nThere is
+    no install_zip.sh there. I though the solution would work in stock Emulator too.."
+- id: 85743
+  author: Roland
+  author_email: r_oldengarm@hotmail.com
+  author_url: http://eurodress.co.nz
+  date: '2016-01-27 17:12:00 +0000'
+  date_gmt: '2016-01-27 22:12:00 +0000'
+  content: Yeah, that install_zip.sh script is not there. But, when you're using that
+    approach, you can use the emulators that include the Google API's. Just check
+    in AVD Manager. No need to install it manually!
+- id: 85744
+  author: Rob Prouse
+  author_email: rob@prouse.org
+  author_url: ''
+  date: '2016-01-27 18:12:00 +0000'
+  date_gmt: '2016-01-27 23:12:00 +0000'
+  content: That is a very good point for the Google supplied emulators. That said,
+    I should take a look at the install_zip.sh script that Microsoft includes in their
+    emulators. It is probably just and unzip and install. I could reproduce those
+    steps here for people using other emulators.
+- id: 85777
+  author: Laila Sukhni
+  author_email: laila_sukhni@yahoo.com
+  author_url: ''
+  date: '2016-07-21 01:31:00 +0000'
+  date_gmt: '2016-07-21 06:31:00 +0000'
+  content: i have a question please, xamarin support google play services in windows
+    mobile also???
+- id: 85778
+  author: Rob Prouse
+  author_email: rob@prouse.org
+  author_url: ''
+  date: '2016-07-21 07:56:00 +0000'
+  date_gmt: '2016-07-21 12:56:00 +0000'
+  content: I am sorry Laila, Windows Mobile has such a small market share that I don't
+    do much development on that platform. I don't think Google Play services is available.
+    As far as I know, for maps, you need to use the Bing map control on Windows Mobile.
+- id: 85779
+  author: Laila Sukhni
+  author_email: laila_sukhni@yahoo.com
+  author_url: ''
+  date: '2016-07-21 09:26:00 +0000'
+  date_gmt: '2016-07-21 14:26:00 +0000'
+  content: Thanks rob prouse,l am new with programing with xamarin and I want to build
+    gis application that work in android and windows phone do I have to write diffrent
+    c# code for each type of mobile when I use xamarin?
+- id: 85780
+  author: Rob Prouse
+  author_email: rob@prouse.org
+  author_url: ''
+  date: '2016-07-21 09:33:00 +0000'
+  date_gmt: '2016-07-21 14:33:00 +0000'
+  content: |-
+    Laila, if you are using Xamarin.Forms, you can use the same C# code for each platform and it will create platform specific maps on each platform. See https://developer.xamarin.com/guides/xamarin-forms/user-interface/map/
+
+    If you are not using Xamarin.Forms then you are already creating UI for each platform. You can still abstract a lot of the business logic away down to the common layer, but it is a bit more work. You will likely want to look at something like MVVM Cross for that.
+- id: 85781
+  author: Laila Sukhni
+  author_email: laila_sukhni@yahoo.com
+  author_url: ''
+  date: '2016-07-21 10:35:00 +0000'
+  date_gmt: '2016-07-21 15:35:00 +0000'
+  content: 'Thank you very much
+
+'
+- id: 85783
+  author: Peng Cheng
+  author_email: pc175@uow.edu.au
+  author_url: ''
+  date: '2016-09-01 04:34:00 +0000'
+  date_gmt: '2016-09-01 09:34:00 +0000'
+  content: What do you mean by 'use the emulators that include the Google API's'?
+    There is no such option in AVD Manager.
+- id: 85790
+  author: Richard
+  author_email: disquscom@leichat.com
+  author_url: http://my360stats.com/LeiChat.htm
+  date: '2016-10-24 18:31:00 +0000'
+  date_gmt: '2016-10-24 23:31:00 +0000'
+  content: I successfully installed gapps-600-base-20151016-1-signed.zip, simply by
+    dragging it on to the running Visual Studio emulator, after a restart the Play
+    Store icon is present but it will not launch and when debugging my app I'm still
+    getting the error saying Google Play services are not installed. Any ideas please?
+- id: 85791
+  author: Rob Prouse
+  author_email: rob@prouse.org
+  author_url: ''
+  date: '2016-10-24 18:33:00 +0000'
+  date_gmt: '2016-10-24 23:33:00 +0000'
+  content: I haven't tried it that way. Did you open the play store, sign in and update?
+- id: 85792
+  author: Richard
+  author_email: disquscom@leichat.com
+  author_url: http://my360stats.com/LeiChat.htm
+  date: '2016-10-24 18:53:00 +0000'
+  date_gmt: '2016-10-24 23:53:00 +0000'
+  content: |-
+    I'd tried the 5" Marshmallow XXHDPI phone profile and although the GAPPS package installed fine after restarting the emulator the Google Play app wouldn't launch.
+
+    I tried the 5" KitKat XXHDPI profile (different GAPPS package) and that worked.
+
+    I've just tried the 5.7" profile instead and that doesn't work either.
+    Perhaps there's an issue with the Marshmallow GAPPS package.
+- id: 85793
+  author: Rob Prouse
+  author_email: rob@prouse.org
+  author_url: ''
+  date: '2016-10-24 19:23:00 +0000'
+  date_gmt: '2016-10-25 00:23:00 +0000'
+  content: Yes, it sounds like the GAPPS package you have doesn't match the emulator
+    you are installing it in.
+- id: 85794
+  author: Richard
+  author_email: disquscom@leichat.com
+  author_url: http://my360stats.com/LeiChat.htm
+  date: '2016-10-24 19:26:00 +0000'
+  date_gmt: '2016-10-25 00:26:00 +0000'
+  content: It seems happy enough to install it and the Google Play app is there, it
+    just won't run. I'll drop the teamandroid.com team a message. Thanks again for
+    your help and blog post.
+---
+<p><img class="alignright size-full wp-image-342" src="http://www.alteridem.net/wp-content/uploads/2015/10/2015-10-28-12_39_14-XDE1.png" alt="2015-10-28 12_39_14-XDE" width="198" height="317" /><strong>Update:</strong> I have <a href="http://www.alteridem.net/2017/02/02/installing-google-play-gapps-visual-studio-android-emulators/">updated this post for 2017 here</a>, I recommend that you read that instead.</p>
+<p>I am developing a <a href="https://xamarin.com/">Xamarin</a> application that displays maps. On Android, the map control requires that <a href="https://developers.google.com/android/guides/overview">Google Play Services</a> is installed, but most emulator images do include them. I mainly develop on Windows, so I have been using the great <a href="https://www.visualstudio.com/en-us/features/msft-android-emulator-vs.aspx">Visual Studio Emulator for Android</a>. I prefer it because it is fast and uses Hyper-V. Other emulators like <a href="https://xamarin.com/android-player">Xamarin's</a> or <a href="https://www.genymotion.com/">GenyMotion</a>&nbsp;use <a href="https://www.virtualbox.org/">VirtualBox </a>under the covers which doesn't work if you have Hyper-V enabled and I have had networking problems when it is installed and my laptop resumes from sleep.</p>
+<p><a href="https://university.xamarin.com/resources/how-to-install-google-play-on-android-emulator">Xamarin has a great article</a> on how to install Google Play Services on their emulators, but it doesn't work with the Visual Studio Emulator. I then found the <a href="http://stackoverflow.com/questions/31550628/visual-studio-emulator-for-android-install-gapps-google-play-services">solution on StackOverflow</a>&nbsp;written&nbsp;Vijay Sargunam. His solution worked perfectly, but was missing a few steps, so the following are my modifications to his work.<!--more--></p>
+<ol>
+<li>Download the correct GAPPS for the Android version from <a href="http://www.teamandroid.com/gapps/">http://www.teamandroid.com/gapps/</a></li>
+<li>Use the Additional Tools (small >> icon) for the emulator and go to the SD Card tab.</li>
+<li>Select a folder on your computer to sync with the virtual SD card.</li>
+<li><strong>Pull from SD card</strong>, which will create a folder structure on the selected folder.</li>
+<li>Now copy the Gapps fill to the 'Download' folder.</li>
+<li><strong>Push to SD card</strong>. This will take a little while, and copy the zip file to your emulator.</li>
+<li>Run a commmand prompt, and go to <strong>sdk\platform-tools</strong> in your Android SDK location and run <strong>adb devices</strong>.</li>
+<li>If you see the your emulator in the list, then skip to step 10.</li>
+<li>If you do not see emulator, run the following: <strong>adb connect <emulator ip>:5555</strong> You can find the emulator ip, from within the emulator, go to Settings -> About Phone -> Status and IP section.</li>
+<li>Next run, <strong>adb shell</strong>. This will give you a prompt to the android emulator.</li>
+<li>Confirm the gapps file is there: <strong>ls /sdcard/Download</strong></li>
+<li>Now run,<strong> install_zip.sh /sdcard/Download/<flashablezip>.zip</strong> This should begin the flashing process.</li>
+<li>Once the flashing is complete, restart the emulator.</li>
+<li>Once you restart, you may see errors with apps like Google+ trying to start up, ignore them for now.</li>
+<li>Sign into your Google account and upgrade all apps from Google Play.</li>
+<li>When you run your application that requires Google Play services, you may be prompted to upgrade</li>
+</ol>
+<p>Voil&Atilde;&iexcl;, maps running in the emulator!</p>

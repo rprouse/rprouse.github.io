@@ -1,0 +1,82 @@
+---
+layout: post
+status: publish
+published: true
+title: Nullable Types in C#
+author:
+  display_name: Rob Prouse
+  login: admin
+  email: rob@prouse.org
+  url: http://www.alteridem.net
+author_login: admin
+author_email: rob@prouse.org
+author_url: http://www.alteridem.net
+wordpress_id: 14
+wordpress_url: http://www.alteridem.net/2007/08/14/nullable-types-in-c/
+date: '2007-08-14 10:09:43 +0000'
+date_gmt: '2007-08-14 15:09:43 +0000'
+categories:
+- C#
+- ".NET 2.0"
+tags: []
+comments:
+- id: 1147
+  author: Judah
+  author_email: ssswamii@yahoo.com
+  author_url: http://judahgabriel.blogspot.com
+  date: '2007-08-14 11:45:04 +0000'
+  date_gmt: '2007-08-14 16:45:04 +0000'
+  content: "You don't have to use the .HasValue property. The compiler is smart enough
+    to figure out what you mean if you say something like\r\n\r\nint? i = 5;\r\nif(i
+    != null)\r\n{\r\n    // use it here\r\n}"
+- id: 1149
+  author: Dave Ward
+  author_email: dave@encosia.com
+  author_url: http://encosia.com
+  date: '2007-08-17 11:22:10 +0000'
+  date_gmt: '2007-08-17 16:22:10 +0000'
+  content: I like the readability of .HasValue.
+- id: 1150
+  author: Padraig
+  author_email: padraig.mcintyre@gmail.com
+  author_url: ''
+  date: '2007-08-17 11:47:15 +0000'
+  date_gmt: '2007-08-17 16:47:15 +0000'
+  content: "Don't forget the ?? shortcut for GetValueOrDefault\r\n\r\nint m = i ??
+    0;\r\n\r\nm will have the value 0 if i is null, or i if it is not null."
+- id: 1151
+  author: Judah
+  author_email: ssswamii@yahoo.com
+  author_url: http://judahgabriel.blogspot.com
+  date: '2007-08-17 14:57:30 +0000'
+  date_gmt: '2007-08-17 19:57:30 +0000'
+  content: "Actually, ?? works on any reference or Nullable type.\r\n\r\nFor example,
+    \r\n\r\nstring IamNull = null;\r\nstring nonNull = \"foo\";\r\nstring s = IamNull
+    ?? nonNull;\r\n\r\ns gets set to nonNull"
+---
+<p>In .NET 1.0 and 1.1, if you wanted to store a null value for a value type (int, double, DateTime, etc) you would have to box it or write your own wrapper around it. The introduction of generics in .NET 2.0 allowed the concept of nullable types to be introduced into the language through the <strong>Nullable<t></strong> structure.</p>
+<p>Now if you want an int value that could be null, you could write,</p>
+<pre><code>Nullable<int> x = new Nullable<int>( 12 );</code></pre>
+<p>This is a fair amount of typing, so luckily, there is compiler support for nullable types using the <strong>? operator</strong>.</p>
+<pre><code>
+int? y = null;
+int? z = 14;
+</code></pre>
+<p>You can test if a value is null with the <strong>HasValue</strong> property, or you can simply compare to null.</p>
+<pre><code>if ( x.HasValue )
+{
+    // ...
+}
+if ( y == null )
+{
+    // ...
+}</code></pre>
+<p>You can add two nullable types together and they will preserve the null values.</p>
+<pre><code>int? i = x + y; // i == null
+int? j = x + z; // j == 26</code></pre>
+<p>To assign a nullable type back to a value type, you use the <strong>Value</strong> property.</p>
+<pre><code>int k = j.Value;</code></pre>
+<p>The only problem with the above is that it will throw an exception if the value is null. To get around this, always check for null first, or use the <strong>GetValueOrDefault</strong> method.</p>
+<pre><code>int l = i.GetValueOrDefault(); // l == 0
+int m = i.GetValueOrDefault( -1 ); // m == -1;</code></pre>
+<p>Nullable types are fairly simple, but really powerful when you need them. Make sure they are in your tool belt.</p>

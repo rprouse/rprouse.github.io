@@ -1,0 +1,70 @@
+---
+layout: post
+status: publish
+published: true
+title: The Stopwatch Class in .NET
+author:
+  display_name: Rob Prouse
+  login: admin
+  email: rob@prouse.org
+  url: http://www.alteridem.net
+author_login: admin
+author_email: rob@prouse.org
+author_url: http://www.alteridem.net
+wordpress_id: 38
+wordpress_url: http://www.alteridem.net/2008/01/14/the-stopwatch-class-in-net/
+date: '2008-01-14 15:13:21 +0000'
+date_gmt: '2008-01-14 20:13:21 +0000'
+categories:
+- C#
+- ".NET 2.0"
+- Tips'n'Tricks
+tags: []
+comments:
+- id: 1757
+  author: Jon von Gillern
+  author_email: jvongillern@gmail.com
+  author_url: http://www.vonsharp.net
+  date: '2008-01-15 10:07:20 +0000'
+  date_gmt: '2008-01-15 15:07:20 +0000'
+  content: "You can actually make this even shorter. There is a static method on the
+    Stopwatch class called StartNew() that returns an instance that has been started
+    for you.\r\n\r\nex.\r\n\r\nStopwatch myStopwatch = Stopwatch.StartNew();\r\n\r\nDoStuff()\r\n\r\nmyStopwatch.Stop();\r\nConsole.WriteLine(\"Do
+    Stuff took {0} ms\", myStopwatch.ElapsedMilliseconds);\r\n\r\n\r\nI've got a class
+    called a StopwatchWriter that simplifies everything if you're profiling multiple
+    parts of the same method as well.\r\n\r\nhttp://www.vonsharp.net/StopwatchWriterClass.aspx"
+- id: 1758
+  author: Robert Prouse
+  author_email: rob@prouse.org
+  author_url: http://www.prouse.org
+  date: '2008-01-15 10:39:19 +0000'
+  date_gmt: '2008-01-15 15:39:19 +0000'
+  content: "Thanks for the comment. I didn't know about the static method.\r\n\r\nI
+    do a similar thing by deriving from the Stopwatch and logging the elapsed time
+    in the Dispose. I was going to blog about that next, but I guess you beat me to
+    it ;)"
+- id: 1762
+  author: Randolpho
+  author_email: randolpho@gmail.com
+  author_url: ''
+  date: '2008-01-17 18:14:34 +0000'
+  date_gmt: '2008-01-17 23:14:34 +0000'
+  content: This has been around for 3 years now, and I've never known about it. Thanks!
+---
+<p>Do you ever find yourself using <strong>DateTime</strong> to time a section of code?&nbsp; Do you have code like the following?</p>
+<pre><code>DateTime start = DateTime.Now;
+
+// Perform a long process
+Thread.Sleep( 1968 );
+
+DateTime end = DateTime.Now;
+TimeSpan duration = end.Subtract( start );
+Console.WriteLine( "This process took {0} ms", duration.TotalMilliseconds );</code></pre>
+<p>If you do, you should look at the <strong><a href="http://msdn2.microsoft.com/en-us/library/system.diagnostics.stopwatch.aspx">System.Diagnostics.Stopwatch</a></strong> class that was introduced in the 2.0 framework.&nbsp; You can convert the code above to the much more readable</p>
+<pre><code>Stopwatch stopwatch = Stopwatch.StartNew();
+
+// Perform a long process
+Thread.Sleep( 1968 );
+
+stopwatch.Stop();
+Console.WriteLine( "This process took {0} ms", stopwatch.ElapsedMilliseconds );</code></pre>

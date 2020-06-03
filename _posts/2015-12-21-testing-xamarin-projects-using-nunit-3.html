@@ -1,0 +1,137 @@
+---
+layout: post
+status: publish
+published: true
+title: Testing Xamarin Projects using NUnit 3
+author:
+  display_name: Rob Prouse
+  login: admin
+  email: rob@prouse.org
+  url: http://www.alteridem.net
+author_login: admin
+author_email: rob@prouse.org
+author_url: http://www.alteridem.net
+wordpress_id: 377
+wordpress_url: http://www.alteridem.net/?p=377
+date: '2015-12-21 12:40:53 +0000'
+date_gmt: '2015-12-21 16:40:53 +0000'
+categories:
+- ".NET"
+- C#
+- Visual Studio
+- Testing
+- NUnit
+- Xamarin
+tags:
+- Xamarin
+comments:
+- id: 85745
+  author: Denis
+  author_email: oliana@hotmail.de
+  author_url: ''
+  date: '2016-02-10 12:30:00 +0000'
+  date_gmt: '2016-02-10 17:30:00 +0000'
+  content: I have everything set up like You wrote and I like the aproach. The only
+    Thing I cannot get to work is to run the Tests located in the portable Project
+    from within Visual Studio (especially the Test-Explorer). How should the portable
+    test Project be linked to the Net45 Testproject?
+- id: 85746
+  author: Rob Prouse
+  author_email: rob@prouse.org
+  author_url: ''
+  date: '2016-02-10 14:21:00 +0000'
+  date_gmt: '2016-02-10 19:21:00 +0000'
+  content: |-
+    The test project, what I named DefectCollection.Tests in my screenshots must be a Shared project, then the Net45 project should target .NET 4.5 and have a shared reference to the test project.
+
+    If the test project is portable, it cannot run on Windows yet.
+- id: 85747
+  author: Jakob
+  author_email: jakobvj@gmail.com
+  author_url: ''
+  date: '2016-02-10 17:04:00 +0000'
+  date_gmt: '2016-02-10 22:04:00 +0000'
+  content: |-
+    Nice article Rob :-)
+    I have a Android application. It uses gps for various functionality. How do i unit test that functionality? A have to have a reference to Google play service, Android.v4 etc
+    Regards
+- id: 85748
+  author: Denis
+  author_email: oliana@hotmail.de
+  author_url: ''
+  date: '2016-02-11 02:26:00 +0000'
+  date_gmt: '2016-02-11 07:26:00 +0000'
+  content: So if I understand it correctly, the .Net 45 Project would be a Testrunner
+    (e.g. a console application) which runs the Tests. I thought, that i could somehow
+    reference/register the Tests in the shared Project from the .Net 45 Project so
+    that the Tests Show up in Visual Studio Test Explorer.
+- id: 85749
+  author: Rob Prouse
+  author_email: rob@prouse.org
+  author_url: ''
+  date: '2016-02-11 11:48:00 +0000'
+  date_gmt: '2016-02-11 16:48:00 +0000'
+  content: No, the .NET 45 project is a normal NUnit project DLL just like any other.
+    All of your tests get compiled into it because they are in a shared project which
+    has the same effect as linking the files into the project.
+- id: 85750
+  author: Denis
+  author_email: oliana@hotmail.de
+  author_url: ''
+  date: '2016-02-11 16:12:00 +0000'
+  date_gmt: '2016-02-11 21:12:00 +0000'
+  content: |-
+    OK, but the tests that are defined in the portable project do not show up in visual studio. I thought the reason for this is, that visual studio does not find them in the .Net project.
+    Could you maybe make a post about that? I think it would be very interesting to have tests in a portable project targeting a xamarin pcl that show up in the visual studio test explorer.
+- id: 85751
+  author: Rob Prouse
+  author_email: rob@prouse.org
+  author_url: ''
+  date: '2016-02-11 16:45:00 +0000'
+  date_gmt: '2016-02-11 21:45:00 +0000'
+  content: Yes, NUnit does not yet support testing portable projects because of internal
+    limitations within how NUnit is architected. I am working on fixing that now,
+    but I am not sure if I am going to be able to get it done in time for the upcoming
+    3.2 release. You can test portable projects by including them in a .NET 4.5 test
+    project, you just can't have a portable test project.
+- id: 85782
+  author: xamariners
+  author_email: ben@xamariners.com
+  author_url: ''
+  date: '2016-08-17 09:11:00 +0000'
+  date_gmt: '2016-08-17 14:11:00 +0000'
+  content: "I just put out a nuget library that allows using specflow with xamarin.forms,
+    allowing viewmodel testing and navigation tracking, while running on console,
+    so pretty ideal for CI, and necessary for good BDD practices. \n\nThe nuget is
+    here : https://www.nuget.org/packages/SpecFlow.Xamarin.Forms, and step by step
+    instructions are available here: http://xamariners.com/2016/08/17/xamarin-forms-bdd-unit-testing/"
+---
+<p><img class="alignright size-full wp-image-396" src="http://www.alteridem.net/wp-content/uploads/2015/12/2015-12-21-11_50_25-XDE.png" alt="NUnit Tests on Android" width="200" height="356" />When testing <a href="https://xamarin.com/" target="_blank">Xamarin</a> using <a href="https://github.com/nunit/nunit.xamarin" target="_blank">NUnit 3</a>, you have two choices.</p>
+<ol>
+<li>A <strong>Portable Library</strong> that you reference from the test runner for each platform, or</li>
+<li>A <strong>Shared Project</strong> with your tests referenced from the platform specific test runners.</li>
+</ol>
+<p>I prefer the <strong>Shared Project</strong> approach because it also allows you to run your tests from within Visual Studio by also creating a <strong>.NET 4.5.x</strong> test project. As of NUnit 3.0.1, you cannot run tests that use the portable version of the NUnit Framework from the console or within Visual Studio, so the <strong>.NET 4.5.x</strong> test project gets around that limitation.<!--more--></p>
+<p>This approach assumes that you are using and testing a portable Xamarin project. If not and you are using a shared project, everything will be the same except you will not be able to test in Visual Studio using a .NET 4.5.x test project because you cannot reference the platform specific assemblies.</p>
+<p>To get started, you should install the <a href="https://visualstudiogallery.msdn.microsoft.com/6cd55f79-4936-49e7-b81d-c40fcd81abc7" target="_blank">NUnit Templates</a> extension for Visual Studio. It will add project templates for the various Xamarin platforms.</p>
+<p>The first step is adding a <strong>Shared Project</strong> to your solution that will contain your tests. Next, add a <strong>NUnit 3 Unit Test Project</strong> from under the <strong>Visual C# | Test</strong> node. This project will be .NET 4.5.x based and allow you to run tests from within Visual Studio or on the console. Add your shared project to this project as a shared reference. Depending on what you are testing, you will likely have to add references to the NuGet packages for Xamarin and any plugins you are using.</p>
+<p>As you are testing with the .NET 4.5 project, you will eventually try to test things that requires Xamarin or one of the plugins to be initialized on the platform which won't work under .NET 4.5. This is where you will start needing platform specific test runners.</p>
+<p>To add the platform specific test projects, <strong>Add | New Project..</strong> and add a <strong>NUnit 3 Test Project (Android)</strong> from under the <strong>Visual C# | Cross-Platform | Test</strong> node. Repeat for the platforms that you support.</p>
+<p><img class="aligncenter size-full wp-image-385" src="http://www.alteridem.net/wp-content/uploads/2015/12/2015-12-20-15_05_02-Add-New-Project.png" alt="2015-12-20 15_05_02-Add New Project" width="863" height="450" /></p>
+<p><img class="aligncenter size-full wp-image-390" src="http://www.alteridem.net/wp-content/uploads/2015/12/2015-12-21-10_40_37-DefectCollection-Microsoft-Visual-Studio.png" alt="Test Projects" width="285" height="287" /></p>
+<p>You will need to add references to your shared test project, your portable project that you want to test and if you have platform specific code you want to test, your platform specific projects. You may be using a newer version of <strong>Xamarin.Forms</strong> and/or require additional NuGet packages, so <strong>Manage NuGet Packages for Solution</strong> and install/upgrade packages for your test projects as appropriate.</p>
+<p>With the platform specific runners, you can add needed platform initialization code to the runners just like any other Xamarin.Forms app. You can also include platform specific tests either by adding them to the runners themselves, or by using the various <a href="https://developer.xamarin.com/guides/cross-platform/application_fundamentals/building_cross_platform_applications/part_4_-_platform_divergence_abstraction_divergent_implementation/#Conditional_Compilation">defines for conditional compilation</a> like <strong>__MOBILE__</strong> or <strong>__ANDROID__</strong>.</p>
+<pre><code>#if __MOBILE__
+    // This test causes the view to be bound to the viewmodel which doesn't work on the
+    // desktop because Xamarin.Forms.Init() must be called
+    [Test(TestOf = typeof(IssueViewModel))]
+    async public Task ListAttachmentsCommandNavigatesToAttachments()
+    {
+        await ViewModel.OnAppearing();
+        Assert.That(ViewModel.ListAttachments != null);
+        await ViewModel.ListAttachmentsFunc();
+        var navigation = Navigation as MockNavigation;
+        Assert.That(navigation.PushAsyncHappend);
+    }
+#endif
+</code></pre>

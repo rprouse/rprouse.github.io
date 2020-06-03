@@ -1,0 +1,132 @@
+---
+layout: post
+status: publish
+published: true
+title: Using NUnit's TestCase Attribute
+author:
+  display_name: Rob Prouse
+  login: admin
+  email: rob@prouse.org
+  url: http://www.alteridem.net
+author_login: admin
+author_email: rob@prouse.org
+author_url: http://www.alteridem.net
+wordpress_id: 648
+wordpress_url: http://www.alteridem.net/?p=648
+date: '2016-10-17 04:36:58 +0000'
+date_gmt: '2016-10-17 09:36:58 +0000'
+categories:
+- ".NET"
+- C#
+- Testing
+- NUnit
+tags: []
+comments:
+- id: 85789
+  author: The NUnit Visual Studio Adapter for Running Tests - Rob Prouse
+  author_email: ''
+  author_url: http://www.alteridem.net/2016/10/20/nunit-visual-studio-adapter/
+  date: '2016-10-20 21:29:19 +0000'
+  date_gmt: '2016-10-21 02:29:19 +0000'
+  content: "[&#8230;] Studio has trouble with multiple tests created using the TestCase
+    attribute or other data attributes. Using the key-bindings while in these methods
+    will run all tests [&#8230;]"
+---
+<p>In the last post, we setup an <a href="http://www.alteridem.net/2016/10/03/nunit-unit-tests/">NUnit test project and ran it in Visual Studio</a>. In this post we are going to expand on that code to add more unit tests using the NUnit TestCase attribute.</p>
+<p>Looking back at the <a href="http://www.alteridem.net/2016/10/03/nunit-unit-tests/">last&nbsp;post</a>, we are testing a method that&nbsp;converts an enum value to a friendly string by splitting the enum name at capitals. In that post, we only tested with one enum value. In this post, we will test with multiple enum values to ensure that the method handles every type of input. We will then remove code duplication by using the <strong>[TestCase]</strong> attribute to run one test many times with different data.<!--more--></p>
+<p>As always, the source code for <a href="https://github.com/rprouse/IntroToNUnit">this tutorial is on GitHub</a>.</p>
+<h2>Testing Edge Cases</h2>
+<p>When testing a method, it is important that we test as many variations of input as possible. In the <a href="http://www.alteridem.net/2016/10/03/nunit-unit-tests/">last&nbsp;post</a>, we only tested that an enum with multiple words could be converted to a sentence - we tested that the enum value <strong>UnitTesting</strong> would convert to the string <strong>"Unit Testing"</strong>, but we should also test that it works with a single word, multiple words starting with a lowercase letter and invalid values.</p>
+<p>To do this, one approach is to add tests for each scenario like this,</p>
+<pre class="lang-cs"><code>[Test]
+public void CanConvertEnumIntoMultipleWords()
+{
+    // Arrange/Act
+    var actual = TestTypes.UnitTesting.ToFriendlyString();
+
+    // Assert
+    Assert.That(actual, Is.Not.Null.And.EqualTo("Unit Testing"));
+}
+
+[Test]
+public void CanConvertEnumIntoMultipleWordsWithFirstWordStartingWithLowerCase()
+{
+    // Arrange/Act
+    var actual = TestTypes.integrationTesting.ToFriendlyString();
+
+    // Assert
+    Assert.That(actual, Is.Not.Null.And.EqualTo("Integration Testing"));
+}
+
+[Test]
+public void CanConvertEnumSingleWord()
+{
+    // Arrange/Act
+    var actual = TestTypes.Testing.ToFriendlyString();
+
+    // Assert
+    Assert.That(actual, Is.Not.Null.And.EqualTo("Testing"));
+}
+
+[Test]
+public void CanConvertEnumSingleLowercaseWord()
+{
+    // Arrange/Act
+    var actual = TestTypes.none.ToFriendlyString();
+
+    // Assert
+    Assert.That(actual, Is.Not.Null.And.EqualTo("None"));
+}
+</code></pre>
+<p>Adding these tests revealed a bug in the implementation of the method where it doesn't work if the first word starts with a lowercase letter which required a change to the Regex in that method. It should also capitalize each word. This is why we need to test as many possibilities as possible.</p>
+<h2>Using the TestCase Attribute</h2>
+<p>Each of our test methods has nearly identical code, we convert an enum to a string value, then we check if the string is correct. If we could pass the enum and the expected string into the function, then we could reduce the tests down to one method.</p>
+<p>For situations like this, NUnit has the <a href="https://github.com/nunit/docs/wiki/TestCase-Attribute">[TestCase] attribute</a>. You can apply the <strong>[TestCase]</strong> attribute multiple times to a method and it will create a new test for every instance passing the parameters from the TestCase attribute into the test method. Using this, we can reduce the four tests to one that looks like this,</p>
+<pre class="lang-cs"><code>[TestCase(TestTypes.none, "None")]
+[TestCase(TestTypes.Testing, "Testing")]
+[TestCase(TestTypes.UnitTesting, "Unit Testing")]
+[TestCase(TestTypes.integrationTesting, "Integration Testing")]
+public void CanConvertEnumIntoFriendlyString(TestTypes value, string expected)
+{
+    // Arrange/Act
+    var actual = value.ToFriendlyString();
+
+    // Assert
+    Assert.That(actual, Is.Not.Null.And.EqualTo(expected));
+}
+</code></pre>
+<p>This simplifies our code and makes it easy to add new test cases. For example, if we want to see if our method handles single character enums, we could just add two new TestCases's</p>
+<pre class="lang-cs"><code>[TestCase(TestTypes.a, "A")]
+[TestCase(TestTypes.B, "B")]
+</code></pre>
+<p>We could also test for invalid values,</p>
+<pre class="lang-cs"><code>[TestCase((TestTypes)10, "")]
+</code></pre>
+<h2>Other Parameters for TestCase</h2>
+<h3>ExpectedResult</h3>
+<p>One of the more popular properties on the TestCase attribute is ExpectedResult. When this is used, the return value of the test method is checked for equality with the <strong>ExpectedResult</strong>. This can reduce code because you do not have to assert equality, it is done automatically.</p>
+<p>Converting the method that tests the parsing of the enums would reduce it to this,</p>
+<pre class="lang-cs"><code>[TestCase((TestTypes)10, ExpectedResult = "")]
+[TestCase(TestTypes.a, ExpectedResult = "A")]
+[TestCase(TestTypes.B, ExpectedResult = "B")]
+[TestCase(TestTypes.none, ExpectedResult = "None")]
+[TestCase(TestTypes.Testing, ExpectedResult = "Testing")]
+[TestCase(TestTypes.UnitTesting, ExpectedResult = "Unit Testing")]
+[TestCase(TestTypes.integrationTesting, ExpectedResult = "Integration Testing")]
+public string CanConvertEnumIntoFriendlyString(TestTypes value)
+{
+    return value.ToFriendlyString();
+}
+</code></pre>
+<h3>Common Parameters</h3>
+<p>The <strong>[TestCase]</strong> attribute supports many other parameters that can modify your tests or add information to them. Some of the more common are,</p>
+<ul>
+<li><strong>Author</strong> identifies the author of the test</li>
+<li><strong>Category</strong> provides a comma-delimited list of categories for this test</li>
+<li><strong>Description</strong> sets the description property of the test</li>
+<li><strong>TestName</strong> sets a test name instead of using the default generated name</li>
+<li><strong>TestOf</strong> specifies the Type that this test is testing</li>
+<li><strong>Explicit</strong> when set to true, the test can only be run explicitly. Use Reason to explain why</li>
+<li><strong>Ignore</strong> causes the test to not be run and specifies the reason</li>
+</ul>
+<p>There are a few other parameters that you can use, see the&nbsp;<a href="https://github.com/nunit/docs/wiki/TestCase-Attribute">[TestCase] attribute documentation</a>&nbsp;for more information.</p>

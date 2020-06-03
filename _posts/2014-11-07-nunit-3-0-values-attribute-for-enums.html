@@ -1,0 +1,41 @@
+---
+layout: post
+status: publish
+published: true
+title: NUnit 3.0 - Values Attribute for Enums
+author:
+  display_name: Rob Prouse
+  login: admin
+  email: rob@prouse.org
+  url: http://www.alteridem.net
+author_login: admin
+author_email: rob@prouse.org
+author_url: http://www.alteridem.net
+wordpress_id: 297
+wordpress_url: http://www.alteridem.net/?p=297
+date: '2014-11-07 12:18:33 +0000'
+date_gmt: '2014-11-07 16:18:33 +0000'
+categories:
+- ".NET"
+- Testing
+- NUnit
+tags: []
+comments: []
+---
+<p>To celebrate the second alpha release of <a href="https://github.com/nunit/nunit/releases">NUnit 3.0</a>, I am going to write a few posts on some of the new features that we've added.</p>
+<p>Today's feature is a simple one, but one of my favorites. With older versions of NUnit, if you wanted to run a test against every value of an enum, you would either have to write code to iterate through the values, or add them as TestCases and risk missing values added to the enum later. With the 3.0 release, you can now write a test method like the following which will be run with every enum value. The <strong>[Values]</strong> attribute on an enum parameter will automatically expand to all possible Enum values.</p>
+<pre><code>
+[Test]
+public void MyEnumTest([Values]MyEnumType myEnumArgument)
+{
+    //...
+}
+</code></pre>
+<p>It is probably less useful, but we also added the same support for Boolean values. Add the <strong>[Values]</strong> attribute to a bool and the method will be run with true and false.</p>
+<pre><code>
+[Test]
+public void MyBoolTest([Values]bool value)
+{
+    //...
+}
+</code></pre>

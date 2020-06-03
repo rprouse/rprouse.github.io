@@ -1,0 +1,74 @@
+---
+layout: post
+status: publish
+published: true
+title: Win32 COLORREF vs .NET Color
+author:
+  display_name: Rob Prouse
+  login: admin
+  email: rob@prouse.org
+  url: http://www.alteridem.net
+author_login: admin
+author_email: rob@prouse.org
+author_url: http://www.alteridem.net
+wordpress_id: 27
+wordpress_url: http://www.alteridem.net/2007/08/23/win32-colorref-vs-net-color/
+date: '2007-08-23 08:19:13 +0000'
+date_gmt: '2007-08-23 13:19:13 +0000'
+categories:
+- ".NET"
+- C#
+- SQL
+- Win32
+- MFC
+tags: []
+comments:
+- id: 2122
+  author: Winston Johnston
+  author_email: wjohnston@runge.com.au
+  author_url: http://smartclientfactory.blogspot.com/
+  date: '2008-07-07 23:44:39 +0000'
+  date_gmt: '2008-07-08 04:44:39 +0000'
+  content: Thanks for this bit of code...
+- id: 2123
+  author: Winston Johnston
+  author_email: wjohnston@runge.com.au
+  author_url: http://smartclientfactory.blogspot.com/
+  date: '2008-07-07 23:51:29 +0000'
+  date_gmt: '2008-07-08 04:51:29 +0000'
+  content: "Can also use... \r\n            System.Drawing.ColorTranslator.FromWin32(iColor);\r\n
+    \           \r\nSystem.Drawing.ColorTranslator.ToWin32(color);"
+---
+<p>I have been migrating a large application from Win32/MFC to .NET and ran into an interesting problem. We store all of the application colors in the database as integers that represent the Win32 <a href="http://msdn2.microsoft.com/en-us/library/ms532655.aspx">COLORREF</a> value. <a href="http://msdn2.microsoft.com/en-us/library/ms532655.aspx">COLORREF</a> is just a DWORD representing the RGB value, so&nbsp;I&nbsp;thought that&nbsp;I could just take the value and get a .NET <a href="http://msdn2.microsoft.com/en-us/library/system.drawing.color.aspx">Color</a>&nbsp;structure using the static <a href="http://msdn2.microsoft.com/en-us/library/2zys7833.aspx">FromArgb</a> method.</p>
+<p>This didn't go too well. It turns out that the byte orders are different. <a href="http://msdn2.microsoft.com/en-us/library/ms532655.aspx">COLORREF</a>&nbsp;is in the order <strong>0x00bbggrr </strong>and <a href="http://msdn2.microsoft.com/en-us/library/system.drawing.color.aspx">Color</a>&nbsp;is in the order <strong>0xaarrggbb</strong>. Notice that the high order byte in .NET is the alpha channel, but in Win32 it is always zero (fully transparent in .NET) Also notice that the byte order is backwards in Win32, Blue/Green/Red compared to the more standard Red/Green/Blue in .NET.</p>
+<p>We began by doing the conversion in code using a bit of bit fiddling;</p>
+<pre><code>public static Color ConvertFromWin32Color( int color )
+{
+    int r = color & 0x000000FF;
+    int g = ( color & 0x0000FF00 ) >> 8;
+    int b = ( color & 0x00FF0000 ) >> 16;
+    return Color.FromArgb( r, g, b );
+}</code></pre>
+<p>This worked well at first, but it was error prone converting between the values. As new code was written, we often forgot that we needed to convert. Finally we decided to do the right thing and convert the values in the database. To do this, I wrote a simple upgrade script for our SQL Server database that consisted of one method which was then applied to each column in the database that contained color values.</p>
+<pre><code>-- =============================================
+-- Author: Rob Prouse
+-- Date: 15/08/07
+-- Description: Convert control colors from
+-- Win32 COLORREF (0x00BBGGRR) values to .NET
+-- Color Values (0xFFRRGGBB)
+-- =============================================
+CREATE FUNCTION SwapColorBytes( @Color int )
+RETURNS int
+AS
+BEGIN
+    RETURN 0xFF000000 +
+    ((@Color & 0x00FF0000)/0x00010000) +
+    (@Color & 0x0000FF00) +
+    (( @Color & 0x000000FF)*0x00010000)
+
+END
+GO
+
+-- Do the following for every column in the DB that contains colors
+UPDATE mytable SET colorcolumn = SwapColorBytes(colorcolumn)
+GO</code></pre>

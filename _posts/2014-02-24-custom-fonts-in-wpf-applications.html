@@ -1,0 +1,49 @@
+---
+layout: post
+status: publish
+published: true
+title: Custom Fonts in WPF Applications
+author:
+  display_name: Rob Prouse
+  login: admin
+  email: rob@prouse.org
+  url: http://www.alteridem.net
+author_login: admin
+author_email: rob@prouse.org
+author_url: http://www.alteridem.net
+wordpress_id: 140
+wordpress_url: http://www.alteridem.net/?p=140
+date: '2014-02-24 12:55:51 +0000'
+date_gmt: '2014-02-24 16:55:51 +0000'
+categories:
+- ".NET"
+- C#
+- WPF
+tags: []
+comments: []
+---
+<p>I am working on a WPF application and wanted to use <a href="http://fortawesome.github.io/Font-Awesome/" target="_blank">Font Awesome</a> for the icons within the application. <a href="http://fortawesome.github.io/Font-Awesome/" target="_blank">Font Awesome</a> is a series of 369 scalable icons that are distributed in font form and mainly used in web development. I am using it to add modern looking icons to my application, but you can use this technique for embedding any font in your WPF application.</p>
+<p><a href="http://www.alteridem.net/wp-content/uploads/2014/02/image.png"><img style="background-image: none; float: right; padding-top: 0px; padding-left: 0px; margin: 6px 0px 0px 6px; display: inline; padding-right: 0px; border-width: 0px;" title="image" src="http://www.alteridem.net/wp-content/uploads/2014/02/image_thumb.png" alt="image" width="213" height="74" align="right" border="0" /></a>First, download <a href="http://fortawesome.github.io/Font-Awesome/" target="_blank">Font Awesome</a>, extract the ZIP file and copy <strong>fonts/fontawesome-webfont.ttf </strong>into a <strong>Fonts</strong> folder in your solution. Set the Build Action in the properties to <strong>Resource</strong> if it isn&acirc;&euro;&trade;t already.</p>
+<p><a href="http://www.alteridem.net/wp-content/uploads/2014/02/image1.png"><img style="background-image: none; float: right; padding-top: 0px; padding-left: 0px; margin: 6px 0px 0px 6px; display: inline; padding-right: 0px; border-width: 0px;" title="image" src="http://www.alteridem.net/wp-content/uploads/2014/02/image_thumb1.png" alt="image" width="196" height="134" align="right" border="0" /></a>Next, add a Style to the Resources in <strong>App.xaml</strong>. Don&acirc;&euro;&trade;t forget the # at the front of the font name and remember to use the internal name of the font, not the name of the file. To check the name of the font, just double click on the font file and it will open in the Windows Font Viewer. The font name will be at the top.</p>
+<pre><code><Application.resources>
+    <style x:key="FontAwesome">
+        <setter property="TextElement.FontFamily" 
+            value="pack://application:,,,/fonts/#FontAwesome" />
+    </style>
+</Application.resources></code></pre>
+<p>Now you can use add this style to your WPF controls.</p>
+<pre><code><TextBlock 
+    Style="{StaticResource FontAwesome}"
+    FontSize="36" 
+    Text="&#xf09b;" /></code></pre>
+<p>If you are using a regular text font, just add the text as you normally would. If it is an image font, then use the unicode values for the images you want, for example <strong>&amp;#xf09b;</strong> for the GitHub icon. For <a href="http://fortawesome.github.io/Font-Awesome/" target="_blank">Font Awesome</a>, you can look up the values on the <a href="http://fortawesome.github.io/Font-Awesome/cheatsheet/" target="_blank">Cheat Sheet</a>.</p>
+<p>Here is the result in the application I am working on.</p>
+<p><a href="http://www.alteridem.net/wp-content/uploads/2014/02/image2.png"><img style="background-image: none; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border: 0px;" title="image" src="http://www.alteridem.net/wp-content/uploads/2014/02/image_thumb2.png" alt="image" width="304" height="250" border="0" /></a></p>
+<p><strong>Update</strong></p>
+<p>If the fonts are resources in another assembly, not in the application, you need to change the font name in your XAML to use the name of the assembly that the font is in. For example, change <em>MyAssembly</em> in the following to the name of the assembly the font is in.</p>
+<pre><code><Application.resources>
+    <style x:key="FontAwesome">
+        <setter property="TextElement.FontFamily" 
+            value="/MyAssembly;Component/Fonts/#FontAwesome" />
+    </style>
+</Application.resources></code></pre>

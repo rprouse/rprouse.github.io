@@ -1,0 +1,157 @@
+---
+layout: post
+status: publish
+published: true
+title: The Yield Statement in C#
+author:
+  display_name: Rob Prouse
+  login: admin
+  email: rob@prouse.org
+  url: http://www.alteridem.net
+author_login: admin
+author_email: rob@prouse.org
+author_url: http://www.alteridem.net
+wordpress_id: 25
+wordpress_url: http://www.alteridem.net/2007/08/22/the-yield-statement-in-c/
+date: '2007-08-22 15:50:50 +0000'
+date_gmt: '2007-08-22 20:50:50 +0000'
+categories:
+- C#
+- ".NET 2.0"
+tags: []
+comments:
+- id: 1157
+  author: Judah
+  author_email: ssswamii@yahoo.com
+  author_url: http://judahgabriel.blogspot.com
+  date: '2007-08-23 11:08:54 +0000'
+  date_gmt: '2007-08-23 16:08:54 +0000'
+  content: "One key point to add is that execution of yield methods are deferred:
+    they aren't evaluated until you foreach over them. Thus, the following code, even
+    though it looks like an infinite loop, is perfectly fine:\r\n\r\nwhile(true)\r\n{\r\n
+    \  yield return 1;\r\n}\r\n\r\nIt will simply keep yielding 1 until you stop foreach-ing
+    over it.\r\n\r\nAnother point to consider is that since yield methods are delay-executed,
+    any argument validation won't get applied until you foreach over it. For example,\r\n\r\nIEnumerable
+    GetEvens(IEnumerable input)\r\n{\r\n    if (input == null ) throw new ArgumentNullException();\r\n
+    \  ...\r\n\r\n   yield return ...;\r\n}\r\n\r\nCalling that method like this:\r\nIEnumerable
+    evens = GetEvents(null);\r\n\r\nIt won't result in an exception! Not until you
+    foreach over evens.\r\n\r\nFor this reason, argument validation should be done
+    first, then return the result of another method that does the actual yielding."
+- id: 1158
+  author: David Brenchley
+  author_email: davidbrenchley@msn.com
+  author_url: ''
+  date: '2007-08-24 09:44:44 +0000'
+  date_gmt: '2007-08-24 14:44:44 +0000'
+  content: Is the yield threadsafe?  What happens when you have 2 threads hitting
+    the same static method?  Is the state maintained for each separate thread?
+- id: 2103
+  author: Lars Corneliussen
+  author_email: lars@corneliussen.de
+  author_url: http://startbigthinksmall.wordpress.com
+  date: '2008-06-10 16:40:00 +0000'
+  date_gmt: '2008-06-10 21:40:00 +0000'
+  content: "If you're interested in how the yield keyword actually works, read this:\r\n\r\nhttp://startbigthinksmall.wordpress.com/2008/06/09/behind-the-scenes-of-the-c-yield-keyword/"
+- id: 2958
+  author: Own MLM Company
+  author_email: Jacobson@createmlm.com
+  author_url: http://createmlm.com
+  date: '2009-01-13 17:48:06 +0000'
+  date_gmt: '2009-01-13 22:48:06 +0000'
+  content: "Judah,\r\nIt would be great if some one would answer to David Brenchley's
+    quesion on thread safety. I am intersted too.\r\nJacobson"
+- id: 3003
+  author: C# tips &laquo; Bobobobo&#8217;s Weblog
+  author_email: ''
+  author_url: http://bobobobo.wordpress.com/2009/01/14/c-tips/
+  date: '2009-01-24 11:05:03 +0000'
+  date_gmt: '2009-01-24 16:05:03 +0000'
+  content: "[...] couple of links that explain yield pretty well: The yield statement
+    in C#,  Behind the scenes of the C# yield keyword, Give way to the YIELD [...]"
+- id: 3225
+  author: dushouke
+  author_email: dushouke@yahoo.com.cn
+  author_url: ''
+  date: '2009-02-22 00:56:13 +0000'
+  date_gmt: '2009-02-22 05:56:13 +0000'
+  content: good~~~
+- id: 3400
+  author: Manpreet
+  author_email: msjammu@gmail.com
+  author_url: ''
+  date: '2009-03-16 18:56:06 +0000'
+  date_gmt: '2009-03-16 23:56:06 +0000'
+  content: good one. Informative.
+- id: 73069
+  author: <DotNet:TIP Subject="Yield Statement&#8221; /> &laquo; Anytime .Net
+  author_email: ''
+  author_url: http://anytimedotnet.wordpress.com/2014/02/04/yield-statement/
+  date: '2014-02-04 08:54:25 +0000'
+  date_gmt: '2014-02-04 12:54:25 +0000'
+  content: "[&#8230;] http://www.alteridem.net/2007/08/22/the-yield-statement-in-c/
+    [&#8230;]"
+---
+<p>Another often overlooked C# statement that was introduced in .NET 2.0 is <strong>yield</strong>. This keyword is used to return items from a loop within a method and retain the state of the method through multiple calls. That is a bit hard to wrap your head around, so as always, an example will help;</p>
+<pre><code>public static IEnumerable<int> Range( int min, int max )
+{
+    for ( int i = min; i < max; i++ )
+    {
+        yield return i;
+    }
+}</code></pre>
+<p>Each time <strong>Range</strong> is called, it will return one value in the given range. Of interest is that it maintains the state between calls. The best way to think of it is that for the first call to the method, execution starts at the first line and continues until it hits a yield statement at which time it returns the value. The subsequent runs through the method continue execution at the statement after the yield, continuing to yield values or exiting at the end of the method.</p>
+<p>Using this, you can write the following code;</p>
+<pre><code>foreach ( int i in Range( 10, 20 ) )
+{
+    Console.Write( i.ToString() + " " );
+}</code></pre>
+<p>Which will return the following;</p>
+<p>10 11 12 13 14 15 16 17 18 19</p>
+<p>Why bother you say? Why not just iterate through the numbers yourself? The answer&nbsp;lies in the fact that each call maintains state, so you don't have to. The above example doesn't really show you the power, so let's try a more complex example, calculating prime numbers.</p>
+<pre><code>public static IEnumerable<int> Primes( int max )
+{
+    yield return 2;
+    List<int> found = new List<int>();
+    found.Add( 3 );
+    int candidate = 3;
+    while ( candidate <= max )
+    {
+        bool isPrime = true;
+        foreach ( int prime in found )
+        {
+            if ( prime * prime > candidate )
+            {
+                break;
+            }
+            if ( candidate % prime == 0 )
+            {
+                isPrime = false;
+                break;
+            }
+        }
+        if ( isPrime )
+        {
+            found.Add( candidate );
+            yield return candidate;
+        }
+        candidate += 2;
+    }
+}</code></pre>
+<p>Notice that there are multiple yields within this method and that the state is maintained through each call. You can now print out all of the prime numbers below 50 with;</p>
+<pre><code>foreach ( int prime in Primes( 50 ) )
+{
+    Console.Write( prime.ToString() + " " );
+}</code></pre>
+<p>There is also the <strong>yield break</strong> statement. If a <strong>yield break</strong> statement is hit within a method, execution of that method stops with no return. Using this, the first method could be rewritten like this;</p>
+<pre><code>public static IEnumerable<int> Range( int min, int max )
+{
+    while ( true )
+    {
+        if ( min >= max )
+        {
+            yield break;
+        }
+        yield return min++;
+    }
+}</code></pre>
+<p>It is not as useful in this case, but I'll leave it to you to find more interesting reasons to break out of a loop. Also, even though I used the generic <strong>IEnumerable<T></strong> for all of my examples, you can also use <strong>IEnumerable</strong>.</p>

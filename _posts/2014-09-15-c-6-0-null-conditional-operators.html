@@ -1,0 +1,42 @@
+---
+layout: post
+status: publish
+published: true
+title: C# 6.0 &acirc;&euro;&ldquo; Null-Conditional Operators
+author:
+  display_name: Rob Prouse
+  login: admin
+  email: rob@prouse.org
+  url: http://www.alteridem.net
+author_login: admin
+author_email: rob@prouse.org
+author_url: http://www.alteridem.net
+wordpress_id: 252
+wordpress_url: http://www.alteridem.net/?p=252
+date: '2014-09-15 17:00:20 +0000'
+date_gmt: '2014-09-15 21:00:20 +0000'
+categories:
+- ".NET"
+- C#
+- C# 6.0
+tags: []
+comments: []
+---
+<p>This is another <a href="http://www.alteridem.net/category/net/csharp/csharp-60/">post in the series</a> on the new features that are coming in C# 6.0.</p>
+<p>This is one of my favourite new features. Have you ever written code like this?</p>
+<pre><code>if (line != null && line.Product != null)
+{
+    total += line.Product.Price * line.Quantity;
+}</code></pre>
+<p>C# 6.0 introduces the ?. null-conditional operator that short circuits and returns null if anything in the chain is null. This combines really well with the <a href="http://www.alteridem.net/2007/08/17/null-coalescing-operator/">null-coalescing operator</a> allowing you to rewrite the above as follows.</p>
+<pre><code>total += line?.Product?.Price ?? 0 * line?.Quantity ?? 0;</code></pre>
+<p>This also works with indexers,</p>
+<pre><code>var firstProduct = OrderLines?[0].Product;	// Will return null if OrderLines is null</code></pre>
+<p>It also works with methods. This will be really handy for triggering events. Instead of writing,</p>
+<pre><code>if (OrderChanged != null)
+{
+    OrderChanged(this, EventArgs.Empty);
+}</code></pre>
+<p>You will now be able to write.</p>
+<pre><code>OrderChanged?.Invoke(this, EventArgs.Empty);</code></pre>
+<p>If you want to check out the code for this series of posts, it is on GitHub at <a href="https://github.com/rprouse/CSharp60">https://github.com/rprouse/CSharp60</a>.</p>
