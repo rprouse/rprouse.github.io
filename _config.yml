@@ -39,3 +39,8 @@ plugins:
 #   - vendor/cache/
 #   - vendor/gems/
 #   - vendor/ruby/
+
+production_url: "https://alteridem.net"
+#rss_path: /rss.xml
+#atom_path: /atom.xml
+host: 0.0.0.0
