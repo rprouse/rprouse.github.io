@@ -19,18 +19,18 @@ comments:
 - id: 85789
   author: The NUnit Visual Studio Adapter for Running Tests - Rob Prouse
   author_email: ''
-  author_url: http://www.alteridem.net/2016/10/20/nunit-visual-studio-adapter/
+  author_url: /2016/10/20/nunit-visual-studio-adapter/
   date: '2016-10-20 21:29:19 +0000'
   date_gmt: '2016-10-21 02:29:19 +0000'
   content: "[&#8230;] Studio has trouble with multiple tests created using the TestCase
     attribute or other data attributes. Using the key-bindings while in these methods
     will run all tests [&#8230;]"
 ---
-<p>In the last post, we setup an <a href="http://www.alteridem.net/2016/10/03/nunit-unit-tests/">NUnit test project and ran it in Visual Studio</a>. In this post we are going to expand on that code to add more unit tests using the NUnit TestCase attribute.</p>
-<p>Looking back at the <a href="http://www.alteridem.net/2016/10/03/nunit-unit-tests/">last&nbsp;post</a>, we are testing a method that&nbsp;converts an enum value to a friendly string by splitting the enum name at capitals. In that post, we only tested with one enum value. In this post, we will test with multiple enum values to ensure that the method handles every type of input. We will then remove code duplication by using the <strong>[TestCase]</strong> attribute to run one test many times with different data.<!--more--></p>
+<p>In the last post, we setup an <a href="/2016/10/03/nunit-unit-tests/">NUnit test project and ran it in Visual Studio</a>. In this post we are going to expand on that code to add more unit tests using the NUnit TestCase attribute.</p>
+<p>Looking back at the <a href="/2016/10/03/nunit-unit-tests/">last&nbsp;post</a>, we are testing a method that&nbsp;converts an enum value to a friendly string by splitting the enum name at capitals. In that post, we only tested with one enum value. In this post, we will test with multiple enum values to ensure that the method handles every type of input. We will then remove code duplication by using the <strong>[TestCase]</strong> attribute to run one test many times with different data.<!--more--></p>
 <p>As always, the source code for <a href="https://github.com/rprouse/IntroToNUnit">this tutorial is on GitHub</a>.</p>
 <h2>Testing Edge Cases</h2>
-<p>When testing a method, it is important that we test as many variations of input as possible. In the <a href="http://www.alteridem.net/2016/10/03/nunit-unit-tests/">last&nbsp;post</a>, we only tested that an enum with multiple words could be converted to a sentence - we tested that the enum value <strong>UnitTesting</strong> would convert to the string <strong>"Unit Testing"</strong>, but we should also test that it works with a single word, multiple words starting with a lowercase letter and invalid values.</p>
+<p>When testing a method, it is important that we test as many variations of input as possible. In the <a href="/2016/10/03/nunit-unit-tests/">last&nbsp;post</a>, we only tested that an enum with multiple words could be converted to a sentence - we tested that the enum value <strong>UnitTesting</strong> would convert to the string <strong>"Unit Testing"</strong>, but we should also test that it works with a single word, multiple words starting with a lowercase letter and invalid values.</p>
 <p>To do this, one approach is to add tests for each scenario like this,</p>
 <pre class="lang-cs"><code>[Test]
 public void CanConvertEnumIntoMultipleWords()

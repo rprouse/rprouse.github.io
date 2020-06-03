@@ -24,7 +24,7 @@ comments:
 - id: 85766
   author: Testing .NET Core RC2 Using NUnit 3 - Rob Prouse
   author_email: ''
-  author_url: http://www.alteridem.net/2016/05/18/testing-net-core-rc2-using-nunit-3/
+  author_url: /2016/05/18/testing-net-core-rc2-using-nunit-3/
   date: '2016-06-18 11:19:35 +0000'
   date_gmt: '2016-06-18 16:19:35 +0000'
   content: "[&#8230;] Update: full NUnit 3 support for .NET Core and ASP.NET Core
@@ -32,7 +32,7 @@ comments:
 - id: 85767
   author: Testing .NET Core using NUnit 3 - Rob Prouse
   author_email: ''
-  author_url: http://www.alteridem.net/2015/11/04/testing-net-core-using-nunit-3/
+  author_url: /2015/11/04/testing-net-core-using-nunit-3/
   date: '2016-06-18 11:20:27 +0000'
   date_gmt: '2016-06-18 16:20:27 +0000'
   content: "[&#8230;] Update 3 &#8211; full NUnit 3 support for .NET Core and ASP.NET
@@ -197,15 +197,15 @@ comments:
 
     The new csproj format uses the old Visual Studio test adapter API, so the NUnit team (me) needed to update that test adapter to support .NET Core. That work is nearly done.
 ---
-<p><strong>Update 2:</strong> The switch from the <strong>project.json</strong> format to the new <strong>csproj format</strong> and the associated tooling changes made the <em>dotnet-test-nunit</em> adapter obsolete by switching the test adapter API. I have released an <a href="https://www.nuget.org/packages/NUnit3TestAdapter/3.8.0-alpha1">update to the NUnit Visual Studio Adapter</a> that implements the new test API and supports .NET Core. If you are using Visual Studio 2017 and/or the new .NET Core tooling, see <a href="http://www.alteridem.net/2017/05/04/test-net-core-nunit-vs2017/">Testing .NET Core with NUnit in Visual Studio 2017</a>.</p>
+<p><strong>Update 2:</strong> The switch from the <strong>project.json</strong> format to the new <strong>csproj format</strong> and the associated tooling changes made the <em>dotnet-test-nunit</em> adapter obsolete by switching the test adapter API. I have released an <a href="https://www.nuget.org/packages/NUnit3TestAdapter/3.8.0-alpha1">update to the NUnit Visual Studio Adapter</a> that implements the new test API and supports .NET Core. If you are using Visual Studio 2017 and/or the new .NET Core tooling, see <a href="/2017/05/04/test-net-core-nunit-vs2017/">Testing .NET Core with NUnit in Visual Studio 2017</a>.</p>
 <p><strong>Update:</strong> I have released <a href="https://www.nuget.org/packages/dotnet-test-nunit/">beta 1 of dotnet-test-nunit</a> which has been updated to the RTM of .NET Core 1.0. I have updated this post and the code on GitHub to reflect the changes.</p>
 <p>The NUnit team has been working hard since .NET Core RC2 and ASP.NET Core RC2 was released last month to add full NUnit testing for .NET Core, and we are happy to announce the second alpha release of <a href="https://www.nuget.org/packages/dotnet-test-nunit/3.4.0-alpha-2">dotnet-test-nunit</a>.</p>
-<p>In my previous blog posts, I explained how to use <a href="http://www.alteridem.net/2016/05/18/testing-net-core-rc2-using-nunit-3/">NUnit to test .NET Core using NUnitLite</a>&nbsp;which worked, but was not the ideal solution. The new <a href="https://www.nuget.org/packages/dotnet-test-nunit/3.4.0-alpha-2">dotnet-test-nunit</a> allows you to test from the command line using the <code>dotnet test</code> command and allows you to run your tests within Visual Studio.<!--more--></p>
+<p>In my previous blog posts, I explained how to use <a href="/2016/05/18/testing-net-core-rc2-using-nunit-3/">NUnit to test .NET Core using NUnitLite</a>&nbsp;which worked, but was not the ideal solution. The new <a href="https://www.nuget.org/packages/dotnet-test-nunit/3.4.0-alpha-2">dotnet-test-nunit</a> allows you to test from the command line using the <code>dotnet test</code> command and allows you to run your tests within Visual Studio.<!--more--></p>
 <p>The <a href="https://github.com/rprouse/NUnitWithDotNetCoreRC2/">code from this post is on GitHub</a> and is based on the code from my previous post.</p>
 <h2>Create a .NET Core Project</h2>
 <p>In Visual Studio, <strong>File | New | Project...</strong> and select <strong>Class Library (.NET Core)</strong> under the new <strong>C# | .NET Core</strong> node.</p>
 <p><img class="aligncenter size-full wp-image-540" src="/images/2016/05/2016-05-18-09_55_55-New-Project.png" alt="New .NET Core Project" width="941" height="653" /></p>
-<p>This it the code under test. To this, I have added the simple calculator class <a href="http://www.alteridem.net/2015/11/04/testing-net-core-using-nunit-3/">from the last post</a>.</p>
+<p>This it the code under test. To this, I have added the simple calculator class <a href="/2015/11/04/testing-net-core-using-nunit-3/">from the last post</a>.</p>
 <pre><code>public static class Calculator
 {
     public static int Add(int x, int y) => x + y;

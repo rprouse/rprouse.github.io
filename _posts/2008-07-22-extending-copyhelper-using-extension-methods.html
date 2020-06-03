@@ -18,13 +18,13 @@ comments:
 - id: 2155
   author: Extending CopyHelper using Generics &raquo; Alteridem Consulting
   author_email: ''
-  author_url: http://www.alteridem.net/2008/07/21/extending-copyhelper-using-generics/
+  author_url: /2008/07/21/extending-copyhelper-using-generics/
   date: '2008-07-22 08:28:19 +0000'
   date_gmt: '2008-07-22 13:28:19 +0000'
   content: "[...] Method to Copy Data Between Objects of Different Types Extending
     CopyHelper using Extension Methods &raquo;    21st Jul, [...]"
 ---
-<p>In my <a href="http://www.alteridem.net/2008/07/21/extending-copyhelper-using-generics/">last</a> <a href="http://www.alteridem.net/2008/07/09/method-to-copy-data-between-objects-of-different-types/">two</a> posts, I have been developing a small utility library to do the grunt work of copying data from an instance of one class to an instance of another type. The <a href="http://www.alteridem.net/2008/07/21/extending-copyhelper-using-generics/"><strong>Copier</strong></a> class from my last post allows me to copy all public properties from one class to another class as long as the properties have the same name and type. All that is done with one line of code;</p>
+<p>In my <a href="/2008/07/21/extending-copyhelper-using-generics/">last</a> <a href="/2008/07/09/method-to-copy-data-between-objects-of-different-types/">two</a> posts, I have been developing a small utility library to do the grunt work of copying data from an instance of one class to an instance of another type. The <a href="/2008/07/21/extending-copyhelper-using-generics/"><strong>Copier</strong></a> class from my last post allows me to copy all public properties from one class to another class as long as the properties have the same name and type. All that is done with one line of code;</p>
 <div class="wlWriterSmartContent" id="scid:812469c5-0cb0-4c63-8c15-c81123a09de7:364d24c2-3f44-49d3-b077-d600fcaece3c" style="padding-right: 0px; display: inline; padding-left: 0px; float: none; padding-bottom: 0px; margin: 0px; padding-top: 0px">
 <pre name="code" class="c#:nogutter">Copier<ICustomer>.Copy( customer ).To<ICustomerView>( view );</code></pre>
 </div>
@@ -36,7 +36,7 @@ comments:
 <div class="wlWriterSmartContent" id="scid:812469c5-0cb0-4c63-8c15-c81123a09de7:9c627046-fca3-4dc8-8ad8-df7c27291361" style="padding-right: 0px; display: inline; padding-left: 0px; float: none; padding-bottom: 0px; margin: 0px; padding-top: 0px">
 <pre name="code" class="c#:nogutter">customer.CopyTo( view );</code></pre>
 </div>
-<p>How is this done? Using extension methods, it was actually much simpler than yesterday&acirc;&euro;&trade;s <a href="http://www.alteridem.net/2008/07/21/extending-copyhelper-using-generics/"><strong>Copier</strong></a> class. In fact, it just ended up being one line of code for the <strong>CopyTo</strong> method and for the <strong>CopyFrom</strong> method. I simply wrapped the <a href="http://www.alteridem.net/2008/07/09/method-to-copy-data-between-objects-of-different-types/"><strong>CopyHelper</strong></a> class like this.</p>
+<p>How is this done? Using extension methods, it was actually much simpler than yesterday&acirc;&euro;&trade;s <a href="/2008/07/21/extending-copyhelper-using-generics/"><strong>Copier</strong></a> class. In fact, it just ended up being one line of code for the <strong>CopyTo</strong> method and for the <strong>CopyFrom</strong> method. I simply wrapped the <a href="/2008/07/09/method-to-copy-data-between-objects-of-different-types/"><strong>CopyHelper</strong></a> class like this.</p>
 <div class="wlWriterSmartContent" id="scid:812469c5-0cb0-4c63-8c15-c81123a09de7:d57cca66-24bc-4e64-a84a-3b52c1c5ebb6" style="padding-right: 0px; display: inline; padding-left: 0px; float: none; padding-bottom: 0px; margin: 0px; padding-top: 0px">
 <pre name="code" class="c#">public static class CopierExtensions
 {

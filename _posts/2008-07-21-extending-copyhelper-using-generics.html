@@ -20,7 +20,7 @@ comments:
   author: Method to Copy Data Between Objects of Different Types &raquo; Alteridem
     Consulting
   author_email: ''
-  author_url: http://www.alteridem.net/2008/07/09/method-to-copy-data-between-objects-of-different-types/
+  author_url: /2008/07/09/method-to-copy-data-between-objects-of-different-types/
   date: '2008-07-21 10:36:47 +0000'
   date_gmt: '2008-07-21 15:36:47 +0000'
   content: "[...] Read Properties from an MSI File Extending CopyHelper using Generics
@@ -45,12 +45,12 @@ comments:
 - id: 2153
   author: Extending CopyHelper using Extension Methods &raquo; Alteridem Consulting
   author_email: ''
-  author_url: http://www.alteridem.net/2008/07/22/extending-copyhelper-using-extension-methods/
+  author_url: /2008/07/22/extending-copyhelper-using-extension-methods/
   date: '2008-07-22 08:19:00 +0000'
   date_gmt: '2008-07-22 13:19:00 +0000'
   content: "[...] Extending CopyHelper using Generics     22nd Jul, [...]"
 ---
-<p>In my <a href="http://www.alteridem.net/2008/07/09/method-to-copy-data-between-objects-of-different-types/">last post</a>, I created a method that does the grunt work of copying data from an instance of one class to an instance of another type. I often find myself copying data between the properties of my data layer classes and those of my user interface like this.</p></p>
+<p>In my <a href="/2008/07/09/method-to-copy-data-between-objects-of-different-types/">last post</a>, I created a method that does the grunt work of copying data from an instance of one class to an instance of another type. I often find myself copying data between the properties of my data layer classes and those of my user interface like this.</p></p>
 <div class="wlWriterSmartContent" id="scid:812469c5-0cb0-4c63-8c15-c81123a09de7:d56ee549-681a-47e3-98f2-b8699e660de1" style="padding-right: 0px; display: inline; padding-left: 0px; float: none; padding-bottom: 0px; margin: 0px; padding-top: 0px">
 <pre name="code" class="c#:nogutter">// Copy the data from the customer to the view
 view.Address = customer.Address;
@@ -60,7 +60,7 @@ view.LastName = customer.LastName;
 view.PostalCode = customer.PostalCode;
 view.Province = customer.Province;</code></pre>
 </div>
-<p>The newly created <a href="http://www.alteridem.net/2008/07/09/method-to-copy-data-between-objects-of-different-types/"><strong>CopyHelper</strong> class</a> allows me to shorten that to this.</p>
+<p>The newly created <a href="/2008/07/09/method-to-copy-data-between-objects-of-different-types/"><strong>CopyHelper</strong> class</a> allows me to shorten that to this.</p>
 <div class="wlWriterSmartContent" id="scid:812469c5-0cb0-4c63-8c15-c81123a09de7:106cd999-9de2-4404-bfe0-d08445cb28ca" style="padding-right: 0px; display: inline; padding-left: 0px; float: none; padding-bottom: 0px; margin: 0px; padding-top: 0px">
 <pre name="code" class="c#:nogutter">// Copy the data from the customer to the view (using reflection in .NET 1.x)
 CopyHelper.Copy( typeof(ICustomer), customer, typeof(ICustomerView), view );</code></pre>
@@ -70,7 +70,7 @@ CopyHelper.Copy( typeof(ICustomer), customer, typeof(ICustomerView), view );</co
 <pre name="code" class="c#:nogutter">// Copy the data from the customer to the view (using reflection and generics in .NET 2.0)
 Copier<ICustomer>.Copy( customer ).To<ICustomerView>( view );</code></pre>
 </div></p>
-<p>Internally, I use my <a href="http://www.alteridem.net/2008/07/09/method-to-copy-data-between-objects-of-different-types/"><strong>CopyHelper</strong> class</a> from my last post. I extend that by creating a generic <strong>Copier</strong> class. I make the constructor private so that it can only be created as a part of the fluent interface, in this case the static copy method. Using the instance of the <strong>Copier</strong> class that was returned from that method, you can then copy <strong>To</strong> or <strong>From</strong> another class instance.</p>
+<p>Internally, I use my <a href="/2008/07/09/method-to-copy-data-between-objects-of-different-types/"><strong>CopyHelper</strong> class</a> from my last post. I extend that by creating a generic <strong>Copier</strong> class. I make the constructor private so that it can only be created as a part of the fluent interface, in this case the static copy method. Using the instance of the <strong>Copier</strong> class that was returned from that method, you can then copy <strong>To</strong> or <strong>From</strong> another class instance.</p>
 <p>Here is the code.</p>
 <div class="wlWriterSmartContent" id="scid:812469c5-0cb0-4c63-8c15-c81123a09de7:e4d4e61e-e527-494e-b96d-0d4b4f9ba5ea" style="padding-right: 0px; display: inline; padding-left: 0px; float: none; padding-bottom: 0px; margin: 0px; padding-top: 0px">
 <pre name="code" class="c#">public sealed class Copier<T1> where T1 : class
@@ -139,7 +139,7 @@ Copier<ICustomer>.Copy( customer ).To<ICustomerView>( view );</code></pre>
 }</code></pre>
 </div></p>
 <p>I would like to constrain <strong>T1</strong> and <strong>T2</strong> to interfaces at compile time, but I am not sure if that can be done. If you have ideas, please post them in the comments. I thought of using reflection to check if <strong>T1</strong> and <strong>T2</strong> are interfaces at run time, but I am a big believer in favouring compile time errors over run time errors.</p>
-<p>In my <a href="http://www.alteridem.net/2008/07/22/extending-copyhelper-using-extension-methods/">next post</a>, I am going to use C# 3.0 extension methods to further simplify copying allowing you to write code like this.</p>
+<p>In my <a href="/2008/07/22/extending-copyhelper-using-extension-methods/">next post</a>, I am going to use C# 3.0 extension methods to further simplify copying allowing you to write code like this.</p>
 <div class="wlWriterSmartContent" id="scid:812469c5-0cb0-4c63-8c15-c81123a09de7:acf0083b-b819-41ac-801c-41c0f977934e" style="padding-right: 0px; display: inline; padding-left: 0px; float: none; padding-bottom: 0px; margin: 0px; padding-top: 0px">
 <pre name="code" class="c#:nogutter">// Copy the data from the customer to the view (using extension methods in C# 3.0)
 customer.CopyTo<ICustomerView>( view );</code></pre>
