@@ -14,12 +14,16 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 title: Alteridem Consulting
+author: Rob Prouse
 email: rob@prouse.org
 description: >- # this means to ignore newlines until "baseurl:"
   Rob Prouse open source developer
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 highlighter: rouge
+show_excerpts: false
+paginate: 5
+
 twitter_username: rprouse
 github_username:  rprouse
 linkedin_username: robprouse
@@ -27,11 +31,15 @@ linkedin_username: robprouse
 # refer to http://shopify.github.io/liquid/filters/date/ if you want to customize this
 date_format: "%b %-d, %Y"
 
+feed:
+  excerpt_only: true
+
 # Build settings
 markdown: kramdown
 plugins:
-  - jekyll-feed
-  - jekyll-seo-tag
+  - jekyll-feed       # https://github.com/jekyll/jekyll-feed
+  - jekyll-seo-tag    # https://github.com/jekyll/jekyll-seo-tag
+  - jekyll-paginate
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
