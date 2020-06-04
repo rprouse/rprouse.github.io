@@ -17,7 +17,7 @@ tags:
 <h3>Install and Configure Xdebug for PHP</h3>
 <p>The first thing you need to do is get the <a href="http://xdebug.org/">Xdebug extension</a> for PHP installed and configured. Luckily, <a href="http://www.apachefriends.org/en/xampp.html">XAMPP</a> ships with <a href="http://xdebug.org/">Xdebug </a>and has the configuration already in php.ini, so you just need to make some minor changes and restart Apache.</p>
 <ol>
-<li>If you are also using <a href="http://www.apachefriends.org/en/xampp.html">XAMPP</a>, skip this step. If you are using an install of PHP without the Xdebug extension, go to the <a href="http://xdebug.org/find-binary.php">Xdebug Find Binary</a> page, paste in the output of phpinfo() or php &ldquo;i and they will provide a link to the extension and custom installation instructions.</li>
+<li>If you are also using <a href="http://www.apachefriends.org/en/xampp.html">XAMPP</a>, skip this step. If you are using an install of PHP without the Xdebug extension, go to the <a href="http://xdebug.org/find-binary.php">Xdebug Find Binary</a> page, paste in the output of phpinfo() or php -i and they will provide a link to the extension and custom installation instructions.</li>
 <li>Open php.ini in your favourite editor. For <a href="http://www.apachefriends.org/en/xampp.html">XAMPP</a>, it is likely in C:\xampp\php.</li>
 <li>Find and uncomment the extension.
 <pre class="code">zend_extension = "C:\xampp\php\ext\php_xdebug.dll"</code></pre>

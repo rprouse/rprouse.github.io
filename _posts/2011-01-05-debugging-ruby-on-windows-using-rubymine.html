@@ -19,7 +19,7 @@ tags:
 <li>First, you should start with Ruby installed from the <a href="http://rubyinstaller.org/downloads/">RubyInstaller</a>. If you have any problems with getting debugging working, I would suggest installing Ruby fresh from here and trying again. </li>
 <li>Second, you need to install DevKit. Download DevKit from the <a href="http://rubyinstaller.org/downloads/">RubyInstaller</a> page, then follow the installation instructions on the <a href="https://github.com/oneclick/rubyinstaller/wiki/development-kit">Development Kit</a> page. Their instructions are thorough, so I won&trade;t reproduce them here. The DevKit install has changed recently and this was part of my problem getting the debugging gem installed. </li>
 <li>Install the <strong>ruby-debug-ide19</strong> gem with the following command line.
-<pre class="code">gem install ruby-debug-ide19 &ldquo;platform=ruby</code></pre>
+<pre class="code">gem install ruby-debug-ide19 -platform=ruby</code></pre>
 </li>
 <li>You should now be able to debug in <a href="http://www.jetbrains.com/ruby/">RubyMine</a>. When I started debugging in <a href="http://www.jetbrains.com/ruby/">RubyMine</a>, it prompted to install additional debugging gems. I allowed it and they installed fine and debugging started.
 <p></li>

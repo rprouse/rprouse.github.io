@@ -33,7 +33,7 @@ tags:
 <h4>Initializing an Application</h4>
 <p>To start out, I am going to run through the screencast <a href="http://rubyonrails.org/screencasts">Creating a weblog in 15 minutes with Rails 2</a>, so I will create the application for that. Once again, at the command line, first cd to your test web root. I use <a href="http://www.apachefriends.org/en/xampp.html">XAMPP</a> for web development on Windows, so I am going to keep my Rails apps there.</p>
 <pre class="code">cd \xampp\htdocs
-rails &ldquo;d mysql blog
+rails -d mysql blog
 cd blog</code></pre>
 <p>The rails command created the blog application to use MySQL as the database. Next open the <strong>blog\config\database.yml</strong> file. Update the username and password where appropriate. Now let's try it.</p>
 <pre class="code">ruby script/server</code></pre>
