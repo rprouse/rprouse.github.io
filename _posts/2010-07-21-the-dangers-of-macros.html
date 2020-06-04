@@ -12,8 +12,9 @@ date_gmt: '2010-07-21 15:02:44 +0000'
 tags:
 - C++
 - Tips'n'Tricks
+comments: []
 ---
-<p>Another developer came to me with a problem today that he couldn&trade;t figure out. He couldn&trade;t believe what he was seeing in the debugger and needed a second set of eyes. He had a line of code like the following;</p>
+<p>Another developer came to me with a problem today that he couldn't figure out. He couldn't believe what he was seeing in the debugger and needed a second set of eyes. He had a line of code like the following;</p>
 <pre name="code" class="cpp">return max( eRetVal, GetNumber() );</code></pre>
 <p>While debugging, he noticed that he was stepping into the GetNumber() method twice, and in his code, it had side-effects. We both puzzled over it for awhile. We looked at the disassembly and sure enough, it was getting called twice, but why? Then it hit me, <b>max</b> is a macro, not a function. If you go to the definition of <b>max</b>, you find;</p>
 <pre name="code" class="cpp">#ifndef max

@@ -36,7 +36,7 @@ tags:
 
    // Fetch the requested property
    string sql = String.Format(
-      SELECT Value FROM Property WHERE Property=&trade;{0}&trade;, property );
+      SELECT Value FROM Property WHERE Property='{0}', property );
    View view = database.OpenView( sql );
    view.Execute( null );
 
