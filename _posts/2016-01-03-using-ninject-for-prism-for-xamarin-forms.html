@@ -14,26 +14,6 @@ tags:
 - C#
 - Xamarin
 - Prism
-comments:
-- id: 85730
-  author: Brian Lagunas
-  author_email: brian.lagunas@live.com
-  author_url: http://brianlagunas.com
-  date: '2016-01-06 20:41:40 +0000'
-  date_gmt: '2016-01-07 01:41:40 +0000'
-  content: Great walkthrough!  I was thinking of renaming "PrismApplication" to be
-    container specific, i.e. "PrismNinjectApplication", or "PrismUnityApplication".  What
-    do you think?  Should I just leave it the way it is?
-- id: 85733
-  author: Robert Prouse
-  author_email: rob@prouse.org
-  date: '2016-01-09 10:56:58 +0000'
-  date_gmt: '2016-01-09 15:56:58 +0000'
-  content: I think that making the application IoC container specific would help to
-    highlight where it is coming from. Given the name, I would have expected it to
-    be part of the main project, not the IoC addon. It might also make it easier for
-    developers to make the mental switch between IoC containers when looking at documentation
-    for the other.
 ---
 <p>I started a <a href="https://xamarin.com/forms">Xamarin.Forms mobile project</a> recently and decided to use the <a href="https://www.nuget.org/packages/Prism.Forms/">Prism for Xamarin.Forms framework</a>. I followed the directions for <a href="http://brianlagunas.com/first-look-at-the-prism-for-xamarin-forms-preview/">getting started with Prism for Xamarin.Forms</a> and was up and running in no time.</p>
 <p>My only issue was that the only IoC container that was supported was <a href="https://github.com/unitycontainer/unity">Unity</a>. I won't debate the merits of various IoC containers, but I prefer <a href="http://www.ninject.org/">Ninject</a>, so I submitted a large <a href="https://github.com/PrismLibrary/Prism/pull/282">pull request adding Ninject support to Prism for Xamarin.Forms</a> which is now available on NuGet as <a href="https://www.nuget.org/packages/Prism.Ninject/">Ninject for Prism</a>.<!--more--></p>

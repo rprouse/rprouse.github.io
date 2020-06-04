@@ -14,16 +14,6 @@ tags:
 - C#
 - Testing
 - NUnit
-comments:
-- id: 85789
-  author: The NUnit Visual Studio Adapter for Running Tests - Rob Prouse
-  author_email: ''
-  author_url: /2016/10/20/nunit-visual-studio-adapter/
-  date: '2016-10-20 21:29:19 +0000'
-  date_gmt: '2016-10-21 02:29:19 +0000'
-  content: "[&#8230;] Studio has trouble with multiple tests created using the TestCase
-    attribute or other data attributes. Using the key-bindings while in these methods
-    will run all tests [&#8230;]"
 ---
 <p>In the last post, we setup an <a href="/2016/10/03/nunit-unit-tests/">NUnit test project and ran it in Visual Studio</a>. In this post we are going to expand on that code to add more unit tests using the NUnit TestCase attribute.</p>
 <p>Looking back at the <a href="/2016/10/03/nunit-unit-tests/">last&nbsp;post</a>, we are testing a method that&nbsp;converts an enum value to a friendly string by splitting the enum name at capitals. In that post, we only tested with one enum value. In this post, we will test with multiple enum values to ensure that the method handles every type of input. We will then remove code duplication by using the <strong>[TestCase]</strong> attribute to run one test many times with different data.<!--more--></p>

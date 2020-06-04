@@ -15,22 +15,6 @@ tags:
 - SQL
 - Win32
 - MFC
-comments:
-- id: 2122
-  author: Winston Johnston
-  author_email: wjohnston@runge.com.au
-  author_url: http://smartclientfactory.blogspot.com/
-  date: '2008-07-07 23:44:39 +0000'
-  date_gmt: '2008-07-08 04:44:39 +0000'
-  content: Thanks for this bit of code...
-- id: 2123
-  author: Winston Johnston
-  author_email: wjohnston@runge.com.au
-  author_url: http://smartclientfactory.blogspot.com/
-  date: '2008-07-07 23:51:29 +0000'
-  date_gmt: '2008-07-08 04:51:29 +0000'
-  content: "Can also use... \r\n            System.Drawing.ColorTranslator.FromWin32(iColor);\r\n
-    \           \r\nSystem.Drawing.ColorTranslator.ToWin32(color);"
 ---
 <p>I have been migrating a large application from Win32/MFC to .NET and ran into an interesting problem. We store all of the application colors in the database as integers that represent the Win32 <a href="http://msdn2.microsoft.com/en-us/library/ms532655.aspx">COLORREF</a> value. <a href="http://msdn2.microsoft.com/en-us/library/ms532655.aspx">COLORREF</a> is just a DWORD representing the RGB value, so&nbsp;I&nbsp;thought that&nbsp;I could just take the value and get a .NET <a href="http://msdn2.microsoft.com/en-us/library/system.drawing.color.aspx">Color</a>&nbsp;structure using the static <a href="http://msdn2.microsoft.com/en-us/library/2zys7833.aspx">FromArgb</a> method.</p>
 <p>This didn't go too well. It turns out that the byte orders are different. <a href="http://msdn2.microsoft.com/en-us/library/ms532655.aspx">COLORREF</a>&nbsp;is in the order <strong>0x00bbggrr </strong>and <a href="http://msdn2.microsoft.com/en-us/library/system.drawing.color.aspx">Color</a>&nbsp;is in the order <strong>0xaarrggbb</strong>. Notice that the high order byte in .NET is the alpha channel, but in Win32 it is always zero (fully transparent in .NET) Also notice that the byte order is backwards in Win32, Blue/Green/Red compared to the more standard Red/Green/Blue in .NET.</p>

@@ -13,7 +13,6 @@ tags:
 - SQL
 - Databases
 - SQL Server
-comments: []
 ---
 <p>I'm experimenting with taking a 3-tier client/server/database application and creating a lightweight client application that uses an embedded database. We use stored procedures and our server application uses SQL Server, so <a href="https://blogs.msdn.microsoft.com/sqlexpress/2011/07/12/introducing-localdb-an-improved-sql-express/" target="_blank">SQL Express LocalDB</a> has potential. The only problem I ran into was restoring a backup taken from SQL Server to LocalDB and <a href="http://stackoverflow.com/questions/13126726/how-do-i-copy-sql-server-2012-database-to-localdb-instance" target="_blank">it appears that I am not the only one</a> that <a href="https://connect.microsoft.com/SQLServer/feedback/details/789845/localdb-cannot-restore-a-backup-whose-original-data-and-log-files-are-in-different-folders#" target="_blank">had problems</a>.<!--more--></p>
 <p>In the end though, it was pretty easy, it just required a few steps that most DB admins are already familiar with, but developers may stumble on. Here are the developer-centric instructions using Visual Studio.</p>

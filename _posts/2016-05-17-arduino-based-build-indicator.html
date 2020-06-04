@@ -15,7 +15,6 @@ tags:
 - Agile
 - Continuous Integration
 - Maker
-comments: []
 ---
 <p><img class="alignright size-full wp-image-535" src="/images/2016/05/20160517_110652.jpg" alt="Arduino based build indicator" width="250" height="258" align="right" />I found a red strobe light in the bargain bin at a local electronics store and immediately knew what to do with it - create a build failed light. There is a long history of dev shops creating <a href="https://en.wikipedia.org/wiki/Build_light_indicator" target="_blank">build indicator lights</a> using lava lamps, stop lights and computer monitors mounted on the wall and I've always wanted to build one.<!--more--></p>
 <p>The strobe was rated at 12V, but I wanted to run it off USB, so I hooked it up to a 5V power supply. It strobed a bit slower, but it worked, so I checked the amps. It drew a steady 70mA which is too much to run directly off an Arduino pin which are limited to around 40mA, but still low enough to run off USB and the 5V pin on the Arduino. I could use a relay to switch the strobe, but it seemed like overkill, so I checked my parts drawer and found some <a href="https://en.wikipedia.org/wiki/2N2222" target="_blank">PN2222A</a> transistors which are rated to 40V and 800mA.</p>
