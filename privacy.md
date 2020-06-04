@@ -10,4 +10,4 @@ wordpress_url: /?page_id=364
 date: '2015-11-18 15:26:28 +0000'
 date_gmt: '2015-11-18 19:26:28 +0000'
 ---
-<p>Alteridem respects your privacy and will never share your information without your consent.</p>
+Alteridem respects your privacy and will never share your information without your consent.

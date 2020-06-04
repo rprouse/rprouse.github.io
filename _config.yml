@@ -33,6 +33,10 @@ date_format: "%b %-d, %Y"
 
 exclude: [".gitignore", ".editorconfig", "CNAME", "README.md", "Gemfile"]
 
+header_pages:
+  - about.md
+  - privacy.md
+
 feed:
   excerpt_only: true
 
