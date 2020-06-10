@@ -46,7 +46,7 @@ date_format: "%b %-d, %Y"
 paginate: 8
 paginate_path: "/page/:num"
 
-exclude: [".gitignore", ".editorconfig", "CNAME", "README.md", "Gemfile", "node_modules", "gulpfile.js", "package.json", "yarn.lock"]
+exclude: [".gitignore", ".editorconfig", "CNAME", "README.md", "Gemfile"]
 
 # Build settings
 markdown: kramdown
