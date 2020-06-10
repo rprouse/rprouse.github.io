@@ -12,5 +12,7 @@ Thumbs.db
 .rbenv-version
 .rvmrc
 .bundle
+yarn.lock
 Gemfile.lock
+node_modules/
 jekyll
