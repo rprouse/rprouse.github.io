@@ -14,38 +14,48 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 title: Alteridem
-author: Rob Prouse
-email: rob@prouse.org
-description: >- # this means to ignore newlines until "baseurl:"
-  Rob Prouse open source developer
+description: >-
+  My name is Rob Prouse. I'm a Microsoft MVP. I lead the NUnit test framework
+  team and contribute to numerous open source projects.
+permalink: ':title/'
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
+site-twitter: #if your site has a twitter account, enter it here
 highlighter: rouge
-show_excerpts: false
-paginate: 5
 
-twitter_username: rprouse
-github_username:  rprouse
-linkedin_username: robprouse
+author: Rob Prouse
+author-img: rob_prouse.jpg
+about-author: >-
+  My name is Rob Prouse. I'm a Microsoft MVP. I lead the NUnit test framework
+  team and contribute to numerous open source projects.
+social-twitter: rprouse
+# social-facebook:
+social-github: rprouse
+social-linkedin: robprouse
+social-email: rob@prouse.org
+
+# Disqus
+discus-identifier: alteridem
+
+# Tracker
+analytics: # Google Analytics
 
 # refer to http://shopify.github.io/liquid/filters/date/ if you want to customize this
 date_format: "%b %-d, %Y"
 
+paginate: 8
+paginate_path: "/page/:num"
+
 exclude: [".gitignore", ".editorconfig", "CNAME", "README.md", "Gemfile"]
-
-header_pages:
-  - about.md
-  - privacy.md
-
-feed:
-  excerpt_only: true
 
 # Build settings
 markdown: kramdown
 plugins:
+  - jekyll-sitemap
   - jekyll-feed       # https://github.com/jekyll/jekyll-feed
   - jekyll-seo-tag    # https://github.com/jekyll/jekyll-seo-tag
   - jekyll-paginate
+  - jemoji
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
