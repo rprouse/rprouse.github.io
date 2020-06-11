@@ -25,7 +25,7 @@ tags:
 <li>Click on&nbsp;<strong>Visual C# | Windows</strong> and click on&nbsp;<strong>Class Library.</strong></li>
 <li>Enter the name of your test project and click&nbsp;<strong>OK</strong>.</li>
 </ol>
-<p><img class="aligncenter wp-image-634 size-full" src="/images/2016/10/2016-10-03-16_23_21-Add-New-Project.png" alt="Add new unit test project" width="795" height="497" /></p>
+<p><img class="aligncenter wp-image-634 size-full" src="/assets/img/2016/10/2016-10-03-16_23_21-Add-New-Project.png" alt="Add new unit test project" width="795" height="497" /></p>
 <h2>Add a Reference to NUnit</h2>
 <p>Before you can write unit tests, you need to add a reference to a test framework, in this case NUnit.</p>
 <ol>
@@ -34,7 +34,7 @@ tags:
 <li>Click on <strong>Browse</strong></li>
 <li>Select&nbsp;<strong>NUnit</strong> and click the&nbsp;<strong>Install</strong> button. At the time of this writing, NUnit is number three in the list. If that changes, use the search bar to find it.</li>
 </ol>
-<p><img class="aligncenter wp-image-636 size-full" src="/images/2016/10/2016-10-03-16_31_47-IntroToNUnit-Microsoft-Visual-Studio.png" alt="Add reference to NUnit" width="792" height="414" /></p>
+<p><img class="aligncenter wp-image-636 size-full" src="/assets/img/2016/10/2016-10-03-16_31_47-IntroToNUnit-Microsoft-Visual-Studio.png" alt="Add reference to NUnit" width="792" height="414" /></p>
 <h2>Add a Reference to Your Project</h2>
 <p>In order to test the code in your main project, you need to add a reference to it in your test project.</p>
 <ol>
@@ -44,7 +44,7 @@ tags:
 <li>Add a checkmark on your main project.</li>
 <li>Click&nbsp;<strong>OK</strong>.</li>
 </ol>
-<p><img class="aligncenter size-full wp-image-638" src="/images/2016/10/2016-10-03-16_38_46-Reference-Manager-IntroToNUnit.Tests_.png" alt="Add Project Reference" width="686" height="343" /></p>
+<p><img class="aligncenter size-full wp-image-638" src="/assets/img/2016/10/2016-10-03-16_38_46-Reference-Manager-IntroToNUnit.Tests_.png" alt="Add Project Reference" width="686" height="343" /></p>
 <h2>Write Unit Tests</h2>
 <p>Another common convention is to name the test class the same as the class being tested with Tests appended. The class I want to test is called&nbsp;<strong>EnumToStringConverter.cs</strong>, so I rename&nbsp;<strong>Class1.cs</strong> to&nbsp;<strong>EnumToStringConverterTests.cs</strong>.</p>
 <p>To this class, I add the&nbsp;<strong>[TestFixture]</strong> attribute. You also need to&nbsp;add the <strong>using NUnit.Framework</strong>. My first test is going to make sure that the converter splits multiple words correctly, so I add a test enum and the first unit test. Add this point, my code looks like this.</p>
@@ -99,8 +99,8 @@ Assert.AreEqual("Unit Testing", actual);
 <li>Search for&nbsp;<strong>NUnit</strong> and install&nbsp;<strong>NUnit 3 Test Adapter</strong></li>
 <li>After you install, click the button at the bottom to&nbsp;<strong>Restart</strong> Visual Studio</li>
 </ol>
-<p><img class="aligncenter size-full wp-image-643" src="/images/2016/10/2016-10-03-17_18_57-Extensions-and-Updates.png" alt="Add NUnit Visual Studio Adapter" width="782" height="325" /></p>
+<p><img class="aligncenter size-full wp-image-643" src="/assets/img/2016/10/2016-10-03-17_18_57-Extensions-and-Updates.png" alt="Add NUnit Visual Studio Adapter" width="782" height="325" /></p>
 <p>Back in Visual Studio with your solution open, you need to open the&nbsp;<strong>Test Explorer Window</strong>. To do this, in the main menu, click&nbsp;<strong>Test | Windows | Test Explorer</strong>.</p>
 <p>The window that opens will list your unit tests and allow you to run or debug them. Click&nbsp;<strong>Run All</strong> to run your tests. Successful tests will go green and failed tests will be red. You can see the results of any test by clicking on it and viewing the results at the bottom of the window. In a future post, I will cover other ways to run your tests and how to use the Test Adapter in Visual Studio in more detail.</p>
-<p><img class="aligncenter size-full wp-image-645" src="/images/2016/10/2016-10-03-17_30_21-IntroToNUnit.png" alt="Test Explorer" width="655" height="233" /></p>
+<p><img class="aligncenter size-full wp-image-645" src="/assets/img/2016/10/2016-10-03-17_30_21-IntroToNUnit.png" alt="Test Explorer" width="655" height="233" /></p>
 <p>Congratulations, you have your first unit test.</p>

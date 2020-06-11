@@ -21,9 +21,9 @@ tags:
 <h3>Getting Started</h3>
 <p>First, download and install the <a href="https://visualstudiogallery.msdn.microsoft.com/e7b6bde2-ba59-43dd-9d14-58409940ffa0">Prism Template Pack</a> extension for Visual Studio. It contains a project template for a Xamarin.Forms Prism Unity App which is a good start.</p>
 <p>In Visual Studio, add a new <strong>Prism Unity App (Forms)</strong> project. There isn't currently a Ninject template, so we will modify the Unity version.</p>
-<p><img class="aligncenter size-full wp-image-408" src="/images/2016/01/2016-01-02-14_29_17-New-Project.png" alt="New Prism Project" width="799" height="498" /></p>
+<p><img class="aligncenter size-full wp-image-408" src="/assets/img/2016/01/2016-01-02-14_29_17-New-Project.png" alt="New Prism Project" width="799" height="498" /></p>
 <p>This is a multi-project template that will create a shared library and three platform specific projects for Android, iOS and Windows Phone 8.0.</p>
-<p><img class="aligncenter size-full wp-image-410" src="/images/2016/01/2016-01-02-14_36_35-PrismNinjectDemo-Microsoft-Visual-Studio.png" alt="Prism Ninject Demo Solution" width="331" height="283" /></p>
+<p><img class="aligncenter size-full wp-image-410" src="/assets/img/2016/01/2016-01-02-14_36_35-PrismNinjectDemo-Microsoft-Visual-Studio.png" alt="Prism Ninject Demo Solution" width="331" height="283" /></p>
 <p>Now we will switch out Unity for Ninject. Right-click on the solution and <strong>Manage NuGet Packages for Solution...</strong> and uninstall the Prism.Unity, Unity and CommonServiceLocator NuGet packages from all projects in that order.</p>
 <p>Next, search for and install the <a href="https://www.nuget.org/packages/Prism.Ninject/">Prism.Ninject</a> NuGet package to all solutions. As of today, the package is prerelease, so make sure you select the <strong>Include prereleases</strong> checkbox and install at least version <strong>6.2.0-pre2</strong>.</p>
 <p>The code in the portable project needs to be switched from using Unity to Ninject. Open <strong>App.xaml</strong> and switch the two instances of <strong>Prism.Unity</strong> to <strong>Prism.Ninject</strong>.</p>

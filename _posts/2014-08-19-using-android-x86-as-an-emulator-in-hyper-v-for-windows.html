@@ -18,58 +18,58 @@ tags:
 <p>First, download the ISO for the 4.4 or newer release Android x86 from <a title="Android x86 Downloads" href="http://www.android-x86.org/download" target="_blank">the downloads page</a>.</p>
 <p>Next fire up <strong>Hyper-V Manager</strong>. I assume you have some experience creating virtual machines using Hyper-V, so I am just going to outline the setup. If you need more info, Google it or <a title="Creating a virtual machine with Hyper-V" href="http://www.thegeekstuff.com/2014/02/create-new-vm-hyperv-manager/" target="_blank">check out this quick-start</a>.</p>
 <p>First, we need to make sure that a Virtual Switch is setup to enable networking. If you haven't already done it for another virtual machine, click <strong>Virtual Switch Manager</strong> on the right and create a new External Virtual Switch. Name it something like Ethernet and make sure it is linked to your Ethernet card, not your WiFi.</p>
-<p><a href="/images/2014/08/2014-08-19-15_40_26-Virtual-Switch-Manager-for-XPS15.png"><img class="aligncenter size-medium wp-image-203" src="/images/2014/08/2014-08-19-15_40_26-Virtual-Switch-Manager-for-XPS15-300x282.png" alt="Virtual Switch Manager" width="300" height="282" /></a></p>
+<p><a href="/assets/img/2014/08/2014-08-19-15_40_26-Virtual-Switch-Manager-for-XPS15.png"><img class="aligncenter size-medium wp-image-203" src="/assets/img/2014/08/2014-08-19-15_40_26-Virtual-Switch-Manager-for-XPS15-300x282.png" alt="Virtual Switch Manager" width="300" height="282" /></a></p>
 <p>Back in <strong>Hyper-V Manager</strong>, at the top right, click <strong>New, Virtual Machine</strong> and name it Android 4.4.</p>
-<p><a href="/images/2014/08/2014-08-19-15_45_26-New-Virtual-Machine-Wizard.png"><img class="aligncenter size-medium wp-image-205" src="/images/2014/08/2014-08-19-15_45_26-New-Virtual-Machine-Wizard-300x225.png" alt="New Virtual Machine Wizard" width="300" height="225" /></a></p>
+<p><a href="/assets/img/2014/08/2014-08-19-15_45_26-New-Virtual-Machine-Wizard.png"><img class="aligncenter size-medium wp-image-205" src="/assets/img/2014/08/2014-08-19-15_45_26-New-Virtual-Machine-Wizard-300x225.png" alt="New Virtual Machine Wizard" width="300" height="225" /></a></p>
 <p>Specify <strong>Generation 1</strong> on the next screen, then select the startup memory. You probably want to increase it to 1024 or 2048 MB. Also, select Use Dynamic Memory.</p>
-<p><a href="/images/2014/08/2014-08-19-15_47_23-New-Virtual-Machine-Wizard.png"><img class="aligncenter size-medium wp-image-206" src="/images/2014/08/2014-08-19-15_47_23-New-Virtual-Machine-Wizard-300x225.png" alt="New Virtual Machine Wizard - Memory" width="300" height="225" /></a></p>
+<p><a href="/assets/img/2014/08/2014-08-19-15_47_23-New-Virtual-Machine-Wizard.png"><img class="aligncenter size-medium wp-image-206" src="/assets/img/2014/08/2014-08-19-15_47_23-New-Virtual-Machine-Wizard-300x225.png" alt="New Virtual Machine Wizard - Memory" width="300" height="225" /></a></p>
 <p>In <strong>Configure Networking</strong>, select the Ethernet switch we setup previously.</p>
 <p>On the <strong>Connect Virtual Hard Disk</strong> page, you can use the defaults, but you will want to decrease the size of the disk to something like 16 GB.</p>
-<p><a href="/images/2014/08/2014-08-19-15_50_55-New-Virtual-Machine-Wizard.png"><img class="aligncenter size-medium wp-image-207" src="/images/2014/08/2014-08-19-15_50_55-New-Virtual-Machine-Wizard-300x225.png" alt="New Virtual Machine Wizard - Connect Virtual Hard Disk" width="300" height="225" /></a></p>
+<p><a href="/assets/img/2014/08/2014-08-19-15_50_55-New-Virtual-Machine-Wizard.png"><img class="aligncenter size-medium wp-image-207" src="/assets/img/2014/08/2014-08-19-15_50_55-New-Virtual-Machine-Wizard-300x225.png" alt="New Virtual Machine Wizard - Connect Virtual Hard Disk" width="300" height="225" /></a></p>
 <p>On the Installation Options page, select <strong>Install an operating system from a bootable CD/DVD-ROM</strong> and select the ISO you downloaded from Android-x86.</p>
-<p><a href="/images/2014/08/2014-08-19-15_52_41-New-Virtual-Machine-Wizard.png"><img class="aligncenter size-medium wp-image-209" src="/images/2014/08/2014-08-19-15_52_41-New-Virtual-Machine-Wizard-300x225.png" alt="New Virtual Machine Wizard - Install Options" width="300" height="225" /></a></p>
+<p><a href="/assets/img/2014/08/2014-08-19-15_52_41-New-Virtual-Machine-Wizard.png"><img class="aligncenter size-medium wp-image-209" src="/assets/img/2014/08/2014-08-19-15_52_41-New-Virtual-Machine-Wizard-300x225.png" alt="New Virtual Machine Wizard - Install Options" width="300" height="225" /></a></p>
 <p>You can now click Next, check out the summary and click Finish to create your new virtual machine.</p>
 <p>In <strong>Hyper-V Manager</strong>, click on your new Android virtual machine and click <strong>Connect</strong> in the lower right.</p>
-<p><a href="/images/2014/08/2014-08-19-16_00_33-Hyper-V-Manager.png"><img class="aligncenter size-medium wp-image-211" src="/images/2014/08/2014-08-19-16_00_33-Hyper-V-Manager-300x149.png" alt="Connect to Virtual Machine" width="300" height="149" /></a></p>
+<p><a href="/assets/img/2014/08/2014-08-19-16_00_33-Hyper-V-Manager.png"><img class="aligncenter size-medium wp-image-211" src="/assets/img/2014/08/2014-08-19-16_00_33-Hyper-V-Manager-300x149.png" alt="Connect to Virtual Machine" width="300" height="149" /></a></p>
 <p>This will open the virtual machine in a powered off state. Press the <strong>Start</strong> button in the toolbar to power up and boot the machine. It will boot to the Live and Installation CD screen. Use the keyboard to scroll down and select <strong>Installation - Install Android-x86 to harddisk</strong>.</p>
-<p><a href="/images/2014/08/2014-08-19-16_05_16-Android-4.4-on-XPS15-Virtual-Machine-Connection.png"><img class="aligncenter size-medium wp-image-212" src="/images/2014/08/2014-08-19-16_05_16-Android-4.4-on-XPS15-Virtual-Machine-Connection-300x271.png" alt="Boot to install" width="300" height="271" /></a></p>
+<p><a href="/assets/img/2014/08/2014-08-19-16_05_16-Android-4.4-on-XPS15-Virtual-Machine-Connection.png"><img class="aligncenter size-medium wp-image-212" src="/assets/img/2014/08/2014-08-19-16_05_16-Android-4.4-on-XPS15-Virtual-Machine-Connection-300x271.png" alt="Boot to install" width="300" height="271" /></a></p>
 <p>Select Create/Modify partitions,</p>
-<p><a href="/images/2014/08/2014-08-19-16_06_44-Android-4.4-on-XPS15-Virtual-Machine-Connection.png"><img class="aligncenter size-medium wp-image-213" src="/images/2014/08/2014-08-19-16_06_44-Android-4.4-on-XPS15-Virtual-Machine-Connection-300x80.png" alt="Create partitions" width="300" height="80" /></a></p>
+<p><a href="/assets/img/2014/08/2014-08-19-16_06_44-Android-4.4-on-XPS15-Virtual-Machine-Connection.png"><img class="aligncenter size-medium wp-image-213" src="/assets/img/2014/08/2014-08-19-16_06_44-Android-4.4-on-XPS15-Virtual-Machine-Connection-300x80.png" alt="Create partitions" width="300" height="80" /></a></p>
 <p>Use the keyboard to highlight <strong>New</strong> and press Enter.</p>
-<p><a href="/images/2014/08/2014-08-19-16_08_18-.png"><img class="aligncenter size-medium wp-image-214" src="/images/2014/08/2014-08-19-16_08_18--300x187.png" alt="New Partition" width="300" height="187" /></a></p>
+<p><a href="/assets/img/2014/08/2014-08-19-16_08_18-.png"><img class="aligncenter size-medium wp-image-214" src="/assets/img/2014/08/2014-08-19-16_08_18--300x187.png" alt="New Partition" width="300" height="187" /></a></p>
 <p>&nbsp;</p>
 <p>Select <strong>Primary</strong>, then accept the size of the partition, then click on <strong>Bootable.</strong></p>
-<p><a href="/images/2014/08/2014-08-19-16_12_09-.png"><img class="aligncenter size-medium wp-image-217" src="/images/2014/08/2014-08-19-16_12_09--300x187.png" alt="Bootable Partition" width="300" height="187" /></a></p>
+<p><a href="/assets/img/2014/08/2014-08-19-16_12_09-.png"><img class="aligncenter size-medium wp-image-217" src="/assets/img/2014/08/2014-08-19-16_12_09--300x187.png" alt="Bootable Partition" width="300" height="187" /></a></p>
 <p>Now, highlight <strong>Write</strong>, press <strong>Enter</strong> and type in <strong>yes</strong> to create the partition. You can now Quit.</p>
-<p><a href="/images/2014/08/2014-08-19-16_14_13-.png"><img class="aligncenter size-medium wp-image-218" src="/images/2014/08/2014-08-19-16_14_13--300x187.png" alt="Write partition" width="300" height="187" /></a></p>
+<p><a href="/assets/img/2014/08/2014-08-19-16_14_13-.png"><img class="aligncenter size-medium wp-image-218" src="/assets/img/2014/08/2014-08-19-16_14_13--300x187.png" alt="Write partition" width="300" height="187" /></a></p>
 <p>You can now choose&nbsp;<strong>sda1 Linux Virtual Disk.</strong></p>
-<p><a href="/images/2014/08/2014-08-19-16_16_56-.png"><img class="aligncenter size-medium wp-image-219" src="/images/2014/08/2014-08-19-16_16_56--300x187.png" alt="Choose partition" width="300" height="187" /></a></p>
+<p><a href="/assets/img/2014/08/2014-08-19-16_16_56-.png"><img class="aligncenter size-medium wp-image-219" src="/assets/img/2014/08/2014-08-19-16_16_56--300x187.png" alt="Choose partition" width="300" height="187" /></a></p>
 <p>Format as&nbsp;<strong>ext3</strong>. confirm your selection, then wait while the partition is created. It will sit at 0% for awhile, don't worry, it will go.</p>
-<p><a href="/images/2014/08/2014-08-19-16_17_49-.png"><img class="aligncenter size-medium wp-image-220" src="/images/2014/08/2014-08-19-16_17_49--300x187.png" alt="ext3" width="300" height="187" /></a></p>
+<p><a href="/assets/img/2014/08/2014-08-19-16_17_49-.png"><img class="aligncenter size-medium wp-image-220" src="/assets/img/2014/08/2014-08-19-16_17_49--300x187.png" alt="ext3" width="300" height="187" /></a></p>
 <p>Next you will be asked if you want to install GRUB. Say yes.</p>
-<p><a href="/images/2014/08/2014-08-19-16_20_28-Android-4.4-on-XPS15-Virtual-Machine-Connection.png"><img class="aligncenter size-medium wp-image-222" src="/images/2014/08/2014-08-19-16_20_28-Android-4.4-on-XPS15-Virtual-Machine-Connection-300x106.png" alt="Grub" width="300" height="106" /></a></p>
+<p><a href="/assets/img/2014/08/2014-08-19-16_20_28-Android-4.4-on-XPS15-Virtual-Machine-Connection.png"><img class="aligncenter size-medium wp-image-222" src="/assets/img/2014/08/2014-08-19-16_20_28-Android-4.4-on-XPS15-Virtual-Machine-Connection-300x106.png" alt="Grub" width="300" height="106" /></a></p>
 <p>&nbsp;</p>
 <p>Also say yes to making /system read-write.</p>
-<p><a href="/images/2014/08/2014-08-19-16_22_12-Android-4.4-on-XPS15-Virtual-Machine-Connection.png"><img class="aligncenter size-medium wp-image-223" src="/images/2014/08/2014-08-19-16_22_12-Android-4.4-on-XPS15-Virtual-Machine-Connection-300x114.png" alt="system" width="300" height="114" /></a></p>
+<p><a href="/assets/img/2014/08/2014-08-19-16_22_12-Android-4.4-on-XPS15-Virtual-Machine-Connection.png"><img class="aligncenter size-medium wp-image-223" src="/assets/img/2014/08/2014-08-19-16_22_12-Android-4.4-on-XPS15-Virtual-Machine-Connection-300x114.png" alt="system" width="300" height="114" /></a></p>
 <p>It will now install Android on your virtual disk.</p>
-<p><a href="/images/2014/08/2014-08-19-16_23_22-Android-4.4-on-XPS15-Virtual-Machine-Connection.png"><img class="aligncenter size-medium wp-image-224" src="/images/2014/08/2014-08-19-16_23_22-Android-4.4-on-XPS15-Virtual-Machine-Connection-300x85.png" alt="Installing" width="300" height="85" /></a></p>
+<p><a href="/assets/img/2014/08/2014-08-19-16_23_22-Android-4.4-on-XPS15-Virtual-Machine-Connection.png"><img class="aligncenter size-medium wp-image-224" src="/assets/img/2014/08/2014-08-19-16_23_22-Android-4.4-on-XPS15-Virtual-Machine-Connection-300x85.png" alt="Installing" width="300" height="85" /></a></p>
 <p>&nbsp;</p>
-<p><a href="/images/2014/08/2014-08-19-16_24_13-Android-4.4-on-XPS15-Virtual-Machine-Connection.png"><img class="aligncenter size-medium wp-image-225" src="/images/2014/08/2014-08-19-16_24_13-Android-4.4-on-XPS15-Virtual-Machine-Connection-300x140.png" alt="2014-08-19 16_24_13-Android 4.4 on XPS15 - Virtual Machine Connection" width="300" height="140" /></a></p>
+<p><a href="/assets/img/2014/08/2014-08-19-16_24_13-Android-4.4-on-XPS15-Virtual-Machine-Connection.png"><img class="aligncenter size-medium wp-image-225" src="/assets/img/2014/08/2014-08-19-16_24_13-Android-4.4-on-XPS15-Virtual-Machine-Connection-300x140.png" alt="2014-08-19 16_24_13-Android 4.4 on XPS15 - Virtual Machine Connection" width="300" height="140" /></a></p>
 <p>&nbsp;</p>
 <p>After a successful installation, you will be asked if you want to run Android or reboot. Don't do either, click on the <strong>Turn Off</strong> button to shutdown the machine, then go to <strong>Media | DVD Drive</strong> and Eject the Android X86 ISO. Now press <strong>Start</strong> to boot the machine.</p>
 <p>You will see the GRUB boot screen, then it will start booting Android and go to the initial setup. Step through as you would any Android device with a few small points.</p>
-<p><a href="/images/2014/08/2014-08-19-16_33_08-.png"><br />
-</a> <a href="/images/2014/08/2014-08-19-16_31_31-.png"><img class="aligncenter size-medium wp-image-227" src="/images/2014/08/2014-08-19-16_31_31--300x225.png" alt="Welcome" width="300" height="225" /></a></p>
+<p><a href="/assets/img/2014/08/2014-08-19-16_33_08-.png"><br />
+</a> <a href="/assets/img/2014/08/2014-08-19-16_31_31-.png"><img class="aligncenter size-medium wp-image-227" src="/assets/img/2014/08/2014-08-19-16_31_31--300x225.png" alt="Welcome" width="300" height="225" /></a></p>
 <p>&nbsp;</p>
 <p>On the Just a sec progress screen, click the screen with the mouse a couple of times so that it doesn't time out and lock the device.</p>
-<p><a href="/images/2014/08/2014-08-19-16_32_03-.png"><img class="aligncenter size-medium wp-image-228" src="/images/2014/08/2014-08-19-16_32_03--300x225.png" alt="2014-08-19 16_32_03-" width="300" height="225" /></a></p>
+<p><a href="/assets/img/2014/08/2014-08-19-16_32_03-.png"><img class="aligncenter size-medium wp-image-228" src="/assets/img/2014/08/2014-08-19-16_32_03--300x225.png" alt="2014-08-19 16_32_03-" width="300" height="225" /></a></p>
 <p>&nbsp;</p>
 <p>Skip Wi-Fi setup. Your Ethernet card will act like cell data.</p>
-<p><a href="/images/2014/08/2014-08-19-16_33_08-.png"><img class="aligncenter size-medium wp-image-226" src="/images/2014/08/2014-08-19-16_33_08--300x225.png" alt="WiFi" width="300" height="225" /></a></p>
+<p><a href="/assets/img/2014/08/2014-08-19-16_33_08-.png"><img class="aligncenter size-medium wp-image-226" src="/assets/img/2014/08/2014-08-19-16_33_08--300x225.png" alt="WiFi" width="300" height="225" /></a></p>
 <p>If you have a Google account and want to use it, click Yes, otherwise No.</p>
-<p><a href="/images/2014/08/2014-08-19-16_35_58-.png"><img class="aligncenter size-medium wp-image-229" src="/images/2014/08/2014-08-19-16_35_58--300x225.png" alt="Google" width="300" height="225" /></a></p>
+<p><a href="/assets/img/2014/08/2014-08-19-16_35_58-.png"><img class="aligncenter size-medium wp-image-229" src="/assets/img/2014/08/2014-08-19-16_35_58--300x225.png" alt="Google" width="300" height="225" /></a></p>
 <p>Once you are done the setup, immediately go to <strong>Settings | Display | Sleep</strong> and set it to never. When Android x86 locks the screen, you cannot get it to wake up in Hyper-V. If anyone figures out how to do it, please post the solution in the comments.</p>
-<p><a href="/images/2014/08/2014-08-19-16_39_00-Android-4.4-on-XPS15-Virtual-Machine-Connection.png"><img class="aligncenter size-medium wp-image-230" src="/images/2014/08/2014-08-19-16_39_00-Android-4.4-on-XPS15-Virtual-Machine-Connection-300x232.png" alt="Sleep" width="300" height="232" /></a></p>
+<p><a href="/assets/img/2014/08/2014-08-19-16_39_00-Android-4.4-on-XPS15-Virtual-Machine-Connection.png"><img class="aligncenter size-medium wp-image-230" src="/assets/img/2014/08/2014-08-19-16_39_00-Android-4.4-on-XPS15-Virtual-Machine-Connection-300x232.png" alt="Sleep" width="300" height="232" /></a></p>
 <h3>Debugging in Android Studio</h3>
 <p>Now for the fun stuff.</p>
 <h4>Setup the Emulator for Debugging</h4>
@@ -79,7 +79,7 @@ tags:
 <h4>Connect ADB</h4>
 <p>In Android, run the <strong>Terminal Emulator</strong>. The font is probably way too small to see, so go into&nbsp;<strong>Preferences</strong> and increase the font size.</p>
 <p>Back in the emulator window, type&nbsp;<strong>netcfg</strong> and take note of the IP address of&nbsp;<strong>eth0</strong>.</p>
-<p><a href="/images/2014/08/netcfg.png"><img class="aligncenter size-medium wp-image-231" src="/images/2014/08/netcfg-300x63.png" alt="netcfg" width="300" height="63" /></a></p>
+<p><a href="/assets/img/2014/08/netcfg.png"><img class="aligncenter size-medium wp-image-231" src="/assets/img/2014/08/netcfg-300x63.png" alt="netcfg" width="300" height="63" /></a></p>
 <p>Now, back on Windows open a command prompt (with a path to your Android tools) and type&nbsp;<strong>adb connect [ipaddress]</strong> with the IP address from the device. Now when you do an&nbsp;<strong>adb devices</strong>, you should see your emulator listed.</p>
 <pre><code>C:\src>adb connect 10.224.81.122
 * daemon not running. starting it now on port 5037 *
@@ -92,6 +92,6 @@ List of devices attached
 <h4>Debug Your App from Android Studio</h4>
 <p>Launch Android Studio and load your project. In the configuration dropdown in the toolbar, select <strong>Edit Configurations</strong>. In the dialog, click on your app configuration and in the <strong>Target Device</strong> section, make sure it says <strong>Show chooser dialog</strong>. Close the configuration dialog.</p>
 <p>You can now Run or Debug your app and a Choose Device dialog will come up with your emulator listed.</p>
-<p><a href="/images/2014/08/2014-08-19-17_19_13-Choose-Device.png"><img src="/images/2014/08/2014-08-19-17_19_13-Choose-Device-300x164.png" alt="Choose Device" width="300" height="164" class="aligncenter size-medium wp-image-233" /></a></p>
+<p><a href="/assets/img/2014/08/2014-08-19-17_19_13-Choose-Device.png"><img src="/assets/img/2014/08/2014-08-19-17_19_13-Choose-Device-300x164.png" alt="Choose Device" width="300" height="164" class="aligncenter size-medium wp-image-233" /></a></p>
 <p>So far, I haven't been able to adjust the emulator resolution to portrait mode and you can't rotate the device. From what I can tell, Hyper-V limits the available resolutions to common desktop resolutions. There is also no sound in the emulator and I haven't been able to get it working with my WiFi card yet, but it is a great option for quick debugging and testing.</p>
 <p>That's all there is to it. If you have any solutions, questions or problems, post them in the comments.</p>

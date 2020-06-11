@@ -17,7 +17,7 @@ tags:
 - NUnit
 - Xamarin
 ---
-<p><img class="alignright size-full wp-image-396" src="/images/2015/12/2015-12-21-11_50_25-XDE.png" alt="NUnit Tests on Android" width="200" height="356" />When testing <a href="https://xamarin.com/" target="_blank">Xamarin</a> using <a href="https://github.com/nunit/nunit.xamarin" target="_blank">NUnit 3</a>, you have two choices.</p>
+<p><img class="alignright size-full wp-image-396" src="/assets/img/2015/12/2015-12-21-11_50_25-XDE.png" alt="NUnit Tests on Android" width="200" height="356" />When testing <a href="https://xamarin.com/" target="_blank">Xamarin</a> using <a href="https://github.com/nunit/nunit.xamarin" target="_blank">NUnit 3</a>, you have two choices.</p>
 <ol>
 <li>A <strong>Portable Library</strong> that you reference from the test runner for each platform, or</li>
 <li>A <strong>Shared Project</strong> with your tests referenced from the platform specific test runners.</li>
@@ -28,8 +28,8 @@ tags:
 <p>The first step is adding a <strong>Shared Project</strong> to your solution that will contain your tests. Next, add a <strong>NUnit 3 Unit Test Project</strong> from under the <strong>Visual C# | Test</strong> node. This project will be .NET 4.5.x based and allow you to run tests from within Visual Studio or on the console. Add your shared project to this project as a shared reference. Depending on what you are testing, you will likely have to add references to the NuGet packages for Xamarin and any plugins you are using.</p>
 <p>As you are testing with the .NET 4.5 project, you will eventually try to test things that requires Xamarin or one of the plugins to be initialized on the platform which won't work under .NET 4.5. This is where you will start needing platform specific test runners.</p>
 <p>To add the platform specific test projects, <strong>Add | New Project..</strong> and add a <strong>NUnit 3 Test Project (Android)</strong> from under the <strong>Visual C# | Cross-Platform | Test</strong> node. Repeat for the platforms that you support.</p>
-<p><img class="aligncenter size-full wp-image-385" src="/images/2015/12/2015-12-20-15_05_02-Add-New-Project.png" alt="2015-12-20 15_05_02-Add New Project" width="863" height="450" /></p>
-<p><img class="aligncenter size-full wp-image-390" src="/images/2015/12/2015-12-21-10_40_37-DefectCollection-Microsoft-Visual-Studio.png" alt="Test Projects" width="285" height="287" /></p>
+<p><img class="aligncenter size-full wp-image-385" src="/assets/img/2015/12/2015-12-20-15_05_02-Add-New-Project.png" alt="2015-12-20 15_05_02-Add New Project" width="863" height="450" /></p>
+<p><img class="aligncenter size-full wp-image-390" src="/assets/img/2015/12/2015-12-21-10_40_37-DefectCollection-Microsoft-Visual-Studio.png" alt="Test Projects" width="285" height="287" /></p>
 <p>You will need to add references to your shared test project, your portable project that you want to test and if you have platform specific code you want to test, your platform specific projects. You may be using a newer version of <strong>Xamarin.Forms</strong> and/or require additional NuGet packages, so <strong>Manage NuGet Packages for Solution</strong> and install/upgrade packages for your test projects as appropriate.</p>
 <p>With the platform specific runners, you can add needed platform initialization code to the runners just like any other Xamarin.Forms app. You can also include platform specific tests either by adding them to the runners themselves, or by using the various <a href="https://developer.xamarin.com/guides/cross-platform/application_fundamentals/building_cross_platform_applications/part_4_-_platform_divergence_abstraction_divergent_implementation/#Conditional_Compilation">defines for conditional compilation</a> like <strong>__MOBILE__</strong> or <strong>__ANDROID__</strong>.</p>
 <pre><code>#if __MOBILE__

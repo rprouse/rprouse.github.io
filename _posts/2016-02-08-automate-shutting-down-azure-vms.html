@@ -18,40 +18,40 @@ tags:
 <h3>Create an Azure Active Directory Account</h3>
 <p>If like me you use multi-factor authentication for your Azure account, you cannot use your account to run automation scripts. Instead, you will need to create an Azure Active Directory account to run the automation scripts. If you are not using multi-factor authentication, you should consider switching, but if not, you can skip this and use your own account when setting up the credentials in the automation account below.</p>
 <p>You need to log into the <a href="https://portal.azure.com" target="_blank">Azure Portal</a> using the account of the Service Administrator to add new users. If this is your MSDN Subscription, you are likely the Service Administrator, but if it is a company account, you can find the Service Administrator by logging in with your account, then going to <strong>Subscriptions</strong>. Click on the subscription you want to administer, then <strong>All Settings | Properties</strong>.</p>
-<p><img class="aligncenter size-full wp-image-440" src="/images/2016/02/Subscription-Properties-Microsoft-Azure.png" alt="Subscription Admin" width="295" height="695" /></p>
+<p><img class="aligncenter size-full wp-image-440" src="/assets/img/2016/02/Subscription-Properties-Microsoft-Azure.png" alt="Subscription Admin" width="295" height="695" /></p>
 <p>The bottom text box in the Properties blade is the Service Admin, log in with that account and click on <strong>Active Directory</strong>. This currently launches you into the classic portal.</p>
 <p>On the left, click on the Directory for the subscription, then on the USERS tab. If you do not see the directory listed, you are not the admin for the directory. Now click on <strong>Add User</strong> at the bottom.</p>
-<p><img class="aligncenter size-full wp-image-442" src="/images/2016/02/Azure_Active_Directory.png" alt="Azure Active Directory" width="600" height="219" /></p>
+<p><img class="aligncenter size-full wp-image-442" src="/assets/img/2016/02/Azure_Active_Directory.png" alt="Azure Active Directory" width="600" height="219" /></p>
 <p>Select "New user in your organization" and enter a username for your automation user.</p>
-<p><img class="aligncenter size-full wp-image-444" src="/images/2016/02/New-AD-User.png" alt="New AD User" width="519" height="251" /></p>
+<p><img class="aligncenter size-full wp-image-444" src="/assets/img/2016/02/New-AD-User.png" alt="New AD User" width="519" height="251" /></p>
 <p>Click next and fill in the user information. The role should be User and <strong>don't enable multi-factor authentication</strong>.</p>
-<p><img class="aligncenter size-full wp-image-445" src="/images/2016/02/New-AD-User-Step-2.png" alt="New AD User Step 2" width="544" height="360" /></p>
+<p><img class="aligncenter size-full wp-image-445" src="/assets/img/2016/02/New-AD-User-Step-2.png" alt="New AD User Step 2" width="544" height="360" /></p>
 <p>Click next, then <strong>Create</strong> to create the user and generate a temporary password for the user. Write down the username and the temporary password.</p>
 <p>Since this is a temporary password, you must change it. Do this by logging out of Azure and logging back in with the newly created automation account. It will prompt you to change the password, do so, then log out and back in with your account.</p>
 <h3>Allow the Automation User to Manage your Subscription</h3>
 <p>Log back into the <a href="https://manage.windowsazure.com/" target="_blank">Classic Azure Portal</a> with your user, click <strong>Settings</strong> at the bottom left, then <strong>Administrators</strong>.</p>
-<p><img class="aligncenter size-full wp-image-452" src="/images/2016/02/Subscription-Admins.png" alt="Subscription Admins" width="600" height="200" /></p>
+<p><img class="aligncenter size-full wp-image-452" src="/assets/img/2016/02/Subscription-Admins.png" alt="Subscription Admins" width="600" height="200" /></p>
 <p>Enter the email for the user you just created and select the subscription they will manage.</p>
-<p><img class="aligncenter size-full wp-image-453" src="/images/2016/02/CoAdministrator.png" alt="CoAdministrator" width="631" height="307" /></p>
+<p><img class="aligncenter size-full wp-image-453" src="/assets/img/2016/02/CoAdministrator.png" alt="CoAdministrator" width="631" height="307" /></p>
 <h3>Create an Automation Account</h3>
 <p>Back in the <a href="https://portal.azure.com" target="_blank">Azure Portal</a> using your MSDN Subscription account, click on <strong>Automation Accounts</strong>. On the Automation Accounts blade, click on Add.</p>
-<p><img class="aligncenter size-full wp-image-429" src="/images/2016/02/Account-Options-Microsoft-Azure.png" alt="Create Automation Account" width="614" height="602" /></p>
+<p><img class="aligncenter size-full wp-image-429" src="/assets/img/2016/02/Account-Options-Microsoft-Azure.png" alt="Create Automation Account" width="614" height="602" /></p>
 <p>Give the new account a recognizable name. You will probably want to assign it to the same resource group as the services you are managing and select the same region. The default account options creates a tutorial runbook, leave it on, the code is useful to crib off of. When you are ready, click <strong>Create</strong>. After it is deployed, you will have a new automation account. Drill into it.</p>
-<p><img class="aligncenter size-full wp-image-431" src="/images/2016/02/DemoAutomation.png" alt="Automation Account" width="600" height="454" /></p>
+<p><img class="aligncenter size-full wp-image-431" src="/assets/img/2016/02/DemoAutomation.png" alt="Automation Account" width="600" height="454" /></p>
 <h3>Add Credentials to the Account</h3>
 <p>Automation scripts need credentials to run under, so the first step is to add them. Click on the <strong>Assets</strong> tile, then the <strong>Credentials</strong> tile then <strong>Add a Credential</strong>.</p>
-<p><img class="aligncenter size-full wp-image-449" src="/images/2016/02/New-Credential-Microsoft-Azure.png" alt="New Automation Credentials" width="305" height="586" /></p>
+<p><img class="aligncenter size-full wp-image-449" src="/assets/img/2016/02/New-Credential-Microsoft-Azure.png" alt="New Automation Credentials" width="305" height="586" /></p>
 <p>If you name the credentials <strong>DefaultAzureCredential</strong> then you you do not need to change the example automation scripts. If you prefer to use another name, you will need to change it in the automation scripts. For the username and password, use the automation user you created at the start of this post. If you skipped that and don't use multi-factor authentication I believe you can use your MSDN account.</p>
 <h3>Testing Your Setup</h3>
 <p>Close back out to the blade for your automation account and click on <strong>Runbooks</strong>. You should have a single Get-AzureVMTutorial runbook that was created when you created the account. We'll use this to test that you have the credentials setup correctly. Click on the runbook to open its blade. If you used <strong>DefaultAzureCredential</strong> for the credentials name, you can just press <strong>Start</strong>. If you used a different name, edit the script and change the authentication account where specified.</p>
 <p>A job blade will open and the job will cycle through Queued, Starting, Running and if all goes well Completed. If it fails for some reason, then the an exception will be shown at the bottom of the blade and the job will become Suspended. If it does this, stop it. If it succeeded, click the output tile to see the list of classic VMs that it found in your subscription.</p>
-<p><img class="aligncenter size-full wp-image-455" src="/images/2016/02/2016-02-08-13_43_04-Get-AzureVMTutorial-2_8_2016-1_40-PM-Microsoft-Azure.png" alt="Test Run" width="557" height="597" /></p>
+<p><img class="aligncenter size-full wp-image-455" src="/assets/img/2016/02/2016-02-08-13_43_04-Get-AzureVMTutorial-2_8_2016-1_40-PM-Microsoft-Azure.png" alt="Test Run" width="557" height="597" /></p>
 <h3>Time to write some code</h3>
 <p>If you peeked at the tutorial runbook code, you will see that it is just a PowerShell script. Time to create our own. I like to test what I am writing in the PowerShell ISE on my machine, but I will leave the setup of that to another blog post. For now, let's create a simple runbook to shutdown virtual machines.</p>
 <p>Back on the blade for your automation account, click <strong>Runbooks</strong> and <strong>Add a runbook</strong>.</p>
-<p><img class="aligncenter size-full wp-image-457" src="/images/2016/02/Add-Runbook-Microsoft-Azure.png" alt="Add Runbook - Microsoft Azure" width="408" height="249" /></p>
+<p><img class="aligncenter size-full wp-image-457" src="/assets/img/2016/02/Add-Runbook-Microsoft-Azure.png" alt="Add Runbook - Microsoft Azure" width="408" height="249" /></p>
 <p>Create a new runbook called <strong>Stop-AzureVirtualMachines</strong> of type <strong>PowerShell Workflow</strong> and give it a meaningful description and click <strong>Create</strong>.</p>
-<p><img class="aligncenter size-full wp-image-459" src="/images/2016/02/2016-02-08-14_51_36-Runbook-Microsoft-Azure.png" alt="Runbook - Microsoft Azure" width="600" height="345" /></p>
+<p><img class="aligncenter size-full wp-image-459" src="/assets/img/2016/02/2016-02-08-14_51_36-Runbook-Microsoft-Azure.png" alt="Runbook - Microsoft Azure" width="600" height="345" /></p>
 <p>A new Workflow Runbook will open in the editor, copy the following code in;</p>
 <pre><code>&lt;# .DESCRIPTION Stops all Azure Virtual Machines in an account. To stop classic VMs, change Get-AzureRmVM and Stop-AzureRmVM to Get-AzureVM and Stop-AzureVM .NOTES AUTHOR: Rob Prouse LASTEDIT: Feb 08, 2016 #&gt;
 workflow Stop-AzureVirtualMachines
@@ -88,10 +88,10 @@ workflow Stop-AzureVirtualMachines
 <p>If you didn't use <strong>DefaultAzureCredential</strong> when you created the credentials, make sure you change it in the script. Also, if you have more than one subscription, uncomment the <strong>Select-AzureRmSubscription</strong> line. Notice that this script shuts down the new Azure Virtual Machines using the PowerShell commands with Rm in them like Get-AzureRmVM. If you want to shut down classic VMs or other services, modify accordingly.</p>
 <p>You can now test your script by clicking the Test pane button and starting your script. If you see any errors, make the necessary edits to get it running in your account. Once it is running, exit the test blade and click <strong>Publish</strong>.</p>
 <p>After you publish the script, the edit blade should close. Back in the runbook blade, double check that the status is <strong>Published</strong>.</p>
-<p><img class="aligncenter size-full wp-image-464" src="/images/2016/02/2016-02-08-15_37_25-Stop-AzureVirtualMachines-Microsoft-Azure.png" alt="2016-02-08 15_37_25-Stop-AzureVirtualMachines - Microsoft Azure" width="569" height="328" /></p>
+<p><img class="aligncenter size-full wp-image-464" src="/assets/img/2016/02/2016-02-08-15_37_25-Stop-AzureVirtualMachines-Microsoft-Azure.png" alt="2016-02-08 15_37_25-Stop-AzureVirtualMachines - Microsoft Azure" width="569" height="328" /></p>
 <h3>Scheduling the Job</h3>
 <p>Last step, promise. In the blade for the runbook you just created, click the <strong>Schedules</strong> tile, <strong>Add a schedule</strong>, <strong>Schedule</strong> and <strong>Create a new schedule</strong>. Give it a name like Every Evening at 6pm, a description, a start date and time in the future and a daily recurrence. You can now exit out of the blades, you are done.</p>
-<p><img class="aligncenter size-full wp-image-465" src="/images/2016/02/2016-02-08-15_41_58-New-Schedule-Microsoft-Azure.png" alt="New Schedule" width="295" height="628" /></p>
+<p><img class="aligncenter size-full wp-image-465" src="/assets/img/2016/02/2016-02-08-15_41_58-New-Schedule-Microsoft-Azure.png" alt="New Schedule" width="295" height="628" /></p>
 <h3>Monitoring your Jobs</h3>
 <p>Optionally, you may want to monitor the status of your jobs to make sure they don't start failing. Do do this, go to the blade for your automation account. There is a Job Statistics tile on that blade. Right click on it and pin it to your dashboard for easy viewing...</p>
-<p><img class="aligncenter size-full wp-image-466" src="/images/2016/02/2016-02-08-15_46_51-Settings-Microsoft-Azure.png" alt="Job Statistics" width="551" height="393" /></p>
+<p><img class="aligncenter size-full wp-image-466" src="/assets/img/2016/02/2016-02-08-15_46_51-Settings-Microsoft-Azure.png" alt="Job Statistics" width="551" height="393" /></p>
