@@ -23,11 +23,11 @@ tags:
 <h2>Creating a Test Project</h2>
 <p>The following instructions are for Visual Studio, but the principles apply to all development environments.</p>
 <p>In the solution that you want to test, <strong>Add | New Project...</strong> and add a <strong>Visual C# | .NET Core | Class Library (.NET Core)</strong>.</p>
-<p><img src="/images/2017/05/Add-.NET-Core-Class-Library.png" alt="Add .NET Core Class Library" width="656" height="421" align="center" /></p>
+<p><img src="/assets/img/2017/05/Add-.NET-Core-Class-Library.png" alt="Add .NET Core Class Library" width="656" height="421" align="center" /></p>
 <p>I am testing a .NET Standard library, but I am using a .NET Core class library for testing. Testing requires a platform to test on, so your test assembly must target a specific platform. I selected .NET Core, but I could also target .NET 4.5 or even multi-target the test assembly. Be aware that multi-targeted test projects are barely supported by Visual Studio and your results may vary. Hopefully we will see improvements in the tooling soon.</p>
 <h2>Adding NuGet References</h2>
 <p>First, you will want to add a project reference to the project you are testing, then add NuGet references to the test framework&nbsp;<strong>NUnit</strong> 3.6.1, to the test runner&nbsp;<strong>NUnit3TestAdapter</strong> 3.8.0-alpha1 and to the test SDK&nbsp;<strong>Microsoft.NET.Test.Sdk</strong> 15.0.0. Add the references either using the <strong>Manage NuGet Packages...</strong> user interface, or by editing the project file.</p>
-<p><img src="/images/2017/05/Add-NuGet-References-to-Test-Project.png" alt="Add NuGet References to Test Project" width="790" height="429" align="center" /></p>
+<p><img src="/assets/img/2017/05/Add-NuGet-References-to-Test-Project.png" alt="Add NuGet References to Test Project" width="790" height="429" align="center" /></p>
 <p>Your csproj file should end up looking similar to this. Notice how much cleaner the new format is.</p>
 <pre><code class="xml">&lt;project Sdk="Microsoft.NET.Sdk"&gt;
 
@@ -54,7 +54,7 @@ tags:
 <p>From here, <a href="/2016/10/03/nunit-unit-tests/">write your unit tests</a> as you would for any project.</p>
 <h2>Running Tests in Visual Studio</h2>
 <p>Running tests in Visual Studio hasn't changed. See my previous post on <a href="/2016/10/20/nunit-visual-studio-adapter/">running NUnit tests in Visual Studio</a> if you have questions.</p>
-<p><img src="/images/2017/05/Running-Unit-Tests.png" alt="Running Unit Tests in Visual Studio" width="259" height="291" align="center" /></p>
+<p><img src="/assets/img/2017/05/Running-Unit-Tests.png" alt="Running Unit Tests in Visual Studio" width="259" height="291" align="center" /></p>
 <p>A few things to note,</p>
 <ul>
 <li>If you multi-target your tests, only one target will run in Visual Studio, I believe the first</li>

@@ -24,7 +24,7 @@ tags:
 <p>The <a href="https://github.com/rprouse/NUnitWithDotNetCoreRC2/">code from this post is on GitHub</a> and is based on the code from my previous post.</p>
 <h2>Create a .NET Core Project</h2>
 <p>In Visual Studio, <strong>File | New | Project...</strong> and select <strong>Class Library (.NET Core)</strong> under the new <strong>C# | .NET Core</strong> node.</p>
-<p><img class="aligncenter size-full wp-image-540" src="/images/2016/05/2016-05-18-09_55_55-New-Project.png" alt="New .NET Core Project" width="941" height="653" /></p>
+<p><img class="aligncenter size-full wp-image-540" src="/assets/img/2016/05/2016-05-18-09_55_55-New-Project.png" alt="New .NET Core Project" width="941" height="653" /></p>
 <p>This it the code under test. To this, I have added the simple calculator class <a href="/2015/11/04/testing-net-core-using-nunit-3/">from the last post</a>.</p>
 <pre><code class="csharp">public static class Calculator
 {
@@ -119,7 +119,7 @@ namespace NUnitWithDotNetCoreRC2.Test
 </code></pre>
 <h2>Running Your Tests</h2>
 <p>Now you can run your tests in Visual Studio, or from the command line. In Visual Studio, you may need to reload the solution before your changes are picked up, then your tests will appear in <code>Test Explorer</code> after you build the solution.</p>
-<p><img class="aligncenter size-full wp-image-558" src="/images/2016/06/2016-06-18-11_58_24-NUnitWithDotNetCoreRC2.png" alt="NUnit testing .NET Core in Visual Studio" width="356" height="590" /></p>
+<p><img class="aligncenter size-full wp-image-558" src="/assets/img/2016/06/2016-06-18-11_58_24-NUnitWithDotNetCoreRC2.png" alt="NUnit testing .NET Core in Visual Studio" width="356" height="590" /></p>
 <p>In addition, use the following commands to run your tests from the command line;</p>
 <pre><code># Restore the NuGet packages
 dotnet restore

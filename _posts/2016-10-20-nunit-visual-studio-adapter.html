@@ -21,19 +21,19 @@ tags:
 <p>The easiest way to install the NUnit Visual Studio Adapter is as an extension. This has the advantage that it is always available and it will automatically update to the latest versions as they are released. The disadvantage is that every person on your team will need to install it.</p>
 <p>To install, you can <a href="https://visualstudiogallery.msdn.microsoft.com/0da0f6bd-9bb6-4ae3-87a8-537788622f2d">download the extension</a> from the Visual Studio Gallery and double click the VSIX file to install it in all supported versions of Visual Studio.</p>
 <p>The second option is to go to the&nbsp;<strong>Tools | Extensions and Updates</strong> menu in Visual Studio. From here, click on&nbsp;<strong>Online</strong> and search for <strong>nunit adapter</strong>. You are looking for the&nbsp;<strong>NUnit 3 Test Adapter</strong> and install it.</p>
-<p><img class="aligncenter wp-image-666 size-full" src="/images/2016/10/2016-10-20-20_46_50-Extensions-and-Updates.png" alt="Install NUnit Visual Studio Adapter as an Extension" width="795" height="453" /></p>
+<p><img class="aligncenter wp-image-666 size-full" src="/assets/img/2016/10/2016-10-20-20_46_50-Extensions-and-Updates.png" alt="Install NUnit Visual Studio Adapter as an Extension" width="795" height="453" /></p>
 <p>Notice there is an&nbsp;<strong>NUnit Test Adapter</strong> available too. That is the original adapter for running older NUnit 2 tests. If you have older tests, it is fine to install both NUnit test adapters side-by-side.</p>
 <h3>NuGet Package</h3>
 <p>The other option for installing the NUnit Visual Studio Adapter is as a NuGet package. This has the advantage that it becomes part of your solution and every developer will get it, but you must add it to every solution that needs it.</p>
 <p>To install, right click on your test project in Visual Studio and click on&nbsp;<strong>Manage NuGet Packages...</strong></p>
 <p>Click on the&nbsp;<strong>Browse</strong> tab and search for&nbsp;<strong>nunit adapter</strong>. You are looking for&nbsp;<strong>NUnit3TestAdapter</strong>. Click it and install. Like the extension, there is also&nbsp;<strong>NUnitTestAdapter</strong> for running NUnit 2 tests.</p>
-<p><img class="aligncenter wp-image-669 size-full" src="/images/2016/10/2016-10-20-20_58_38-IntroToNUnit-NuGet_-IntroToNUnit.Tests_.png" alt="Install NUnit Visual Studio Adapter as NuGet Package" width="781" height="476" /></p>
+<p><img class="aligncenter wp-image-669 size-full" src="/assets/img/2016/10/2016-10-20-20_58_38-IntroToNUnit-NuGet_-IntroToNUnit.Tests_.png" alt="Install NUnit Visual Studio Adapter as NuGet Package" width="781" height="476" /></p>
 <p>Note that you only have to install the adapter in one test project and it will be available for the entire solution.</p>
 <h2>Running Tests using the Test Explorer Window</h2>
 <p>You will usually run your tests using the&nbsp;<strong>Test Explorer Window</strong>. To open it, click the&nbsp;<strong>Test | Windows | Test Explorer</strong> menu.</p>
 <h3>Running Tests</h3>
 <p>After you build your solution, Visual Studio will populate the&nbsp;<strong>Test Explorer Window</strong>. If you don't see any tests, check the output window for errors. To run tests, simply click the&nbsp;<strong>Run All</strong> button in the upper left. You will see your tests run as the progress bar updates and your tests turn green.</p>
-<p><img class="aligncenter size-full wp-image-672" src="/images/2016/10/2016-10-20-21_14_02-IntroToNUnit-Microsoft-Visual-Studio.png" alt="Run all tests from the Test Explorer Window" width="380" height="404" /></p>
+<p><img class="aligncenter size-full wp-image-672" src="/assets/img/2016/10/2016-10-20-21_14_02-IntroToNUnit-Microsoft-Visual-Studio.png" alt="Run all tests from the Test Explorer Window" width="380" height="404" /></p>
 <p>The&nbsp;<strong>Run...</strong> menu allows you to run failed tests, tests that have not been run before, etc. Right&nbsp;clicking on individual tests or groups of tests and clicking&nbsp;<strong>Run Selected Tests</strong> will run those tests.</p>
 <p><strong>Debugging Tests</strong></p>
 <p>Tests&nbsp;can be debugged from the&nbsp;<strong>Test Explorer Window</strong>. Add your breakpoints into your code and right click on individual tests or groups of tests, then click&nbsp;<strong>Debug Selected Tests</strong>.</p>
@@ -50,14 +50,14 @@ tags:
 <p>Visual Studio has trouble with multiple tests created using the <a href="/2016/10/17/nunit-testcase-attribute/">TestCase </a>attribute or other data attributes. Using the key-bindings while in these methods will run all tests in the class.</p>
 <h3>Code Lens</h3>
 <p>If your&nbsp;version of Visual Studio includes Code Lens, your tests will also have a small icon on the left of the code lens that indicates if the test passed, failed, was ignored or hasn't been run. Clicking that icon brings up information on the last test run and allows you to run or debug the test.</p>
-<p><img class="aligncenter size-full wp-image-675" src="/images/2016/10/2016-10-20-22_00_43-IntroToNUnit-Microsoft-Visual-Studio.png" alt="Code Lens for Unit Tests" width="722" height="218" /></p>
+<p><img class="aligncenter size-full wp-image-675" src="/assets/img/2016/10/2016-10-20-22_00_43-IntroToNUnit-Microsoft-Visual-Studio.png" alt="Code Lens for Unit Tests" width="722" height="218" /></p>
 <h2>Other Features</h2>
 <h3>Grouping Tests</h3>
 <p>By default, Visual Studio groups tests in the&nbsp;<strong>Test Explorer Window</strong> by their outcome; pass, fail, etc. You can also group by&nbsp;<strong>Class, Duration, Traits</strong> or&nbsp;<strong>Project</strong>. To group your tests, either right-click on a group and select&nbsp;<strong>Group By</strong> or use the dropdown at the top left of the window.</p>
-<p><img class="aligncenter size-full wp-image-678" src="/images/2016/10/2016-10-20-22_10_44-IntroToNUnit-Microsoft-Visual-Studio.png" alt="Grouping Unit Tests" width="232" height="200" /></p>
+<p><img class="aligncenter size-full wp-image-678" src="/assets/img/2016/10/2016-10-20-22_10_44-IntroToNUnit-Microsoft-Visual-Studio.png" alt="Grouping Unit Tests" width="232" height="200" /></p>
 <p>The&nbsp;<strong>Traits</strong> group maps to <a href="https://github.com/nunit/docs/wiki/Category-Attribute">NUnit's&nbsp;</a>Category Attribute which allows you to group your tests based on the categories you assign them.</p>
 <h3>Running x86 or x64 Tests</h3>
 <p>If your tests are compiled x86 or x64 instead of AnyCpu, you must set the processor architecture to run your tests under. To do so, click on&nbsp;<strong>Test | Test Settings | Default Processor Architecture</strong> menu and select X86 or X64.</p>
 <h3>Playlists</h3>
 <p>If you have a group of tests that you are always running, you should create a playlist for them. To do so, select the tests that you want to include in the&nbsp;<strong>Test Explorer Window</strong>, then right click and select&nbsp;<strong>Add to Playlist | New Playlist.</strong> Once you do so, you can filter the tests that are displayed and run but selecting the playlist from the dropdown at the top right.</p>
-<p><img class="aligncenter size-full wp-image-680" src="/images/2016/10/2016-10-20-22_23_50-IntroToNUnit-Microsoft-Visual-Studio.png" alt="Test Playlists" width="340" height="208" /></p>
+<p><img class="aligncenter size-full wp-image-680" src="/assets/img/2016/10/2016-10-20-22_23_50-IntroToNUnit-Microsoft-Visual-Studio.png" alt="Test Playlists" width="340" height="208" /></p>

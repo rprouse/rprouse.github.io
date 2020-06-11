@@ -19,7 +19,7 @@ comments: []
 <p>First, we need to make sure that our project has a settings file. It is usually under the Properties node of the project. If it is not, right click on the solution and <strong>Add | New Item&brvbar; | Visual C# Items | General | Settings File</strong> and name it <em>Settings.settings.</em> Next, drag it and drop it in your project's Properties folder.</p>
 <p>Next, you need to add a bool User setting called <strong>UpgradeRequired</strong> and default it to true. Next, at the very beginning of your Main, you check if <strong>UpgradeRequired</strong> is true, and if it is, upgrade the settings, set <strong>UpgradeRequired</strong> to false and save out the settings. This will pull in the settings from previous versions of your application.</p>
 <p>Your settings should look like this,</p>
-<p><img style="display: inline" title="settings" alt="settings" src="/images/2011/09/settings.png" width="416" height="106"></p>
+<p><img style="display: inline" title="settings" alt="settings" src="/assets/img/2011/09/settings.png" width="416" height="106"></p>
 <p>The code should look like this,</p>
 <pre name="code" class="c#:nogutter">static void Main( string[] args )
 {

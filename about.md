@@ -10,7 +10,7 @@ wordpress_url: /contact/
 date: '2007-03-19 10:48:38 +0000'
 date_gmt: '2007-03-19 15:48:38 +0000'
 ---
-![Rob Prouse](/images/2007/03/RProuse-20120428-0400-150x150.jpg)
+![Rob Prouse](/assets/img/2007/03/RProuse-20120428-0400-150x150.jpg)
 
 My name is Rob Prouse. I am a software&nbsp;developer specializing in .NET, but I am experienced with most popular programming languages. I am passionate about agile engineering practices and present on the subject whenever I get the chance. I manage the [NUnit](https://github.com/nunit) project and have contributed to many open source projects over the years.
 

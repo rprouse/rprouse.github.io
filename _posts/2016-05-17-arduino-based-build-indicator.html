@@ -16,7 +16,7 @@ tags:
 - Continuous Integration
 - Maker
 ---
-<p><img class="alignright size-full wp-image-535" src="/images/2016/05/20160517_110652.jpg" alt="Arduino based build indicator" width="250" height="258" align="right" />I found a red strobe light in the bargain bin at a local electronics store and immediately knew what to do with it - create a build failed light. There is a long history of dev shops creating <a href="https://en.wikipedia.org/wiki/Build_light_indicator" target="_blank">build indicator lights</a> using lava lamps, stop lights and computer monitors mounted on the wall and I've always wanted to build one.<!--more--></p>
+<p><img class="alignright size-full wp-image-535" src="/assets/img/2016/05/20160517_110652.jpg" alt="Arduino based build indicator" width="250" height="258" align="right" />I found a red strobe light in the bargain bin at a local electronics store and immediately knew what to do with it - create a build failed light. There is a long history of dev shops creating <a href="https://en.wikipedia.org/wiki/Build_light_indicator" target="_blank">build indicator lights</a> using lava lamps, stop lights and computer monitors mounted on the wall and I've always wanted to build one.<!--more--></p>
 <p>The strobe was rated at 12V, but I wanted to run it off USB, so I hooked it up to a 5V power supply. It strobed a bit slower, but it worked, so I checked the amps. It drew a steady 70mA which is too much to run directly off an Arduino pin which are limited to around 40mA, but still low enough to run off USB and the 5V pin on the Arduino. I could use a relay to switch the strobe, but it seemed like overkill, so I checked my parts drawer and found some <a href="https://en.wikipedia.org/wiki/2N2222" target="_blank">PN2222A</a> transistors which are rated to 40V and 800mA.</p>
 <h3>Software</h3>
 <p>Since I was going to power this project off USB, I decided to let the computer do the heavy lifting of checking the state of the build and signal the Arduino over serial. The Arduino code is pretty simple, listen on serial, if it receives a 0, set pin 13 LOW, if it receives a 1, set pin 13 HIGH.</p>
@@ -111,10 +111,10 @@ while True:
 </code></pre>
 <h3>Hardware</h3>
 <p>I started by prototyping on a breadboard using a red LED to stand in for the strobe. The green LED is a power indicator. Once I knew the code and the hardware was working, I then added the strobe in parallel to the LED and its resistor.</p>
-<p><img class="aligncenter size-full wp-image-524" src="/images/2016/05/Strobe_bb.png" alt="Strobe Breadboard" width="1812" height="723" /></p>
+<p><img class="aligncenter size-full wp-image-524" src="/assets/img/2016/05/Strobe_bb.png" alt="Strobe Breadboard" width="1812" height="723" /></p>
 <p>I then soldered the components for the transistor switching circuit onto a small prototyping board.</p>
-<p><img class="aligncenter size-full wp-image-532" src="/images/2016/05/20160517_110809.jpg" alt="Transistor switching circuit" width="720" height="405" /></p>
+<p><img class="aligncenter size-full wp-image-532" src="/assets/img/2016/05/20160517_110809.jpg" alt="Transistor switching circuit" width="720" height="405" /></p>
 <p>Then wired the board to an old Arduino Uno, put it in a small box and screwed the strobe to the box.</p>
-<p><img class="aligncenter size-full wp-image-533" src="/images/2016/05/20160517_110817.jpg" alt="Project box" width="720" height="405" /></p>
+<p><img class="aligncenter size-full wp-image-533" src="/assets/img/2016/05/20160517_110817.jpg" alt="Project box" width="720" height="405" /></p>
 <p>And then put the strobe up at work. Sorry, I couldn't catch the flashing...</p>
-<p><img class="aligncenter size-full wp-image-530" src="/images/2016/05/20160504_170310.jpg" alt="Build indicator strobe" width="720" height="434" /></p>
+<p><img class="aligncenter size-full wp-image-530" src="/assets/img/2016/05/20160504_170310.jpg" alt="Build indicator strobe" width="720" height="434" /></p>

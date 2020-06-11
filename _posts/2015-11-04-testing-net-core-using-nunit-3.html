@@ -36,10 +36,10 @@ tags:
 }
 </code></pre>
 <p>To test this project, I simply add a new test project by right-clicking on my solution and <strong>Add | New Project...</strong>. I then navigate to the <strong>Visual C# | Web</strong> node and create a new <strong>Console Application (Package)</strong>.</p>
-<p><img class="aligncenter size-full wp-image-351" src="/images/2015/11/2015-11-04-10_59_25-Add-New-Project.png" alt="2015-11-04 10_59_25-Add New Project" width="955" height="660" /></p>
+<p><img class="aligncenter size-full wp-image-351" src="/assets/img/2015/11/2015-11-04-10_59_25-Add-New-Project.png" alt="2015-11-04 10_59_25-Add New Project" width="955" height="660" /></p>
 <p>&nbsp;</p>
 <p>I then add a project reference to the project under test,</p>
-<p><img class="aligncenter size-full wp-image-353" src="/images/2015/11/2015-11-04-11_01_38-NUnitDnxTest-Microsoft-Visual-Studio.png" alt="2015-11-04 11_01_38-NUnitDnxTest - Microsoft Visual Studio" width="341" height="446" /></p>
+<p><img class="aligncenter size-full wp-image-353" src="/assets/img/2015/11/2015-11-04-11_01_38-NUnitDnxTest-Microsoft-Visual-Studio.png" alt="2015-11-04 11_01_38-NUnitDnxTest - Microsoft Visual Studio" width="341" height="446" /></p>
 <p>Next, I Manage NuGet Packages on the test project. <del datetime="2016-04-19T00:17:27+00:00">Make sure you check <strong>Include prerelease</strong> and search for <strong>nunitlite.</strong></del> Adding the NUnitLite package will also pull in NUnit 3.</p>
 <p>Now open&nbsp;<strong>Program.cs</strong> and replace it with the following, adjusting the namespace accordingly.</p>
 <pre><code class="csharp">using NUnit.Common;
@@ -105,11 +105,11 @@ namespace MyDnxProject.Test
 </code></pre>
 <p>You can now run and debug your tests from Visual Studio by setting the test project as the <strong>Startup Project</strong> and running. You may want to add the <strong>--wait</strong> command line option to the project settings under <strong>Debug | Application Arguments</strong>. This isn't needed under .NET Core which keeps the console window open at the end of the run, but it is needed by .NET 4.5.1.</p>
 <p>In Visual Studio, to change from running DNX 4.5.1 to DNX Core 5.0, drop down the debug project button in the toolbar and switch the CLR Type;</p>
-<p><img class="aligncenter size-full wp-image-357" src="/images/2015/11/2015-11-04-13_55_32-NUnitDnxTest-Microsoft-Visual-Studio.png" alt="2015-11-04 13_55_32-NUnitDnxTest - Microsoft Visual Studio" width="644" height="208" /></p>
+<p><img class="aligncenter size-full wp-image-357" src="/assets/img/2015/11/2015-11-04-13_55_32-NUnitDnxTest-Microsoft-Visual-Studio.png" alt="2015-11-04 13_55_32-NUnitDnxTest - Microsoft Visual Studio" width="644" height="208" /></p>
 <p>You will notice that if you run DNX 4.5.1, you get the full colour console output, but if you switch to DNX Core 5.0, you get the same information, but in a one colour console. We hope to update NUnitLite for DNX to support full colour soon.</p>
 <p>Now, I assume you are going to want to run your tests from the command line. The following are the steps that will be needed. All of this is just standard .NET Core stuff, but I wanted to document it for new users.</p>
 <p>First, go into the project settings for your test project and enable <strong>Produce outputs on build</strong> for all configurations on the Build tab.</p>
-<p><img class="aligncenter size-full wp-image-359" src="/images/2015/11/2015-11-04-14_03_55-NUnitDnxTest-Microsoft-Visual-Studio.png" alt="2015-11-04 14_03_55-NUnitDnxTest - Microsoft Visual Studio" width="397" height="134" /></p>
+<p><img class="aligncenter size-full wp-image-359" src="/assets/img/2015/11/2015-11-04-14_03_55-NUnitDnxTest-Microsoft-Visual-Studio.png" alt="2015-11-04 14_03_55-NUnitDnxTest - Microsoft Visual Studio" width="397" height="134" /></p>
 <p>Open up a command prompt and navigate to the root of your solution. .NET Core builds projects into an <em>artifacts</em> directory in the solution root. CD into <em>artifacts\bin\MyDnxProject.Test\Debug</em>. You will notice that there are NuGet packages in this folder and <em>app</em>, <em>dnx451</em> and <em>dnxcore50</em> directories.</p>
 <pre><code>&Icirc;&raquo; ls
 

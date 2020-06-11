@@ -32,7 +32,7 @@ tags:
 <p>This fixed my problems with the UdpAppender, although, if you use <strong>localhost</strong> on a Windows Vista or Windows 7 machine, it will resolve to the IPv6 address, so make sure that your receiver is listening on the IPv6 address. For example, in <a href="http://log2console.codeplex.com/">log2console,</a> under Receivers, set Use IPv6 Addresses to true for the UDP receiver. If your receiver does not support IPv6, use <strong>127.0.0.2</strong> for the address.</p>
 <p>To save other people the hassle of recompiling log4net themselves to get the latest fixes, I have uploaded a release version of the assembly. Download it here.</p>
 <ul>
-<li><a href="/images/2010/07/log4net_1.2.10.1.zip">log4net 1.2.10.1</a> -&nbsp; 260 KB Zip</li>
+<li><a href="/assets/img/2010/07/log4net_1.2.10.1.zip">log4net 1.2.10.1</a> -&nbsp; 260 KB Zip</li>
 </ul>
 <p>We are using this version of the assembly in our own projects, but I make no guarantees as to its stability.</p>
 <p><strong>Update:</strong> Just to&nbsp; be clear, this is not an official log4net release and it is only compiled against .NET 2.0. I have made no code changes, it is just the code that is currently in the repository. This is only intended to save you having to download and compile if you run into the same problems I did. It is also not extensively tested. We are using it and File, Rolling File, Event Log and UDP Appenders seem to be working fine.</p>
