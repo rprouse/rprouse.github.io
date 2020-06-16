@@ -17,7 +17,7 @@ title: Alteridem
 description: >-
   My name is Rob Prouse. I'm a Microsoft MVP. I lead the NUnit test framework
   team and contribute to numerous open source projects.
-permalink: ':title/'
+permalink: pretty
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 site-twitter: #if your site has a twitter account, enter it here
