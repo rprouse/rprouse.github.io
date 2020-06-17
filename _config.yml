@@ -73,6 +73,7 @@ plugins:
 #   - vendor/gems/
 #   - vendor/ruby/
 
+url: "https://alteridem.net"
 production_url: "https://alteridem.net"
 #rss_path: /rss.xml
 #atom_path: /atom.xml
