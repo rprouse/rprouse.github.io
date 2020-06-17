@@ -183,6 +183,13 @@ footer {
   }
 }
 
+.pagination {
+  background-color: $white;
+  padding: 16px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px 0 rgba(31, 35, 46, .15);
+}
+
 a.older-posts, a.newer-posts {
   font-size: 18px;
   display: inline-block;
