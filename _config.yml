@@ -42,7 +42,7 @@ social-email: rob@prouse.org
 discus-identifier: alteridem
 
 # Tracker
-analytics: UA-7904234-3
+analytics: G-X21LFRE8T9
 
 # refer to http://shopify.github.io/liquid/filters/date/ if you want to customize this
 date_format: "%b %-d, %Y"
