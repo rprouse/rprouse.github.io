@@ -18,7 +18,7 @@ tags:
 <p>It took a fair amount of searching and code tweaking, but I finally worked it all out.</p>
 <ol>
 <li>Add a reference to the COM <strong>Microsoft Windows Installer Object Library</strong>.</li>
-<li>Add a <span style="font-family: 'Courier New';"><span style="color: #0000ff;">using</span> WindowsInstaller;</span></li>
+<li>Add a using WindowsInstaller;</li>
 <li>Add the following static method to your code (error checking removed for brevity.)</li>
 </ol>
 <pre class="c-sharp:nogutter">public static string GetMsiProperty( string msiFile, string property )
