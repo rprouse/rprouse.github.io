@@ -15,10 +15,9 @@
 # in the templates via {{ site.myvariable }}.
 title: Alteridem
 description: >-
-  My name is Rob Prouse. I'm a Microsoft MVP. I am the Chief Technology Officer
-  at Reliq Health Technologies and in my spare time, I lead the open source
-  NUnit Test Framework development team and contribute to numerous open source
-  projects.
+  Proven software engineer and architect with a passion for building high
+  performance agile teams and empowering them to deliver customer value through
+  software and technology.
 permalink: pretty
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
@@ -28,10 +27,9 @@ highlighter: rouge
 author: Rob Prouse
 author-img: rob_prouse.jpg
 about-author: >-
-  My name is Rob Prouse. I'm a Microsoft MVP. I am the Chief Technology Officer
-  at Reliq Health Technologies and in my spare time, I lead the open source
-  NUnit Test Framework development team and contribute to numerous open source
-  projects.
+  Proven software engineer and architect with a passion for building high
+  performance agile teams and empowering them to deliver customer value through
+  software and technology.
 social-twitter: rprouse
 # social-facebook:
 social-github: rprouse
