@@ -4,7 +4,7 @@ status: publish
 published: true
 title: Résumé for Rob Prouse
 fullname: Rob Prouse
-jobtitle: Senior Development Manager & Opensource Developer
+jobtitle: Software Development Manager
 email: rob@prouse.org
 phone: 905-320-7861
 location: Hamilton, ON
@@ -19,7 +19,7 @@ date: '2021-04-10 13:48:38 +0400'
 
 Proven software engineer and architect with a passion for building high performance agile teams and empowering them to deliver customer value through software and technology.
 
-Awarded for five consecutive years as a Microsoft Most Valuable Professional (MVP) for thought leadership in C#, .NET and DevOps. Head of the open source NUnit Test Framework development team, a member of the .NET Foundation and a frequent contributor to numerous opensource projects. My opensource projects have been downloaded over 300 million times.
+Recognized by Microsoft as a Most Valuable Professional (MVP) for thought leadership in C#, .NET and DevOps. Head of the opensource NUnit Test Framework development team, a member of the .NET Foundation and a frequent contributor to numerous opensource projects. My opensource projects have been downloaded over 300 million times.
 
 ## Work Experience
 
@@ -27,10 +27,10 @@ Awarded for five consecutive years as a Microsoft Most Valuable Professional (MV
 
 Reliq Health Technologies is a rapidly growing technology company focused on developing innovative remote patient monitoring, care collaboration and telemedicine solutions for Community-Based Healthcare.
 
-- Built and led a 22 person agile teams working on multiple projects.
-- Reduced per customer Cloud hosting costs to 1/10th.
-- Took an early startup application and refactored it to enterprise scale.
-- Optimized CI/CD processes to deliver code to production every sprint.
+- Rebooted the company's software development by building and leading a 22 person agile team working on multiple projects.
+- Through architectural and performance improvements, reduced per customer Cloud hosting costs to 1/10th.
+- Refactored an early startup application bringing it to enterprise scale.
+- Optimized CI/CD processes to deliver value to our customers every sprint.
 - Created a requirements processes that coordinated the work of business, clinical and product management teams ensuring that development was working on business priorities.
 
 ### Software Development Manager, Bentley Systems &middot; Jun 2017 – Mar 2019
@@ -44,13 +44,13 @@ Bentley Systems is the leading global provider of software solutions to engineer
 ### Principal Software Engineer, Bentley Systems &middot; Oct 2012 – Jun 2017
 
 - Designed and led the development of several cross-platform mobile applications written in C# using Xamarin for the Enterprise market.
-- Responsible for modernizing the technology and architecture of their Asset Performance Management suite of software.
-- Led the teams transition to modern agile development practices, tools and processes.
-- Served on the architectural advisory board coordinating the technical changes between suites of products.
+- Modernized the technology and architecture of their Asset Performance Management suite of software.
+- Led the team's transition to modern agile development practices, tools and processes.
+- Served on the architectural advisory board, coordinating the technical improvements between suites of products.
 
 ### Framework Developer, Ivara Corporation &middot; Jan 2005 - Oct 2012
 
-- Converted the company's flagship product from a 2-tier MFC application to a 3-Tier .NET application. The development required that all functionality be maintained while rewriting the product to have a modern user interface and support hundreds of concurrent users.
+- Converted the company's flagship product from a 2-tier MFC application to a 3-Tier .NET application. All functionality was maintained while rewriting the product to have a modern user interface and support hundreds of concurrent users.
 - In order to deliver on-time and to specifications, pushed the company to adopt agile development practices. Brought test-driven development, continuous builds and an iterative approach to development to the company.
 
 ### Senior Software Architect, Semaview, Inc. &middot; Dec 2002 - Jun 2004

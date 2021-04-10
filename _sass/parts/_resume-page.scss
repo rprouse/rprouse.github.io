@@ -1,3 +1,31 @@
+@import 'variables';
+
+@page {
+  /* Change margins and paper size of PDF */
+  /* https://developer.mozilla.org/en-US/docs/Web/CSS/@page */
+  size: letter;
+  margin: 0.5in 0.8in;
+}
+
+@media print {
+  a, a:link, a:visited, a:hover {
+      color: $body-color;
+      text-decoration: none;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    background: none;
+  }
+
+  .article-resume {
+    margin: 0;
+    padding: 0;
+    background: none;
+  }
+}
+
 .article-resume {
   max-width: 748px;
   font-size: 16px;

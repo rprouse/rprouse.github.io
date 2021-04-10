@@ -9,16 +9,16 @@
 
     <div id="contact">
       <ul>
-        <li><i class="fa fa-mobile" aria-hidden="true"></i> <a href="mailto:{{ page.phone }}">{{ page.phone }}</a></li>
+        <li><i class="fa fa-mobile" aria-hidden="true"></i> <a href="tel:{{ page.phone }}">{{ page.phone }}</a></li>
         <li><i class="fa fa-envelope-o" aria-hidden="true"></i> <a href="mailto:{{ page.email }}">{{ page.email }}</a></li>
       </ul>
       <ul>
         <li><i class="fa fa-map-marker" aria-hidden="true"></i> <a href="https://www.google.com/maps/place/{{ page.location }}"> {{ page.location }}</a></li>
-        <li><i class="fa fa-linkedin-square" aria-hidden="true"></i> <a href="mailto:{{ page.linkedin_url }}">{{ page.linkedin }}</a></li>
+        <li><i class="fa fa-linkedin-square" aria-hidden="true"></i> <a href="{{ page.linkedin_url }}">{{ page.linkedin }}</a></li>
       </ul>
       <ul>
-        <li><i class="fa fa-github" aria-hidden="true"></i> <a href="mailto:{{ page.github_url }}">{{ page.github }}</a></li>
-        <li><i class="fa fa-stack-overflow" aria-hidden="true"></i> <a href="mailto:{{ page.stackoverflow_url }}">{{ page.stackoverflow }}</a></li>
+        <li><i class="fa fa-github" aria-hidden="true"></i> <a href="{{ page.github_url }}">{{ page.github }}</a></li>
+        <li><i class="fa fa-stack-overflow" aria-hidden="true"></i> <a href="{{ page.stackoverflow_url }}">{{ page.stackoverflow }}</a></li>
       </ul>
     </div>
 
