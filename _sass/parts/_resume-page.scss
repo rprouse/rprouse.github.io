@@ -1,0 +1,82 @@
+@import 'variables';
+
+@page {
+  /* Change margins and paper size of PDF */
+  /* https://developer.mozilla.org/en-US/docs/Web/CSS/@page */
+  size: letter;
+  margin: 0.5in 0.8in;
+}
+
+@media print {
+  a, a:link, a:visited, a:hover {
+      color: $body-color;
+      text-decoration: none;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    background: none;
+  }
+
+  .article-resume {
+    margin: 0;
+    padding: 0;
+    background: none;
+  }
+}
+
+.article-resume {
+  max-width: 748px;
+  font-size: 16px;
+  margin: 40px auto;
+  padding: 0 10px;
+
+  h1,h2,h3 {
+    line-height: 1.2;
+  }
+
+  h1#fullname {
+    margin-top: 0;
+    margin-bottom: 6px;
+    font-size: 36px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-weight: normal;
+  }
+
+  h2#jobtitle {
+    margin-top: 0;
+    font-size: 20px;
+    font-weight: normal;
+    font-style: italic;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid;
+  }
+
+  #contact {
+    .fa {
+      width: 18px;
+      text-align: center;
+    }
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    grid-auto-flow: column;
+    align-items: start;
+    justify-items: center;
+    ul {
+      padding-inline-start: 0;
+      margin: 0;
+      li {
+        list-style: none;
+      }
+    }
+  }
+
+  h2 {
+    padding-bottom: 5px;
+    border-bottom: 1px solid;
+  }
+}

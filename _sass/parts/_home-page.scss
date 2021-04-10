@@ -72,11 +72,17 @@
 }
 
 .contact {
-  .contact-title {
+  .resume {
+    a, a:link, a:visited, a:hover {
+      color: $lightgray;
+      text-decoration: none;
+    }
+  }
+  .resume, .contact-title {
     position: relative;
     color: $lightgray;
     font-weight: 400;
-    font-size: 12px;
+    font-size: 14px;
     margin: 0 0 5px;
     text-transform: uppercase;
     text-align: center;

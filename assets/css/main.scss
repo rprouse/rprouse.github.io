@@ -140,11 +140,10 @@ table tfoot td {
   clear: both;
 }
 
-/* - - - - - - - - - - Home Page Styles - - - - - - - - - - */
+/* - - - - - - - - - - Page Styles - - - - - - - - - - */
 @import 'parts/home-page';
-
-/* - - - - - - - - - - Post Page Styles - - - - - - - - - - */
 @import 'parts/post-page';
+@import 'parts/resume-page';
 
 /* - - - - - - - - - - Tag Styles - - - - - - - - - - */
 @import 'parts/tag';
