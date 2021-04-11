@@ -4,24 +4,27 @@
 <body>
 
   <article class="article-resume">
-    <h1 id="fullname">{{ page.fullname }}</h1>
-    <h2 id="jobtitle">{{ page.jobtitle }}</h2>
 
-    <div id="contact">
-      <ul>
-        <li><i class="fa fa-mobile" aria-hidden="true"></i> <a href="tel:{{ page.phone }}">{{ page.phone }}</a></li>
-        <li><i class="fa fa-envelope-o" aria-hidden="true"></i> <a href="mailto:{{ page.email }}">{{ page.email }}</a></li>
-      </ul>
-      <ul>
-        <li><i class="fa fa-map-marker" aria-hidden="true"></i> <a href="https://www.google.com/maps/place/{{ page.location }}"> {{ page.location }}</a></li>
-        <li><i class="fa fa-linkedin-square" aria-hidden="true"></i> <a href="{{ page.linkedin_url }}">{{ page.linkedin }}</a></li>
-      </ul>
-      <ul>
-        <li><i class="fa fa-github" aria-hidden="true"></i> <a href="{{ page.github_url }}">{{ page.github }}</a></li>
-        <li><i class="fa fa-stack-overflow" aria-hidden="true"></i> <a href="{{ page.stackoverflow_url }}">{{ page.stackoverflow }}</a></li>
-      </ul>
+    <div id="contact-container">
+      <div id="contact-title">
+        <h1 id="fullname">{{ page.fullname }}</h1>
+        <h2 id="jobtitle">{{ page.jobtitle }}</h2>
+      </div>
+      <div class="contact-list">
+        <ul>
+          <li><i class="fa fa-mobile" aria-hidden="true"></i> <a href="tel:{{ page.phone }}">{{ page.phone }}</a></li>
+          <li><i class="fa fa-envelope-o" aria-hidden="true"></i> <a href="mailto:{{ page.email }}">{{ page.email }}</a></li>
+          <li><i class="fa fa-map-marker" aria-hidden="true"></i> <a href="https://www.google.com/maps/place/{{ page.location }}"> {{ page.location }}</a></li>
+        </ul>
+      </div>
+      <div class="contact-list">
+        <ul>
+          <li><i class="fa fa-linkedin-square" aria-hidden="true"></i> <a href="{{ page.linkedin_url }}">{{ page.linkedin }}</a></li>
+          <li><i class="fa fa-github" aria-hidden="true"></i> <a href="{{ page.github_url }}">{{ page.github }}</a></li>
+          <li><i class="fa fa-stack-overflow" aria-hidden="true"></i> <a href="{{ page.stackoverflow_url }}">{{ page.stackoverflow }}</a></li>
+        </ul>
+      </div>
     </div>
-
     {{ content }}
   </article>
 

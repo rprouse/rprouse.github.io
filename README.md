@@ -13,7 +13,7 @@ Do the following if you want to develop using Ruby on your local machine.
 GitHub will do this automatically when you push, but this allows you to view the site locally before you commit.
 
 1. `bundle install`
-2. `bundle exec jekyll serve`
+2. `bundle exec jekyll serve -l`
 
 ## Theme
 
