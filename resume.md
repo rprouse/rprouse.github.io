@@ -21,6 +21,15 @@ Proven software engineer and architect with a passion for building high performa
 
 Recognized by Microsoft as a Most Valuable Professional (MVP) for thought leadership in C#, .NET and DevOps. Head of the opensource NUnit Test Framework development team, a member of the .NET Foundation and a frequent contributor to numerous opensource projects. My opensource packages have been downloaded over 300 million times.
 
+## Key Skills
+
+|   |   |   |   |   |
+|---|---|---|---|---|
+| C#          | SQL Server | Vue     | Azure  | Docker
+| TypeScript  | PostGres   | Angular | AWS    | Kubernetes
+| Java        | MySQL      | Agile   | GitHub | C/C++
+| Python      | MongoDb    | Scrum   | Jira   | DevOps
+
 ## Work Experience
 
 ### Chief Technology Officer, Reliq Health &middot; Mar 2019 &ndash; Mar 2021
@@ -85,7 +94,7 @@ During a ten year career with Canada's Department of National Defense, worked in
 
 ### Team Lead, NUnit Framework &middot; Dec 2013 &ndash; Present
 
-NUnit is an opensource unit-testing framework for all .Net languages. Rebooted the project and rebuild the community in 2014 then took over leadership of the project in 2017.
+NUnit is an opensource unit-testing framework for all .Net languages. Rebooted the project and rebuilt the community in 2014, then took over leadership of the team in 2017.
 
 ### Organizer & Speaker, CoderCamp Hamilton &middot; Oct 2014 &ndash; Present
 
