@@ -85,11 +85,11 @@ During a ten year career with Canada's Department of National Defense, worked in
 
 ### Team Lead, NUnit Framework &middot; Dec 2013 &ndash; Present
 
-NUnit is an opensource unit-testing framework for all .Net languages. Helped reboot the project and rebuild the community in 2014 then took over leadership of the project in 2017.
+NUnit is an opensource unit-testing framework for all .Net languages. Rebooted the project and rebuild the community in 2014 then took over leadership of the project in 2017.
 
 ### Organizer & Speaker, CoderCamp Hamilton &middot; Oct 2014 &ndash; Present
 
-CoderCamp Hamilton is a monthly meetup / mini-conference for local software developers to learn tools, techniques, and technologies from one another in a casual and friendly setting.
+CoderCamp Hamilton is a monthly meetup/mini-conference for local developers to learn tools, techniques, and technologies from one another in a casual and friendly setting.
 
 ### Instructor, Canada Learning Code &middot; Aug 2018 &ndash; Present
 

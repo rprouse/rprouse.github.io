@@ -8,11 +8,6 @@
 }
 
 @media print {
-  a, a:link, a:visited, a:hover {
-      color: $body-color;
-      text-decoration: none;
-  }
-
   body {
     margin: 0;
     padding: 0;
@@ -32,6 +27,16 @@
   margin: 40px auto;
   padding: 0 10px;
 
+  a, a:link, a:visited {
+    color: $body-color;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: darken($body-color, 20%);
+    text-decoration: underline;
+  }
+
   h1,h2,h3 {
     line-height: 1.2;
   }
@@ -47,25 +52,35 @@
 
   h2#jobtitle {
     margin-top: 0;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: normal;
     font-style: italic;
     text-transform: uppercase;
     letter-spacing: 2px;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    border-bottom: none;
+  }
+
+  #contact-container {
+    display: grid;
+    grid-template-columns: auto 24% 18%;
+    grid-auto-flow: column;
+    align-items: start;
+    justify-items: stretch;
     padding-bottom: 6px;
     border-bottom: 1px solid;
   }
 
-  #contact {
+  #contact-title {
+  }
+
+  .contact-list {
+    padding-left: 10px;
     .fa {
       width: 18px;
       text-align: center;
     }
-    display: grid;
-    grid-template-columns: 33% 33% 33%;
-    grid-auto-flow: column;
-    align-items: start;
-    justify-items: center;
     ul {
       padding-inline-start: 0;
       margin: 0;
