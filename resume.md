@@ -48,7 +48,7 @@ Bentley Systems is the leading global provider of software solutions to engineer
 
 - Technical lead on the company's InnerSource project that created processes that allowed teams around the world to contribute to each others' code using opensource processes.
 - Led the company's One Engineering (1ES) effort that borrowed from Microsoft's DevOps transformation to move the company to modern DevOps and development practices using the latest tools and dev processes.
-- Advised on technology and software architecture trends allowing the company to capitolize on changes in technology.
+- Advised on technology and software architecture trends allowing the company to capitalize on changes in technology.
 
 ### Principal Software Engineer, Bentley Systems &middot; Oct 2012 &ndash; Jun 2017
 
