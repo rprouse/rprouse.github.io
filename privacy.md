@@ -1,4 +1,12 @@
-# Privacy Policy
+---
+layout: main
+status: publish
+published: true
+title: Privacy Policy
+date: '2025-03-18 11:38:38 +0400'
+---
+
+## Privacy Policy
 
 At Alteridem Consulting, we value your privacy. We do not collect any personal information from our users. Our website is designed to provide information about our services without requiring you to share any personal data.
 
