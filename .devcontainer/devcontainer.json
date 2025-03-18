@@ -1,4 +1,4 @@
-{
+Add{
 	"name": "Alteridem.net",
 	"dockerFile": "Dockerfile",
 	"appPort": 4000,
